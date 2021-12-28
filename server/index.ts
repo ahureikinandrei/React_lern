@@ -1,13 +1,25 @@
-import * as express from 'express'
+require('dotenv').config()
+const express = require('express')
+const mongoose = require('mongoose')
+const authRouter = require('./routes/auth.route')
 
 const app = express()
+const PORT = process.env.PORT || 5000
+const { DB_URL } = process.env
 
-const PORT = 8080
+app.use(express.json())
+app.use('/api/auth', authRouter)
 
-app.get('/', (req: express.Request, res: express.Response) => {
-    res.setHeader('Content-Type', 'text/html')
-    res.end('<h1>Hello World</h1>')
-})
+const start = async () => {
+    try {
+        mongoose.connect(DB_URL)
 
+        app.listen(PORT, () => {
+            console.log('server start on port', PORT)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
 
-app.listen(PORT, () => console.log(`app running on port ${PORT}`))
+start()
