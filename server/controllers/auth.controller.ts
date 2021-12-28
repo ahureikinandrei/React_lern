@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
 const saltLength = config.get('SALT_LENGTH')
+const jwtTokenLifeTime = config.get('JWT_TOKEN_LIFE_TIME')
 
 class AuthController {
     static generateAccessToken(id) {
@@ -12,7 +13,9 @@ class AuthController {
             id,
         }
 
-        return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' })
+        return jwt.sign(payload, process.env.SECRET_KEY, {
+            expiresIn: jwtTokenLifeTime,
+        })
     }
 
     static async hashPassword(password) {
