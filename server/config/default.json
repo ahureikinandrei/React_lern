@@ -1,4 +1,0 @@
-{
-  "SALT_LENGTH": 15,
-  "JWT_TOKEN_LIFE_TIME": "24h"
-}

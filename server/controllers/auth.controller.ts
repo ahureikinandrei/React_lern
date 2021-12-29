@@ -1,11 +1,8 @@
-const config = require('config')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
-
-const saltLength = config.get('SALT_LENGTH')
-const jwtTokenLifeTime = config.get('JWT_TOKEN_LIFE_TIME')
+const { SALT_LENGTH, JWT_TOKEN_LIFE_TIME } = require('../config/constants')
 
 class AuthController {
     static generateAccessToken(id) {
@@ -14,13 +11,12 @@ class AuthController {
         }
 
         return jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: jwtTokenLifeTime,
+            expiresIn: JWT_TOKEN_LIFE_TIME,
         })
     }
 
     static async hashPassword(password) {
-        const hashPassword = await bcrypt.hash(password, saltLength)
-        return hashPassword
+        return bcrypt.hash(password, SALT_LENGTH)
     }
 
     async post(req, res) {
