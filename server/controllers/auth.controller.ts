@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken')
-const bcryptAuth = require('bcryptjs')
-const UserAuth = require('../models/User')
-const { SECRET_KEY, JWT_TOKEN_LIFE_TIME } = require('../config/constants')
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
+import User from '../models/User'
+import { SECRET_KEY, JWT_TOKEN_LIFE_TIME } from '../config/constants'
 
 class AuthController {
     static _generateAccessToken(id) {
@@ -17,7 +17,7 @@ class AuthController {
     async post(req, res) {
         try {
             const { email, password } = req.body
-            const user = await UserAuth.findOne({ email })
+            const user = await User.findOne({ email })
 
             if (!user) {
                 return res.formatResponse(
@@ -27,10 +27,7 @@ class AuthController {
                 )
             }
 
-            const validPassword = bcryptAuth.compareSync(
-                password,
-                user.password
-            )
+            const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword) {
                 return res.formatResponse(req.body, 'Invalid password', 400)
             }
@@ -44,4 +41,4 @@ class AuthController {
     }
 }
 
-module.exports = new AuthController()
+export default new AuthController()

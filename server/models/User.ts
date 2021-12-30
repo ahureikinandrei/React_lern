@@ -1,4 +1,5 @@
-const { Schema, model, ObjectId } = require('mongoose')
+import { ObjectId } from 'mongodb'
+import { Schema, model } from 'mongoose'
 
 const UserModel = new Schema({
     email: { type: String, required: true, unique: true },
@@ -7,4 +8,4 @@ const UserModel = new Schema({
     cities: [{ type: ObjectId, ref: 'City' }],
 })
 
-module.exports = model('User', UserModel)
+export default model('User', UserModel)

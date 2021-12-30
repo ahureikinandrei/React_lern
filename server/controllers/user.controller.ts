@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs')
-const { validationResult } = require('express-validator')
-const User = require('../models/User')
-const { SALT_LENGTH } = require('../config/constants')
+import { validationResult } from 'express-validator'
+import bcrypt from 'bcryptjs'
+import { SALT_LENGTH } from '../config/constants'
+import User from '../models/User'
 
 class UserController {
     static async _hashPassword(password) {
@@ -127,4 +127,4 @@ class UserController {
     }
 }
 
-module.exports = new UserController()
+export default new UserController()

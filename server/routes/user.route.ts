@@ -1,8 +1,8 @@
-const UserRouteExpress = require('express')
-const { check } = require('express-validator')
-const userController = require('../controllers/user.controller')
+import { Router } from 'express'
+import { check } from 'express-validator'
+import userController from '../controllers/user.controller'
 
-const userRouter = new UserRouteExpress()
+const userRouter = Router()
 
 userRouter.post(
     '/user',
@@ -21,4 +21,4 @@ userRouter.get('/user', userController.getAll)
 userRouter.patch('/user', userController.patch)
 userRouter.delete('/user', userController.delete)
 
-module.exports = userRouter
+export default userRouter

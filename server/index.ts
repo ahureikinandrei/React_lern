@@ -1,9 +1,11 @@
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const userRouterModule = require('./routes/user.route')
-const authRouterModule = require('./routes/auth.route')
-const { PORT, DB_URL } = require('./config/constants')
+import dotenv from 'dotenv'
+import express from 'express'
+import mongoose from 'mongoose'
+/* eslint-disable import/first */
+dotenv.config()
+import { PORT, DB_URL } from './config/constants'
+import userRouter from './routes/user.route'
+import authRouter from './routes/auth.route'
 
 const app = express()
 const SERVER_PORT = PORT || 5000
@@ -33,7 +35,6 @@ const formatResponse = (req, res, next) => {
             res.status(status)
         }
 
-        console.log(newData)
         return res.json(newData)
     }
     next()
@@ -41,8 +42,8 @@ const formatResponse = (req, res, next) => {
 
 app.use(express.json())
 app.use(formatResponse)
-app.use('/api', userRouterModule)
-app.use('/api/auth', authRouterModule)
+app.use('/api', userRouter)
+app.use('/api/auth', authRouter)
 
 const start = async () => {
     try {
