@@ -1,114 +1,45 @@
-const bcrypt = require('bcryptjs')
-const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
-const User = require('../models/User')
-const { SALT_LENGTH, JWT_TOKEN_LIFE_TIME } = require('../config/constants')
+const bcryptAuth = require('bcryptjs')
+const UserAuth = require('../models/User')
+const { SECRET_KEY, JWT_TOKEN_LIFE_TIME } = require('../config/constants')
 
 class AuthController {
-    static generateAccessToken(id) {
+    static _generateAccessToken(id) {
         const payload = {
             id,
         }
 
-        return jwt.sign(payload, process.env.SECRET_KEY, {
+        return jwt.sign(payload, SECRET_KEY, {
             expiresIn: JWT_TOKEN_LIFE_TIME,
         })
-    }
-
-    static async hashPassword(password) {
-        return bcrypt.hash(password, SALT_LENGTH)
     }
 
     async post(req, res) {
         try {
             const { email, password } = req.body
-
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return res
-                    .status(400)
-                    .json({ message: 'Uncorrected request', errors })
-            }
-
-            const candidate = await User.findOne({ email })
-
-            if (candidate) {
-                return res
-                    .status(400)
-                    .json({ message: `User with ${email} already exist` })
-            }
-
-            const hashPassword = await AuthController.hashPassword(password)
-            const user = new User({ email, password: hashPassword })
-            await user.save()
-            return res.json({ message: 'User was created' })
-        } catch (e) {
-            return res.status(400).json({ message: 'Registration error' })
-        }
-    }
-
-    async get(req, res) {
-        try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
+            const user = await UserAuth.findOne({ email })
 
             if (!user) {
-                return res
-                    .status(400)
-                    .json({ message: `Such user has not been found` })
+                return res.formatResponse(
+                    req.body,
+                    'Such user has not been found',
+                    404
+                )
             }
 
-            const validPassword = bcrypt.compareSync(password, user.password)
+            const validPassword = bcryptAuth.compareSync(
+                password,
+                user.password
+            )
             if (!validPassword) {
-                return res.status(400).json({ message: `Invalid password` })
+                return res.formatResponse(req.body, 'Invalid password', 400)
             }
 
-            const token = AuthController.generateAccessToken(user._id)
-            return res.json({ token })
+            const token = AuthController._generateAccessToken(user._id)
+            return res.formatResponse({ token }, 'Login')
         } catch (e) {
             console.log(e)
-            return res.status(400).json({ message: 'Get user error' })
-        }
-    }
-
-    async patch(req, res) {
-        try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
-            if (!user) {
-                return res.status(400).json({ message: `No such user` })
-            }
-
-            const hashPassword = await AuthController.hashPassword(password)
-            const newPassword = { password: hashPassword }
-
-            await User.updateOne({ email }, newPassword)
-
-            return res.json('User was updated')
-        } catch (e) {
-            return res.status(400).json({ message: 'Update user error' })
-        }
-    }
-
-    async delete(req, res) {
-        try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
-            if (!user) {
-                return res.status(400).json({ message: `No such user` })
-            }
-
-            const validPassword = bcrypt.compareSync(password, user.password)
-            if (!validPassword) {
-                return res.status(400).json({ message: `Invalid password` })
-            }
-
-            await User.deleteOne({ email })
-
-            return res.json('User was deleted')
-        } catch (e) {
-            console.log(e)
-            return res.status(400).json({ message: 'Delete user error' })
+            return res.formatResponse(e, 'Something bad happened', 400)
         }
     }
 }
