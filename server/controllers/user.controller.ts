@@ -46,14 +46,14 @@ class UserController {
             const { id } = req.params
 
             if (!id) {
-                return res.formatResponse({}, `ID not found`, 404)
+                return res.formatResponse(null, `ID not found`, 404)
             }
 
             const user = await User.findById(id)
 
             if (!user) {
                 return res.formatResponse(
-                    {},
+                    null,
                     `Such user has not been found`,
                     404
                 )
@@ -72,7 +72,7 @@ class UserController {
 
             if (!users) {
                 return res.formatResponse(
-                    {},
+                    null,
                     'Such users has not been found',
                     404
                 )
@@ -90,7 +90,7 @@ class UserController {
             const { email, password } = req.body
             const user = await User.findOne({ email })
             if (!user) {
-                return res.formatResponse(user, 'No such user', 404)
+                return res.formatResponse(null, 'No such user', 404)
             }
 
             const hashPassword = await UserController._hashPassword(password)
@@ -110,7 +110,7 @@ class UserController {
             const { email, password } = req.body
             const user = await User.findOne({ email })
             if (!user) {
-                return res.formatResponse({}, 'No such user', 404)
+                return res.formatResponse(null, 'No such user', 404)
             }
 
             const validPassword = bcrypt.compareSync(password, user.password)
