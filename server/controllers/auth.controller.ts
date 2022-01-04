@@ -34,14 +34,22 @@ class AuthController {
 
             const token = AuthController._generateAccessToken(user._id)
 
-            return res.formatResponse({ token }, 'Login')
+            return res.formatResponse(
+                {
+                    token,
+                    user: {
+                        email: user.email,
+                    },
+                },
+                'Login'
+            )
         } catch (e) {
             console.log(e)
             return res.formatResponse(e, 'Server error', 400)
         }
     }
 
-    async auth(req, res) {
+    async get(req, res) {
         try {
             const user = await User.findOne({ _id: req.user.id })
             const token = AuthController._generateAccessToken(user._id)
