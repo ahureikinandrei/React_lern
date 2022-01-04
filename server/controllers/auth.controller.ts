@@ -52,6 +52,15 @@ class AuthController {
     async get(req, res) {
         try {
             const user = await User.findOne({ _id: req.user.id })
+
+            if (!user) {
+                return res.formatResponse(
+                    null,
+                    'Such user has not been found',
+                    404
+                )
+            }
+
             const token = AuthController._generateAccessToken(user._id)
 
             return res.formatResponse(
