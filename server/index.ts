@@ -6,6 +6,7 @@ dotenv.config()
 import { PORT, DB_URL } from './config/constants'
 import userRouter from './routes/user.route'
 import authRouter from './routes/auth.route'
+import corsMiddleware from './middleware/cors.middleware'
 
 const app = express()
 const SERVER_PORT = PORT || 5000
@@ -40,6 +41,7 @@ const formatResponse = (req, res, next) => {
     next()
 }
 
+app.use(corsMiddleware)
 app.use(express.json())
 app.use(formatResponse)
 app.use('/api', userRouter)

@@ -8,14 +8,10 @@ export interface AuthState {
 }
 
 export enum AuthActionEnum {
-    // eslint-disable-next-line no-unused-vars
-    SET_AUTH = 'user/SET_USER_DATA',
-    // eslint-disable-next-line no-unused-vars
-    SET_ERROR = 'user/FETCH_SIGN_IN',
-    // eslint-disable-next-line no-unused-vars
-    SET_USER = 'user/FETCH_SIGN_UP',
-    // eslint-disable-next-line no-unused-vars
-    SET_IS_LOADING = 'user/FETCH_USER_DATA',
+    SET_AUTH = 'SET_AUTH',
+    SET_ERROR = 'SET_ERROR',
+    SET_USER = 'SET_USER',
+    SET_IS_LOADING = 'SET_IS_LOADING',
 }
 
 export interface SetAuthAction {

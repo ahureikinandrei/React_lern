@@ -7,6 +7,7 @@ import {
 } from './types'
 import { IUser } from '../../../models/IUser'
 import { AppDispatch } from '../../store'
+import UserService from '../../../api/UserService'
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({
@@ -26,17 +27,23 @@ export const AuthActionCreators = {
         payload,
     }),
     login:
-        (username: string, password: string) =>
-        async (dispatch: AppDispatch) => {
+        (email: string, password: string) => async (dispatch: AppDispatch) => {
             try {
-                console.log(username, password)
+                dispatch(AuthActionCreators.setIsLoading(true))
+                const response = await UserService.getUser(email, password)
+                const { data } = response.data
+                if (data && data.token) {
+                    localStorage.setItem('token', data.token)
+                } else {
+                    dispatch(AuthActionCreators.setError('Input is not valid'))
+                }
+                dispatch(AuthActionCreators.setIsLoading(false))
             } catch (e) {
                 dispatch(AuthActionCreators.setError('Login error'))
             }
         },
     logout: () => async (dispatch: AppDispatch) => {
-        localStorage.removeItem('auth')
-        localStorage.removeItem('username')
+        localStorage.removeItem('token')
         dispatch(AuthActionCreators.setUser({} as IUser))
         dispatch(AuthActionCreators.setIsAuth(false))
     },

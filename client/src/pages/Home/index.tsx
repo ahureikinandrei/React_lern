@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
+// import { useActions } from '../../hooks/useActions'
 
 export const useStylesHome = makeStyles(() =>
     createStyles({
@@ -19,6 +20,14 @@ export const useStylesHome = makeStyles(() =>
 
 const Home: FC = () => {
     const classes = useStylesHome()
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            console.log(1)
+        }
+    })
+
     return (
         <div className={classes.wrapper}>
             <Header />
