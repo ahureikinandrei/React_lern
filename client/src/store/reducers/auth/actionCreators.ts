@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import {
     AuthActionEnum,
     SetAuthAction,
@@ -8,6 +9,7 @@ import {
 import { IUser } from '../../../models/IUser'
 import { AppDispatch } from '../../store'
 import UserService from '../../../api/UserService'
+import AuthService from '../../../api/AuthService'
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({
@@ -32,19 +34,47 @@ export const AuthActionCreators = {
                 dispatch(AuthActionCreators.setIsLoading(true))
                 const response = await UserService.getUser(email, password)
                 const { data } = response.data
+
                 if (data && data.token) {
                     localStorage.setItem('token', data.token)
+                    dispatch(AuthActionCreators.setIsAuth(true))
                 } else {
                     dispatch(AuthActionCreators.setError('Input is not valid'))
                 }
-                dispatch(AuthActionCreators.setIsLoading(false))
             } catch (e) {
-                dispatch(AuthActionCreators.setError('Login error'))
+                const error = e as AxiosError
+                if (error.response) {
+                    dispatch(
+                        AuthActionCreators.setError(error.response.data.message)
+                    )
+                } else {
+                    dispatch(AuthActionCreators.setError('Login error'))
+                }
             }
+            dispatch(AuthActionCreators.setIsLoading(false))
         },
     logout: () => async (dispatch: AppDispatch) => {
         localStorage.removeItem('token')
         dispatch(AuthActionCreators.setUser({} as IUser))
         dispatch(AuthActionCreators.setIsAuth(false))
+    },
+    auth: (token: string) => async (dispatch: AppDispatch) => {
+        try {
+            dispatch(AuthActionCreators.setIsLoading(true))
+            const response = await AuthService.validateUserToken(token)
+            const { data } = response.data
+            if (data && data.user) {
+                dispatch(AuthActionCreators.setUser(data.user))
+                dispatch(AuthActionCreators.setIsAuth(true))
+            } else {
+                localStorage.removeItem('token')
+                dispatch(AuthActionCreators.setUser({} as IUser))
+                dispatch(AuthActionCreators.setIsAuth(false))
+                dispatch(AuthActionCreators.setError('Invalid token'))
+            }
+        } catch (e) {
+            dispatch(AuthActionCreators.setError('No such email'))
+        }
+        dispatch(AuthActionCreators.setIsLoading(false))
     },
 }

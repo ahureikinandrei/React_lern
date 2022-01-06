@@ -15,10 +15,9 @@ export default class UserService {
             password,
         }
 
-        const response = await axios.post<IAxiosDataResponse>(
+        return axios.post<IAxiosDataResponse>(
             'http://localhost:5000/api/auth/login',
             body
         )
-        return response
     }
 }
