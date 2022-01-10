@@ -44,10 +44,6 @@ class AuthController {
         try {
             const { id } = req.user
 
-            if (!id) {
-                return res.formatResponse(null, 'No such id:', 404)
-            }
-
             const user = await User.findOne({ _id: id })
 
             if (!user) {
