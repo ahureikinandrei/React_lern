@@ -6,7 +6,7 @@ export default class UserService {
         return axios.get<IAxiosDataResponse>('http://localhost:5000/api/user')
     }
 
-    static async getUser(
+    static async createUser(
         email: string,
         password: string
     ): Promise<AxiosResponse<IAxiosDataResponse>> {
@@ -16,7 +16,7 @@ export default class UserService {
         }
 
         return axios.post<IAxiosDataResponse>(
-            'http://localhost:5000/api/auth/login',
+            'http://localhost:5000/api/user',
             body
         )
     }

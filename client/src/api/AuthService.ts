@@ -16,4 +16,19 @@ export default class AuthService {
 
         return response
     }
+
+    static async getUser(
+        email: string,
+        password: string
+    ): Promise<AxiosResponse<IAxiosDataResponse>> {
+        const body = {
+            email,
+            password,
+        }
+
+        return axios.post<IAxiosDataResponse>(
+            'http://localhost:5000/api/auth/login',
+            body
+        )
+    }
 }

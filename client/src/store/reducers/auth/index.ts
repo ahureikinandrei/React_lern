@@ -6,6 +6,7 @@ const initialState: AuthState = {
     error: '',
     isLoading: false,
     user: {} as IUser,
+    message: '',
 }
 
 export default function authReducer(
@@ -20,6 +21,8 @@ export default function authReducer(
             return { ...state, user: action.payload }
         case AuthActionEnum.SET_ERROR:
             return { ...state, error: action.payload, isLoading: false }
+        case AuthActionEnum.SET_MESSAGE:
+            return { ...state, message: action.payload, isLoading: false }
         case AuthActionEnum.SET_IS_LOADING:
             return { ...state, isLoading: action.payload }
         default:

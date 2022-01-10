@@ -5,6 +5,7 @@ import {
     SetErrorAction,
     SetIsLoadingAction,
     SetUserAction,
+    SetMessageAction,
 } from './types'
 import { IUser } from '../../../models/IUser'
 import { AppDispatch } from '../../store'
@@ -28,11 +29,15 @@ export const AuthActionCreators = {
         type: AuthActionEnum.SET_ERROR,
         payload,
     }),
+    setMessage: (payload: string): SetMessageAction => ({
+        type: AuthActionEnum.SET_MESSAGE,
+        payload,
+    }),
     login:
         (email: string, password: string) => async (dispatch: AppDispatch) => {
             try {
                 dispatch(AuthActionCreators.setIsLoading(true))
-                const response = await UserService.getUser(email, password)
+                const response = await AuthService.getUser(email, password)
                 const { data } = response.data
 
                 if (data && data.token) {
@@ -77,4 +82,22 @@ export const AuthActionCreators = {
         }
         dispatch(AuthActionCreators.setIsLoading(false))
     },
+    registration:
+        (email: string, password: string) => async (dispatch: AppDispatch) => {
+            try {
+                dispatch(AuthActionCreators.setIsLoading(true))
+                const response = await UserService.createUser(email, password)
+                dispatch(AuthActionCreators.setMessage(response.data.message))
+            } catch (e) {
+                const error = e as AxiosError
+                if (error.response) {
+                    dispatch(
+                        AuthActionCreators.setError(error.response.data.message)
+                    )
+                } else {
+                    dispatch(AuthActionCreators.setError('Registration error'))
+                }
+            }
+            dispatch(AuthActionCreators.setIsLoading(false))
+        },
 }
