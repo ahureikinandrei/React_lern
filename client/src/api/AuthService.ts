@@ -1,18 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
-import { IAxiosDataResponse } from './types'
+import { AxiosResponse } from 'axios'
+import axios from '../core/axios'
 
 export default class AuthService {
-    static async validateUserToken(
-        token: string
-    ): Promise<AxiosResponse<IAxiosDataResponse>> {
-        const response = await axios.get<IAxiosDataResponse>(
-            'http://localhost:5000/api/auth/me',
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        )
+    static async validateUserToken(): Promise<AxiosResponse> {
+        const response = await axios.get('api/auth/me')
 
         return response
     }
@@ -20,15 +11,12 @@ export default class AuthService {
     static async getUser(
         email: string,
         password: string
-    ): Promise<AxiosResponse<IAxiosDataResponse>> {
+    ): Promise<AxiosResponse> {
         const body = {
             email,
             password,
         }
 
-        return axios.post<IAxiosDataResponse>(
-            'http://localhost:5000/api/auth/login',
-            body
-        )
+        return axios.post('/api/auth/login', body)
     }
 }

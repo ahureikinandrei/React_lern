@@ -31,7 +31,7 @@ const MessageSnackbar: FC = () => {
     }
 
     useEffect(() => {
-        if (error === '' && message === '') {
+        if (!error && !message) {
             setOpen(false)
         } else {
             setOpen(true)

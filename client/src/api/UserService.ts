@@ -1,23 +1,20 @@
-import axios, { AxiosResponse } from 'axios'
-import { IAxiosDataResponse } from './types'
+import { AxiosResponse } from 'axios'
+import axios from '../core/axios'
 
 export default class UserService {
-    static async getUsers(): Promise<AxiosResponse<IAxiosDataResponse>> {
-        return axios.get<IAxiosDataResponse>('http://localhost:5000/api/user')
+    static async getUsers(): Promise<AxiosResponse> {
+        return axios.get('api/user')
     }
 
     static async createUser(
         email: string,
         password: string
-    ): Promise<AxiosResponse<IAxiosDataResponse>> {
+    ): Promise<AxiosResponse> {
         const body = {
             email,
             password,
         }
 
-        return axios.post<IAxiosDataResponse>(
-            'http://localhost:5000/api/user',
-            body
-        )
+        return axios.post('http://localhost:5000/api/user', body)
     }
 }

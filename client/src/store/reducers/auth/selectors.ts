@@ -1,6 +1,8 @@
 import { RootState } from '../../store'
 import { AuthState } from './types'
 
+export const selectAuthState = (state: RootState): AuthState => state.auth
+
 export const selectError = (state: RootState): AuthState['error'] =>
     state.auth.error
 

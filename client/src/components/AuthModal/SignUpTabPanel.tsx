@@ -4,23 +4,8 @@ import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { useActions } from '../../hooks/useActions'
-
-const validationSchema = yup.object({
-    email: yup
-        .string()
-        .email('Enter a valid email')
-        .required('Email is required'),
-    password: yup
-        .string()
-        .min(5, 'Password should be of minimum 5 characters length')
-        .max(12, 'Password should be of maximum 12 characters length')
-        .required('Password is required'),
-    confirm_password: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match'),
-})
+import { signUpValidationSchema } from './validationSchems/validationSchems'
 
 interface ISignUpTabPanelProps {
     onClose: () => void
@@ -36,7 +21,7 @@ const SignUpTabPanel: FC<ISignUpTabPanelProps> = ({ onClose }) => {
         },
         validateOnChange: false,
         validateOnBlur: false,
-        validationSchema,
+        validationSchema: signUpValidationSchema,
         onSubmit: (values) => {
             const { email, password } = values
             onClose()

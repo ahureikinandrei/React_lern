@@ -42,7 +42,13 @@ class AuthController {
 
     async get(req, res) {
         try {
-            const user = await User.findOne({ _id: req.user.id })
+            const { id } = req.user
+
+            if (!id) {
+                return res.formatResponse(null, 'No such id:', 404)
+            }
+
+            const user = await User.findOne({ _id: id })
 
             if (!user) {
                 return res.formatResponse(

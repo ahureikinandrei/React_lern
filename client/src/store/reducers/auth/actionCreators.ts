@@ -63,10 +63,10 @@ export const AuthActionCreators = {
         dispatch(AuthActionCreators.setUser({} as IUser))
         dispatch(AuthActionCreators.setIsAuth(false))
     },
-    auth: (token: string) => async (dispatch: AppDispatch) => {
+    auth: () => async (dispatch: AppDispatch) => {
         try {
             dispatch(AuthActionCreators.setIsLoading(true))
-            const response = await AuthService.validateUserToken(token)
+            const response = await AuthService.validateUserToken()
             const { data } = response.data
             if (data && data.user) {
                 dispatch(AuthActionCreators.setUser(data.user))
