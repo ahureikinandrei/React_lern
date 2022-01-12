@@ -7,7 +7,10 @@ import AuthModal from '../AuthModal/AuthModal'
 import SwitchSystem from '../Switch/SwitchSystem'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
-import { selectAuthState } from '../../store/reducers/auth/selectors'
+import {
+    selectAuthIsLoading,
+    selectAuthStatus,
+} from '../../store/reducers/auth/selectors'
 
 const useStylesHeader = makeStyles((theme: Theme) =>
     createStyles({
@@ -16,6 +19,7 @@ const useStylesHeader = makeStyles((theme: Theme) =>
             alignItems: 'center',
             [theme.breakpoints.down('md')]: {
                 flexDirection: 'column',
+                minWidth: 90,
             },
         },
     })
@@ -23,7 +27,8 @@ const useStylesHeader = makeStyles((theme: Theme) =>
 
 const HeaderSettings: FC = () => {
     const classes = useStylesHeader()
-    const { isAuth, isLoading } = useTypedSelector(selectAuthState)
+    const isAuth = useTypedSelector(selectAuthStatus)
+    const isLoading = useTypedSelector(selectAuthIsLoading)
     const { logout } = useActions()
     const [visibleModal, setVisibleModal] = useState(false)
 

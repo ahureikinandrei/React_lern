@@ -33,18 +33,24 @@ class AuthController {
             }
 
             const token = AuthController._generateAccessToken(user._id)
-            return res.formatResponse({ token }, 'Login')
+
+            return res.formatResponse(
+                {
+                    token,
+                    user: {
+                        email: user.email,
+                    },
+                },
+                'Login'
+            )
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Something bad happened', 400)
+            return res.formatResponse(e, 'Server error', 400)
         }
     }
 
     async get(req, res) {
         try {
-            const { id } = req.user
-
-            const user = await User.findOne({ _id: id })
+            const user = await User.findOne({ _id: req.user.id })
 
             if (!user) {
                 return res.formatResponse(

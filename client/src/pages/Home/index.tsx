@@ -4,7 +4,6 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { useActions } from '../../hooks/useActions'
 import MessageSnackbar from '../../components/MessageSnackbar/MessageSnackbar'
-import WeatherService from '../../api/WeatherService'
 
 export const useStylesHome = makeStyles(() =>
     createStyles({
@@ -22,14 +21,14 @@ export const useStylesHome = makeStyles(() =>
 
 const Home: FC = () => {
     const classes = useStylesHome()
-    const { auth } = useActions()
+    const { auth, getWeatherInCurrentLocation } = useActions()
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             auth()
         }
-        WeatherService.getCurrentWeather()
+        getWeatherInCurrentLocation()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
