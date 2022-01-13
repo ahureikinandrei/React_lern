@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
-import SearchSelect from '../SerchSelect/SearchSelect'
 import SearchInput from '../SearchInput/SearchInput'
+import { useActions } from '../../hooks/useActions'
+import { generateIdCard } from '../../utils/generateIdCard'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,15 +26,23 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchForm: FC = () => {
     const classes = useStyles()
+    const { setNewCard } = useActions()
+
+    const addNewCard = (): void => {
+        setNewCard({
+            id: generateIdCard(),
+        })
+    }
+
     return (
         <div className={classes.searchForm}>
-            <SearchSelect />
             <SearchInput />
             <Fab
                 size="small"
                 color="primary"
                 aria-label="add"
                 className={classes.searchFormFab}
+                onClick={addNewCard}
             >
                 <AddIcon />
             </Fab>

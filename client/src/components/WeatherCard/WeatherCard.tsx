@@ -3,20 +3,22 @@ import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import { createStyles } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 import TableWeather from '../TableWeather/TableWeather'
 import WeatherCardSettings from '../WeatherCardSettings/WeatherCardSettings'
+import { useActions } from '../../hooks/useActions'
 
 export const useStylesCard = makeStyles((theme) =>
     createStyles({
         card: {
+            position: 'relative',
             minWidth: 300,
             height: 285,
             borderRadius: 40,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 40,
-            marginBottom: 40,
             backgroundColor: theme.palette.secondary.main,
         },
         table: {
@@ -30,11 +32,24 @@ export const useStylesCard = makeStyles((theme) =>
             alignItems: 'center',
             justifyContent: 'space-around',
         },
+        icon: {
+            position: 'absolute',
+            top: 15,
+            right: 20,
+        },
     })
 )
 
-export const WeatherCard: FC = () => {
+interface IWeatherCardProps {
+    id: string
+}
+
+export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const classes = useStylesCard()
+    const { deleteCard } = useActions()
+    const deleteCardClick = (): void => {
+        deleteCard(id)
+    }
 
     return (
         <Card className={classes.card}>
@@ -45,6 +60,13 @@ export const WeatherCard: FC = () => {
                 <Grid className={classes.settings} item xs={2}>
                     <WeatherCardSettings />
                 </Grid>
+                <IconButton
+                    className={classes.icon}
+                    onClick={deleteCardClick}
+                    aria-label="delete"
+                >
+                    <DeleteIcon />
+                </IconButton>
             </Grid>
         </Card>
     )

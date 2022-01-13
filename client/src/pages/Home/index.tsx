@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { useActions } from '../../hooks/useActions'
 import MessageSnackbar from '../../components/MessageSnackbar/MessageSnackbar'
-import { WeatherCard } from '../../components/WeatherCard/WeatherCard'
+import DragAndDropSpace from '../../components/DrapAndDropSpace/DragAndDropSpace'
 
 export const useStylesHome = makeStyles(() =>
     createStyles({
@@ -14,14 +14,15 @@ export const useStylesHome = makeStyles(() =>
             minHeight: '100vh',
         },
         content: {
-            flex: '1 0 0',
+            maxWidth: 1024,
             width: '100%',
+            flex: '1 0 0',
             boxSizing: 'border-box',
             marginLeft: 'auto',
             marginRight: 'auto',
             paddingLeft: 16,
             paddingRight: 16,
-            // overflow: 'scroll',
+            paddingBottom: 16,
         },
     })
 )
@@ -43,7 +44,7 @@ const Home: FC = () => {
         <div className={classes.wrapper}>
             <Header />
             <main className={classes.content}>
-                <WeatherCard />
+                <DragAndDropSpace />
             </main>
             <Footer />
             <MessageSnackbar />
