@@ -1,7 +1,26 @@
-import { IWeatherData } from '../store/reducers/weather/types'
+import {
+    IWeatherData,
+    IWeatherForecastData,
+} from '../store/reducers/weather/types'
 
 export interface IDataFromApi {
     [key: string]: any
+}
+
+function transformForecastData(
+    forecast: IWeatherForecastData[]
+): IWeatherForecastData[] {
+    const transformedForecast = []
+    for (let i = 0; i < 6; i += 1) {
+        const { datetimeEpoch, temp, humidity } = forecast[i]
+        transformedForecast.push({
+            datetimeEpoch,
+            temp,
+            humidity,
+        })
+    }
+
+    return transformedForecast
 }
 
 export function transformDataFromWeatherApi(
@@ -17,6 +36,7 @@ export function transformDataFromWeatherApi(
     transformedData.datetimeEpoch = dataFromApi.currentConditions.datetimeEpoch
     transformedData.windspeed = dataFromApi.currentConditions.windspeed
     transformedData.humidity = dataFromApi.currentConditions.humidity
+    transformedData.forecast = transformForecastData(dataFromApi.days)
 
     return transformedData
 }

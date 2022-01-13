@@ -1,3 +1,9 @@
+export interface IWeatherForecastData {
+    datetimeEpoch: number
+    temp: number
+    humidity: number
+}
+
 export interface IWeatherData {
     address: string
     timezone: string
@@ -7,6 +13,7 @@ export interface IWeatherData {
     datetimeEpoch: number
     humidity: number
     windspeed: number
+    forecast: IWeatherForecastData[]
 }
 
 export interface WeatherState {

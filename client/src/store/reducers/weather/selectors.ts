@@ -1,5 +1,5 @@
 import { RootState } from '../../store'
-import { WeatherState } from './types'
+import { IWeatherForecastData, WeatherState } from './types'
 
 export const selectSearchValue = (
     state: RootState
@@ -20,3 +20,7 @@ export const selectSnackbarMessage = (
 export const selectWeatherData = (
     state: RootState
 ): WeatherState['weatherData'] => state.weather.weatherData
+
+export const selectWeatherDataForecast = (
+    state: RootState
+): IWeatherForecastData[] => state.weather.weatherData.forecast

@@ -14,6 +14,8 @@ const useStylesHeader = makeStyles(() =>
             justifyContent: 'space-between',
             padding: '0 40px',
             backgroundColor: '#E4DFD6',
+            // overflow: 'scroll',
+            overflow: 'hidden',
         },
     })
 )

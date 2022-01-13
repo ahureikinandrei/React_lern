@@ -17,7 +17,10 @@ class WeatherController {
             const { data } = response
             return res.formatResponse(data, 'Weather')
         } catch (e) {
-            return res.formatResponse(e.response.data, 'Server error', 400)
+            if (e.response) {
+                return res.formatResponse(e.response.data, 'Server error', 400)
+            }
+            return res.formatResponse(e.data, 'Server error', 400)
         }
     }
 }

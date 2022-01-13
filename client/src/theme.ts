@@ -16,10 +16,10 @@ export const theme = createTheme({
             main: '#FCD2C2',
         },
         secondary: {
-            main: '#918D86',
+            main: '#F0F0F0',
         },
         background: {
-            default: '#F0F0F0',
+            default: '#FFFFFF',
         },
         text: {
             primary: '#202020',
