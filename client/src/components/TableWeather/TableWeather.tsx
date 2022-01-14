@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { createStyles } from '@material-ui/core'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { selectWeatherDataForecast } from '../../store/reducers/weather/selectors'
 import ForecastCard from '../ForecastCard/ForecastCard'
+import { IWeatherForecastData } from '../../store/reducers/weather/types'
 
 const useStylesTableWeather = makeStyles(() =>
     createStyles({
@@ -16,9 +15,12 @@ const useStylesTableWeather = makeStyles(() =>
     })
 )
 
-const TableWeather: FC = () => {
+interface ITableWeatherProps {
+    forecast: IWeatherForecastData[]
+}
+
+const TableWeather: FC<ITableWeatherProps> = ({ forecast }) => {
     const classes = useStylesTableWeather()
-    const forecast = useTypedSelector(selectWeatherDataForecast)
 
     return (
         <div className={classes.table}>

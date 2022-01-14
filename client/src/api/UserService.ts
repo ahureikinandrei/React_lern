@@ -15,6 +15,6 @@ export default class UserService {
             password,
         }
 
-        return axios.post('http://localhost:5000/api/user', body)
+        return axios.post('/api/user', body)
     }
 }

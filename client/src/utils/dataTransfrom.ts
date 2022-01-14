@@ -2,6 +2,7 @@ import {
     IWeatherData,
     IWeatherForecastData,
 } from '../store/reducers/weather/types'
+import { unixToDay } from './dateUtils'
 
 export interface IDataFromApi {
     [key: string]: any
@@ -39,4 +40,20 @@ export function transformDataFromWeatherApi(
     transformedData.forecast = transformForecastData(dataFromApi.days)
 
     return transformedData
+}
+
+interface IDataForForecastGraph {
+    name: string
+    temp: number
+}
+
+export function transformForecastForGraph(
+    data: IWeatherForecastData[]
+): IDataForForecastGraph[] {
+    return data.map((dayData) => {
+        return {
+            name: unixToDay(dayData.datetimeEpoch, true),
+            temp: dayData.temp,
+        }
+    })
 }
