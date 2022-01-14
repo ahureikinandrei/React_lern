@@ -10,7 +10,13 @@ import WeatherCardSettings from '../WeatherCardSettings/WeatherCardSettings'
 import { useActions } from '../../hooks/useActions'
 import GraphWeather from '../GraphWeather/GraphWeather'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { selectWeatherDataForecast } from '../../store/reducers/weather/selectors'
+import {
+    selectWeatherDataForecast,
+    selectWeatherDataLatitude,
+    selectWeatherDataLongitude,
+} from '../../store/reducers/weather/selectors'
+import InteractiveMap from '../InteractiveMap/InteractiveMap'
+import { MAP_BTN_TEXT, TABLE_BTN_TEXT } from '../../config/constants'
 
 export const useStylesCard = makeStyles((theme) =>
     createStyles({
@@ -48,9 +54,12 @@ interface IWeatherCardProps {
 }
 
 export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
-    const [viewState, changeViewState] = useState('table')
+    const [viewState, changeViewState] = useState(TABLE_BTN_TEXT)
     const classes = useStylesCard()
     const forecast = useTypedSelector(selectWeatherDataForecast)
+    const latitude = useTypedSelector(selectWeatherDataLatitude)
+    const longitude = useTypedSelector(selectWeatherDataLongitude)
+
     const { deleteCard } = useActions()
     const deleteCardClick = (): void => {
         deleteCard(id)
@@ -65,9 +74,14 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
             <Grid container>
                 <Grid className={classes.table} item xs={10}>
                     {/* eslint-disable-next-line no-nested-ternary */}
-                    {viewState === 'table' ? (
+                    {viewState === TABLE_BTN_TEXT ? (
                         <TableWeather forecast={forecast} />
-                    ) : viewState === 'map' ? null : (
+                    ) : viewState === MAP_BTN_TEXT ? (
+                        <InteractiveMap
+                            latitude={latitude}
+                            longitude={longitude}
+                        />
+                    ) : (
                         <GraphWeather forecast={forecast} />
                     )}
                 </Grid>

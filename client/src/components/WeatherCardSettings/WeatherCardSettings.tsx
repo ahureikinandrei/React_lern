@@ -2,6 +2,11 @@ import React, { FC } from 'react'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import { createStyles } from '@material-ui/core'
+import {
+    GRAPH_BTN_TEXT,
+    MAP_BTN_TEXT,
+    TABLE_BTN_TEXT,
+} from '../../config/constants'
 
 export const useStylesCardSettings = makeStyles(() =>
     createStyles({
@@ -20,7 +25,7 @@ interface IWeatherCardSettingsProps {
     viewState: string
 }
 
-const buttonEnum = ['table', 'graph', 'map']
+const buttonEnum = [TABLE_BTN_TEXT, GRAPH_BTN_TEXT, MAP_BTN_TEXT]
 
 const WeatherCardSettings: FC<IWeatherCardSettingsProps> = ({
     swapViewMod,

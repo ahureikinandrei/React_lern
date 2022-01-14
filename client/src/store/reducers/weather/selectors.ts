@@ -24,3 +24,9 @@ export const selectWeatherData = (
 export const selectWeatherDataForecast = (
     state: RootState
 ): IWeatherForecastData[] => state.weather.weatherData.forecast
+
+export const selectWeatherDataLatitude = (state: RootState): number =>
+    state.weather.weatherData.latitude
+
+export const selectWeatherDataLongitude = (state: RootState): number =>
+    state.weather.weatherData.longitude
