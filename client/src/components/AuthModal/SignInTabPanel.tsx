@@ -41,9 +41,6 @@ const SignInTabPanel: FC<ISignInTabPanelProps> = ({ onClose }) => {
                             label="Email"
                             name="email"
                             onChange={formik.handleChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             variant="standard"
                             type="email"
                             margin="normal"
@@ -62,9 +59,6 @@ const SignInTabPanel: FC<ISignInTabPanelProps> = ({ onClose }) => {
                             label="Password"
                             name="password"
                             onChange={formik.handleChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             variant="standard"
                             type="password"
                             margin="normal"

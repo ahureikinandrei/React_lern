@@ -21,13 +21,14 @@ export const useStylesHome = makeStyles(() =>
 
 const Home: FC = () => {
     const classes = useStylesHome()
-    const { auth } = useActions()
+    const { auth, getWeatherInCurrentLocation } = useActions()
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             auth()
         }
+        getWeatherInCurrentLocation()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

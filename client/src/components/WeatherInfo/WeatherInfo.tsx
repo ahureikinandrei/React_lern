@@ -1,10 +1,17 @@
 import React, { FC } from 'react'
 import { createStyles, makeStyles, Typography } from '@material-ui/core'
 import NearMeOutlinedIcon from '@material-ui/icons/NearMeOutlined'
+import { unixToDay, unixToHour } from '../../utils/dateUtils'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import {
+    selectErrorWeatherData,
+    selectIsLoadingWeather,
+    selectWeatherData,
+} from '../../store/reducers/weather/selectors'
 
 export const useStylesWeatherInfo = makeStyles(() =>
     createStyles({
-        wrapper: { minWidth: 240 },
+        wrapper: { minWidth: 240, overflow: 'hidden' },
         city: { fontSize: '1.5rem', lineHeight: 1.2 },
         date: { fontSize: '1.25rem', lineHeight: 1.2 },
         temperature: { fontSize: '1.5rem', lineHeight: 1.2, fontWeight: 600 },
@@ -23,29 +30,37 @@ export const useStylesWeatherInfo = makeStyles(() =>
 
 const WeatherInfo: FC = () => {
     const classes = useStylesWeatherInfo()
+    const data = useTypedSelector(selectWeatherData)
+    const loading = useTypedSelector(selectIsLoadingWeather)
+    const error = useTypedSelector(selectErrorWeatherData)
+
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error) {
+        return <h1>{error}</h1>
+    }
 
     return (
         <div className={classes.wrapper}>
             <Typography variant="subtitle1" className={classes.city}>
-                Minsk
+                {data.address}
             </Typography>
             <Typography variant="subtitle1" className={classes.date}>
-                Thursday | 16:45 am
+                {unixToDay(data.datetimeEpoch)} |{' '}
+                {unixToHour(data.datetimeEpoch)}
             </Typography>
             <Typography variant="subtitle1" className={classes.temperature}>
-                12°C
+                {data.temp} °C
             </Typography>
             <Typography variant="subtitle1" className={classes.subInformation}>
                 <NearMeOutlinedIcon className={classes.subInformationIcon} />
-                Wind 10 km/h
+                Wind {data.windspeed} km/h
             </Typography>
             <Typography variant="subtitle1" className={classes.subInformation}>
                 <NearMeOutlinedIcon className={classes.subInformationIcon} />
-                Hum 54 %
-            </Typography>
-            <Typography variant="subtitle1" className={classes.subInformation}>
-                <NearMeOutlinedIcon className={classes.subInformationIcon} />
-                Rain 0.2 %
+                Hum {data.humidity} %
             </Typography>
         </div>
     )

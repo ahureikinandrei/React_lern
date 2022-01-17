@@ -39,9 +39,6 @@ const SignUpTabPanel: FC<ISignUpTabPanelProps> = ({ onClose }) => {
                             id="sing_up_email"
                             label="E-Mail"
                             name="email"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             variant="standard"
                             type="Email"
                             margin="normal"
@@ -60,9 +57,6 @@ const SignUpTabPanel: FC<ISignUpTabPanelProps> = ({ onClose }) => {
                             id="sing_up_password"
                             label="Password"
                             name="password"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             variant="standard"
                             type="password"
                             margin="normal"

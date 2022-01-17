@@ -4,7 +4,7 @@ import { Alert } from '@material-ui/lab'
 import { createStyles, makeStyles } from '@material-ui/core'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
-import { selectError, selectMessage } from '../../store/reducers/auth/selectors'
+import { selectSnackbarData } from '../../store/reducers/selectors'
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -18,8 +18,8 @@ const MessageSnackbar: FC = () => {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const { setError, setMessage } = useActions()
-    const error = useTypedSelector(selectError)
-    const message = useTypedSelector(selectMessage)
+
+    const snackbarData = useTypedSelector(selectSnackbarData)
 
     const handleClose = (): void => {
         setOpen(false)
@@ -31,12 +31,12 @@ const MessageSnackbar: FC = () => {
     }
 
     useEffect(() => {
-        if (!error && !message) {
+        if (!snackbarData.message) {
             setOpen(false)
         } else {
             setOpen(true)
         }
-    }, [error, message])
+    }, [snackbarData])
 
     return (
         <Snackbar
@@ -46,10 +46,10 @@ const MessageSnackbar: FC = () => {
             onClose={handleClose}
         >
             <Alert
-                severity={error ? 'error' : 'success'}
+                severity={snackbarData.severityError ? 'error' : 'success'}
                 className={classes.alignItem}
             >
-                {error || message}
+                {snackbarData.message}
             </Alert>
         </Snackbar>
     )

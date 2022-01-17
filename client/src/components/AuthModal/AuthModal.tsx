@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { createStyles, makeStyles } from '@material-ui/core'
-import { Theme } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import TabPanel from './AuthTabPanel'
@@ -13,17 +12,17 @@ import { AuthModalItemsValue, Ia11yProps } from './types'
 import SignInTabPanel from './SignInTabPanel'
 import SignUpTabPanel from './SignUpTabPanel'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         modal: {
-            borderRadius: 10,
+            borderRadius: 20,
         },
         title: {
             display: 'flex',
             justifyContent: 'space-between',
         },
-        textField: {
-            marginBottom: theme.spacing(2),
+        closeIcon: {
+            fontSize: 26,
         },
     })
 )
@@ -58,7 +57,7 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
             onClose={onClose}
             aria-labelledby="form-dialog-title"
             PaperProps={{
-                style: { borderRadius: 20 },
+                className: classes.modal,
             }}
         >
             <DialogTitle id="form-dialog-title">
@@ -86,7 +85,10 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
                         color="secondary"
                         aria-label="close"
                     >
-                        <CloseIcon style={{ fontSize: 26 }} color="secondary" />
+                        <CloseIcon
+                            className={classes.closeIcon}
+                            color="secondary"
+                        />
                     </IconButton>
                 </div>
             </DialogTitle>
@@ -94,7 +96,6 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
                 <TabPanel
                     value={value}
                     index={AuthModalItemsValue.SIGN_IN}
-                    /* eslint-disable-next-line react/jsx-props-no-spreading */
                     {...a11yProps(AuthModalItemsValue.SIGN_IN)}
                 >
                     <SignInTabPanel onClose={onClose} />
@@ -102,7 +103,6 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
                 <TabPanel
                     value={value}
                     index={AuthModalItemsValue.SIGN_UP}
-                    /* eslint-disable-next-line react/jsx-props-no-spreading */
                     {...a11yProps(AuthModalItemsValue.SIGN_UP)}
                 >
                     <SignUpTabPanel onClose={onClose} />
