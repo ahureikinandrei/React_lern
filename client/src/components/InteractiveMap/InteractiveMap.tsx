@@ -66,7 +66,7 @@ const InteractiveMap: FC<IInteractiveMapProps> = ({ latitude, longitude }) => {
             className={classes.mapContainer}
             center={[latitude, longitude]}
             zoom={13}
-            // dragging={false}
+            dragging={false}
         >
             <TileLayer url={MapUrl} />
             <LocationMarker temp={-4} />

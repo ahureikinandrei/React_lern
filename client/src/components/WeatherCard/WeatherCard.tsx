@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, ReactElement, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import { createStyles } from '@material-ui/core'
@@ -69,21 +69,23 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
         changeViewState(value)
     }
 
+    const renderContent = (viewState: string): ReactElement => {
+        if (viewState === TABLE_BTN_TEXT) {
+            return <TableWeather forecast={forecast} />
+        }
+
+        if (viewState === MAP_BTN_TEXT) {
+            return <InteractiveMap latitude={latitude} longitude={longitude} />
+        }
+
+        return <GraphWeather forecast={forecast} />
+    }
+
     return (
         <Card className={classes.card}>
             <Grid container>
                 <Grid className={classes.table} item xs={10}>
-                    {/* eslint-disable-next-line no-nested-ternary */}
-                    {viewState === TABLE_BTN_TEXT ? (
-                        <TableWeather forecast={forecast} />
-                    ) : viewState === MAP_BTN_TEXT ? (
-                        <InteractiveMap
-                            latitude={latitude}
-                            longitude={longitude}
-                        />
-                    ) : (
-                        <GraphWeather forecast={forecast} />
-                    )}
+                    {renderContent(viewState)}
                 </Grid>
                 <Grid className={classes.settings} item xs={2}>
                     <WeatherCardSettings
