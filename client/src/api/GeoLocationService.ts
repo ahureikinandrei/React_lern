@@ -1,7 +1,7 @@
 import { IGeolocationResponse } from './types'
 
 export default class GeoLocationService {
-    static async getCurrentLocationCoords(): Promise<IGeolocationResponse> {
+    static getCurrentLocationCoords(): Promise<IGeolocationResponse> {
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
