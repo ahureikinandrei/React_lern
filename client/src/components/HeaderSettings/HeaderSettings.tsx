@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { createStyles, makeStyles } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import AuthModal from '../AuthModal/AuthModal'
@@ -33,10 +32,6 @@ const HeaderSettings: FC = () => {
     const [visibleModal, setVisibleModal] = useState(false)
 
     const handleClickOpenModal = (): void => {
-        if (isLoading) {
-            return
-        }
-
         setVisibleModal(true)
     }
 
@@ -45,17 +40,7 @@ const HeaderSettings: FC = () => {
     }
 
     const onClickHandler = (): void => {
-        if (isLoading) {
-            return
-        }
-
-        if (isAuth) {
-            logout()
-        }
-    }
-
-    if (isLoading) {
-        return <CircularProgress />
+        logout()
     }
 
     return (
@@ -67,7 +52,11 @@ const HeaderSettings: FC = () => {
                     Logout
                 </Button>
             ) : (
-                <Button variant="outlined" onClick={handleClickOpenModal}>
+                <Button
+                    variant="outlined"
+                    onClick={handleClickOpenModal}
+                    disabled={isLoading}
+                >
                     Sign In
                 </Button>
             )}
