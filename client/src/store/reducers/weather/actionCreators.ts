@@ -7,6 +7,7 @@ import {
     SetWeatherData,
     SetErrorWeatherData,
     SetSnackbarMessage,
+    SwitchUnits,
 } from './types'
 import { AppDispatch } from '../../store'
 import WeatherService from '../../../api/WeatherService'
@@ -14,6 +15,7 @@ import GeoLocationService from '../../../api/GeoLocationService'
 import { coordinatesToString } from '../../../utils/unifyUtils'
 import { IGeolocationErrorResponse } from '../../../api/types'
 import { transformDataFromWeatherApi } from '../../../utils/dataTransfrom'
+import { KEY_UNITS_IN_LOCAL_STORAGE } from '../../../config/constants'
 
 export const WeatherActionCreators = {
     setIsLoading: (payload: boolean): SetIsLoadingWeatherAction => ({
@@ -36,6 +38,13 @@ export const WeatherActionCreators = {
         type: WeatherActionEnum.SET_WEATHER_DATA,
         payload,
     }),
+    switchUnits: (payload: string): SwitchUnits => {
+        localStorage.setItem(KEY_UNITS_IN_LOCAL_STORAGE, payload)
+        return {
+            type: WeatherActionEnum.SWITCH_UNITS,
+            payload,
+        }
+    },
     getWeatherInfo: (query: string) => async (dispatch: AppDispatch) => {
         try {
             dispatch(WeatherActionCreators.setSearchValue(query))

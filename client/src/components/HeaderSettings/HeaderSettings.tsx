@@ -45,7 +45,6 @@ const HeaderSettings: FC = () => {
 
     return (
         <div className={classes.headerSettings}>
-            <div />
             <SwitchSystem />
             {isAuth ? (
                 <Button variant="outlined" onClick={onClickHandler}>

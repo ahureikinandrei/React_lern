@@ -4,6 +4,7 @@ import {
     WeatherState,
     IWeatherData,
 } from './types'
+import { DEGREES_CELSIUS } from '../../../config/constants'
 
 const initialState: WeatherState = {
     searchValue: '',
@@ -11,6 +12,7 @@ const initialState: WeatherState = {
     errorWeatherData: '',
     weatherData: {} as IWeatherData,
     snackbarMessage: '',
+    unitsDegrees: DEGREES_CELSIUS,
 }
 
 export default function weatherReducer(
@@ -29,6 +31,8 @@ export default function weatherReducer(
             return { ...state, searchValue: action.payload }
         case WeatherActionEnum.SET_WEATHER_DATA:
             return { ...state, weatherData: action.payload }
+        case WeatherActionEnum.SWITCH_UNITS:
+            return { ...state, unitsDegrees: action.payload }
         default:
             return state
     }

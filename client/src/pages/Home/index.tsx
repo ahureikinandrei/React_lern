@@ -5,6 +5,11 @@ import Footer from '../../components/Footer/Footer'
 import { useActions } from '../../hooks/useActions'
 import MessageSnackbar from '../../components/MessageSnackbar/MessageSnackbar'
 import DragAndDropSpace from '../../components/DrapAndDropSpace/DragAndDropSpace'
+import {
+    DEGREES_FAHRENHEIT,
+    KEY_TOKEN_IN_LOCAL_STORAGE,
+    KEY_UNITS_IN_LOCAL_STORAGE,
+} from '../../config/constants'
 
 export const useStylesHome = makeStyles(() =>
     createStyles({
@@ -29,12 +34,17 @@ export const useStylesHome = makeStyles(() =>
 
 const Home: FC = () => {
     const classes = useStylesHome()
-    const { auth, getWeatherInCurrentLocation } = useActions()
+    const { auth, getWeatherInCurrentLocation, switchUnits } = useActions()
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem(KEY_TOKEN_IN_LOCAL_STORAGE)
+        const units = localStorage.getItem(KEY_UNITS_IN_LOCAL_STORAGE)
         if (token) {
             auth()
+        }
+
+        if (units === DEGREES_FAHRENHEIT) {
+            switchUnits(DEGREES_FAHRENHEIT)
         }
         getWeatherInCurrentLocation()
         // eslint-disable-next-line react-hooks/exhaustive-deps

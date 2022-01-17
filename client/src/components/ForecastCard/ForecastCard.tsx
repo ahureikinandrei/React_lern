@@ -7,6 +7,7 @@ interface IForecastCardProps {
     temp: number
     humidity: number
     datetimeEpoch: number
+    unitsDegrees: string
 }
 
 const useStylesForecastCard = makeStyles((theme) =>
@@ -28,12 +29,15 @@ const ForecastCard: FC<IForecastCardProps> = ({
     temp,
     humidity,
     datetimeEpoch,
+    unitsDegrees,
 }) => {
     const classes = useStylesForecastCard()
 
     return (
         <Card className={classes.card}>
-            <Typography variant="h5">{temp} °C</Typography>
+            <Typography variant="h5">
+                {temp} {unitsDegrees}
+            </Typography>
             <Typography variant="h4">
                 {unixToDay(datetimeEpoch, true)}
             </Typography>

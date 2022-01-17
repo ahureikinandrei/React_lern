@@ -6,7 +6,9 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectErrorWeatherData,
     selectIsLoadingWeather,
+    selectTempInUnits,
     selectWeatherData,
+    selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
 
 export const useStylesWeatherInfo = makeStyles(() =>
@@ -33,13 +35,15 @@ const WeatherInfo: FC = () => {
     const data = useTypedSelector(selectWeatherData)
     const loading = useTypedSelector(selectIsLoadingWeather)
     const error = useTypedSelector(selectErrorWeatherData)
+    const unitsDegrees = useTypedSelector(selectWeatherUnits)
+    const temp = useTypedSelector(selectTempInUnits)
 
     if (loading) {
-        return <h1>Loading...</h1>
+        return <Typography variant="h3">Loading...</Typography>
     }
 
     if (error) {
-        return <h1>{error}</h1>
+        return <Typography variant="h3">{error}</Typography>
     }
 
     return (
@@ -52,7 +56,7 @@ const WeatherInfo: FC = () => {
                 {unixToHour(data.datetimeEpoch)}
             </Typography>
             <Typography variant="subtitle1" className={classes.temperature}>
-                {data.temp} °C
+                {temp} {unitsDegrees}
             </Typography>
             <Typography variant="subtitle1" className={classes.subInformation}>
                 <NearMeOutlinedIcon className={classes.subInformationIcon} />

@@ -22,6 +22,7 @@ export interface WeatherState {
     errorWeatherData: string
     weatherData: IWeatherData
     snackbarMessage: string
+    unitsDegrees: string
 }
 
 export enum WeatherActionEnum {
@@ -30,11 +31,17 @@ export enum WeatherActionEnum {
     SET_SNACKBAR_MESSAGE = 'SET_SNACKBAR_MESSAGE',
     SET_SEARCH_VALUE = 'SET_SEARCH_VALUE',
     SET_WEATHER_DATA = 'SET_WEATHER_DATA',
+    SWITCH_UNITS = 'SWITCH_UNITS',
 }
 
 export interface SetIsLoadingWeatherAction {
     type: WeatherActionEnum.SET_IS_LOADING_WEATHER
     payload: boolean
+}
+
+export interface SwitchUnits {
+    type: WeatherActionEnum.SWITCH_UNITS
+    payload: string
 }
 
 export interface SetErrorWeatherData {
@@ -63,3 +70,4 @@ export type WeatherAction =
     | SetWeatherData
     | SetErrorWeatherData
     | SetSnackbarMessage
+    | SwitchUnits

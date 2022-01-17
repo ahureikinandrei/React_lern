@@ -11,9 +11,10 @@ import { useActions } from '../../hooks/useActions'
 import GraphWeather from '../GraphWeather/GraphWeather'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
-    selectWeatherDataForecast,
     selectWeatherDataLatitude,
     selectWeatherDataLongitude,
+    selectWeatherForecastInUnits,
+    selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
 import InteractiveMap from '../InteractiveMap/InteractiveMap'
 import { MAP_BTN_TEXT, TABLE_BTN_TEXT } from '../../config/constants'
@@ -56,9 +57,10 @@ interface IWeatherCardProps {
 export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const [viewState, changeViewState] = useState(TABLE_BTN_TEXT)
     const classes = useStylesCard()
-    const forecast = useTypedSelector(selectWeatherDataForecast)
+    const forecast = useTypedSelector(selectWeatherForecastInUnits)
     const latitude = useTypedSelector(selectWeatherDataLatitude)
     const longitude = useTypedSelector(selectWeatherDataLongitude)
+    const unitsDegrees = useTypedSelector(selectWeatherUnits)
 
     const { deleteCard } = useActions()
     const deleteCardClick = (): void => {
@@ -71,7 +73,9 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
 
     const renderContent = (viewState: string): ReactElement => {
         if (viewState === TABLE_BTN_TEXT) {
-            return <TableWeather forecast={forecast} />
+            return (
+                <TableWeather forecast={forecast} unitsDegrees={unitsDegrees} />
+            )
         }
 
         if (viewState === MAP_BTN_TEXT) {

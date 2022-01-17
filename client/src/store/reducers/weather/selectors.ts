@@ -1,5 +1,8 @@
-import { RootState } from '../../store'
+import { createSelector } from 'reselect'
 import { IWeatherForecastData, WeatherState } from './types'
+import { RootState } from '../../store'
+import { celsiusToFahrenheit } from '../../../utils/dataTransfrom'
+import { DEGREES_FAHRENHEIT } from '../../../config/constants'
 
 export const selectSearchValue = (
     state: RootState
@@ -30,3 +33,36 @@ export const selectWeatherDataLatitude = (state: RootState): number =>
 
 export const selectWeatherDataLongitude = (state: RootState): number =>
     state.weather.weatherData.longitude
+
+export const selectWeatherTemp = (state: RootState): number =>
+    state.weather.weatherData.temp
+
+export const selectWeatherUnits = (state: RootState): string =>
+    state.weather.unitsDegrees
+
+export const selectTempInUnits = createSelector(
+    selectWeatherUnits,
+    selectWeatherTemp,
+    (unitsDegrees, temp) => {
+        if (unitsDegrees === DEGREES_FAHRENHEIT) {
+            return celsiusToFahrenheit(temp)
+        }
+        return temp
+    }
+)
+
+export const selectWeatherForecastInUnits = createSelector(
+    selectWeatherUnits,
+    selectWeatherDataForecast,
+    (unitsDegrees, forecast) => {
+        if (unitsDegrees === DEGREES_FAHRENHEIT) {
+            return forecast.map((dailyForecast) => {
+                return {
+                    ...dailyForecast,
+                    temp: celsiusToFahrenheit(dailyForecast.temp),
+                }
+            })
+        }
+        return forecast
+    }
+)

@@ -57,3 +57,7 @@ export function transformForecastForGraph(
         }
     })
 }
+
+export function celsiusToFahrenheit(temp: number): number {
+    return +((temp * 9) / 5 + 32).toFixed(3)
+}

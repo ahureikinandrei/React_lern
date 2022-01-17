@@ -17,9 +17,10 @@ const useStylesTableWeather = makeStyles(() =>
 
 interface ITableWeatherProps {
     forecast: IWeatherForecastData[]
+    unitsDegrees: string
 }
 
-const TableWeather: FC<ITableWeatherProps> = ({ forecast }) => {
+const TableWeather: FC<ITableWeatherProps> = ({ forecast, unitsDegrees }) => {
     const classes = useStylesTableWeather()
 
     return (
@@ -32,6 +33,7 @@ const TableWeather: FC<ITableWeatherProps> = ({ forecast }) => {
                               humidity={humidity}
                               temp={temp}
                               datetimeEpoch={datetimeEpoch}
+                              unitsDegrees={unitsDegrees}
                           />
                       )
                   })
