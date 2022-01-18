@@ -13,12 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             [theme.breakpoints.down('sm')]: {
                 flexWrap: 'wrap',
-                justifyContent: 'space-evenly',
-            },
-        },
-        searchFormFab: {
-            [theme.breakpoints.down('sm')]: {
-                order: 4,
+                justifyContent: 'center',
+                width: '100%',
             },
         },
     })
@@ -41,7 +37,6 @@ const SearchForm: FC = () => {
                 size="small"
                 color="primary"
                 aria-label="add"
-                className={classes.searchFormFab}
                 onClick={addNewCard}
             >
                 <AddIcon />

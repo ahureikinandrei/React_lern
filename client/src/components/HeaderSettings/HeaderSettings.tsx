@@ -16,6 +16,9 @@ const useStylesHeader = makeStyles((theme: Theme) =>
         headerSettings: {
             display: 'flex',
             alignItems: 'center',
+            [theme.breakpoints.down('xs')]: {
+                display: 'none',
+            },
             [theme.breakpoints.down('md')]: {
                 flexDirection: 'column',
                 minWidth: 90,

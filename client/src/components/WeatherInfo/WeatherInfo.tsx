@@ -11,21 +11,44 @@ import {
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
 
-export const useStylesWeatherInfo = makeStyles(() =>
+export const useStylesWeatherInfo = makeStyles((theme) =>
     createStyles({
-        wrapper: { minWidth: 240, overflow: 'hidden' },
-        city: { fontSize: '1.5rem', lineHeight: 1.2 },
-        date: { fontSize: '1.25rem', lineHeight: 1.2 },
-        temperature: { fontSize: '1.5rem', lineHeight: 1.2, fontWeight: 600 },
+        wrapper: {
+            minWidth: 160,
+            overflow: 'hidden',
+            fontSize: 16,
+            [theme.breakpoints.down('xs')]: {
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                fontSize: 12,
+                flexWrap: 'wrap',
+                '& h6': {
+                    marginRight: 5,
+                    marginLeft: 5,
+                },
+            },
+        },
+        city: { fontSize: '1.5em', lineHeight: 1.2 },
+        date: { fontSize: '1.25em', lineHeight: 1.2 },
+        temperature: { fontSize: '1.5em', lineHeight: 1.2, fontWeight: 600 },
         subInformation: {
             paddingTop: 5,
-            fontSize: '0.875rem',
+            fontSize: '0.875em',
             lineHeight: 1.2,
             display: 'flex',
             alignItems: 'center',
         },
         subInformationIcon: {
             paddingRight: 5,
+        },
+        status: {
+            [theme.breakpoints.down('xs')]: {
+                width: '100%',
+                textAlign: 'center',
+                fontSize: '1.5em',
+            },
         },
     })
 )
@@ -39,11 +62,19 @@ const WeatherInfo: FC = () => {
     const temp = useTypedSelector(selectTempInUnits)
 
     if (loading) {
-        return <Typography variant="h3">Loading...</Typography>
+        return (
+            <Typography variant="h3" className={classes.status}>
+                Loading...
+            </Typography>
+        )
     }
 
     if (error) {
-        return <Typography variant="h3">{error}</Typography>
+        return (
+            <Typography variant="h3" className={classes.status}>
+                {error}
+            </Typography>
+        )
     }
 
     return (

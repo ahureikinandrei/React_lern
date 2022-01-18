@@ -23,7 +23,6 @@ L.Marker.prototype.options.icon = DefaultIcon
 const useStylesMap = makeStyles(() =>
     createStyles({
         mapContainer: {
-            marginLeft: 20,
             width: '100%',
             height: 245,
             borderRadius: 20,

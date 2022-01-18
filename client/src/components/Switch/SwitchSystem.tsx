@@ -22,7 +22,7 @@ const SwitchSystem: FC = () => {
     return (
         <FormControl component="fieldset">
             <FormControlLabel
-                value="top"
+                value="degrees"
                 control={<Switch color="secondary" />}
                 label="°C | °F"
                 labelPlacement="top"

@@ -35,12 +35,14 @@ export const useStylesCard = makeStyles((theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
+            padding: '0 20px',
         },
         settings: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-around',
+            paddingRight: 10,
         },
         icon: {
             position: 'absolute',
@@ -88,10 +90,10 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     return (
         <Card className={classes.card}>
             <Grid container>
-                <Grid className={classes.table} item xs={10}>
+                <Grid className={classes.table} item xs={9} sm={10}>
                     {renderContent(viewState)}
                 </Grid>
-                <Grid className={classes.settings} item xs={2}>
+                <Grid className={classes.settings} item xs={3} sm={2}>
                     <WeatherCardSettings
                         swapViewMod={swapViewMod}
                         viewState={viewState}
