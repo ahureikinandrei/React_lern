@@ -32,10 +32,7 @@ export const useStylesCard = makeStyles((theme) =>
             backgroundColor: theme.palette.secondary.main,
         },
         table: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            padding: '0 20px',
+            paddingLeft: 20,
         },
         settings: {
             display: 'flex',

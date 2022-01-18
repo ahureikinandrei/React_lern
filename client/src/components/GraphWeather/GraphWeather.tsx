@@ -18,14 +18,12 @@ const GraphWeather: FC<ITableWeatherProps> = ({ forecast }) => {
     return (
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
-                width={250}
-                height={300}
                 data={transformForecastForGraph(forecast)}
                 margin={{
                     top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
+                    right: 5,
+                    left: -30,
+                    bottom: 0,
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />

@@ -15,12 +15,16 @@ const useStylesForecastCard = makeStyles((theme) =>
         card: {
             width: 110,
             height: 200,
+            marginBottom: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-around',
             borderRadius: 20,
             backgroundColor: theme.palette.primary.main,
+            [theme.breakpoints.down('xs')]: {
+                width: 70,
+            },
         },
     })
 )

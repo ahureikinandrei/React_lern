@@ -12,7 +12,7 @@ function transformForecastData(
     forecast: IWeatherForecastData[]
 ): IWeatherForecastData[] {
     const transformedForecast = []
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < 7; i += 1) {
         const { datetimeEpoch, temp, humidity } = forecast[i]
         transformedForecast.push({
             datetimeEpoch,
