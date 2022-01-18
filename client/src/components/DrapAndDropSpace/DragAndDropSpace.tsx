@@ -7,10 +7,12 @@ import {
     DraggingStyle,
     NotDraggingStyle,
 } from 'react-beautiful-dnd'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { WeatherCard } from '../WeatherCard/WeatherCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthIsLoading } from '../../store/reducers/settings/selectors'
 import { useActions } from '../../hooks/useActions'
+import './style.css'
 
 const getItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined
@@ -38,28 +40,35 @@ const DragAndDropSpace: FC = () => {
             <Droppable droppableId="cards">
                 {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
-                        {cards.map(({ id }, index) => {
-                            return (
-                                <Draggable
+                        <TransitionGroup>
+                            {cards.map(({ id }, index) => (
+                                <CSSTransition
                                     key={id}
-                                    draggableId={id}
-                                    index={index}
+                                    timeout={500}
+                                    classNames="item"
                                 >
-                                    {(provided) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            <WeatherCard id={id} />
-                                        </div>
-                                    )}
-                                </Draggable>
-                            )
-                        })}
+                                    <Draggable
+                                        key={id}
+                                        draggableId={id}
+                                        index={index}
+                                    >
+                                        {(provided) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={getItemStyle(
+                                                    provided.draggableProps
+                                                        .style
+                                                )}
+                                            >
+                                                <WeatherCard id={id} />
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                </CSSTransition>
+                            ))}
+                        </TransitionGroup>
                         {provided.placeholder}
                     </div>
                 )}
