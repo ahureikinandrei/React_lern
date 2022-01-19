@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
 import { SALT_LENGTH } from '../config/constants'
 import User from '../models/User'
+import City from '../models/City'
 
 class UserController {
     static async _hashPassword(password) {
@@ -87,18 +88,28 @@ class UserController {
 
     async patch(req, res) {
         try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
+            const user = await User.findOne({ _id: req.user.id })
             if (!user) {
-                return res.formatResponse(null, 'No such user', 404)
+                return res.formatResponse(
+                    null,
+                    'Such user has not been found',
+                    404
+                )
             }
 
-            const hashPassword = await UserController._hashPassword(password)
-            const newPassword = { password: hashPassword }
+            const { name, lat, lon, country } = req.body
 
-            await User.updateOne({ email }, newPassword)
+            const cityInDb = await City.findOne({ name, lat, lon, country })
 
-            return res.formatResponse(user, 'User has been updated')
+            const city = cityInDb || new City({ name, lat, lon, country })
+
+            await city.save()
+
+            user.cities.push(city._id)
+            await user.save()
+            const data = await user.populate('cities')
+
+            return res.formatResponse(data, 'User has been updated')
         } catch (e) {
             console.log(e)
             return res.formatResponse(e, 'Update user error', 400)

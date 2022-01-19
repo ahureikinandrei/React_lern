@@ -14,7 +14,7 @@ import {
 export const useStylesWeatherInfo = makeStyles((theme) =>
     createStyles({
         wrapper: {
-            minWidth: 160,
+            minWidth: 180,
             overflow: 'hidden',
             fontSize: 16,
             [theme.breakpoints.down('xs')]: {

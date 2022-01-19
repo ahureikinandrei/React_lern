@@ -1,5 +1,10 @@
 import { createSelector } from 'reselect'
-import { IWeatherForecastData, WeatherState } from './types'
+import {
+    ILocationData,
+    IWeatherData,
+    IWeatherForecastData,
+    WeatherState,
+} from './types'
 import { RootState } from '../../store'
 import { celsiusToFahrenheit } from '../../../utils/dataTransfrom'
 import { DEGREES_FAHRENHEIT } from '../../../config/constants'
@@ -64,5 +69,17 @@ export const selectWeatherForecastInUnits = createSelector(
             })
         }
         return forecast
+    }
+)
+
+export const selectCurrentSelectedLocation = createSelector(
+    selectWeatherData,
+    (weatherDate: IWeatherData): ILocationData | null => {
+        if (weatherDate.location && weatherDate.location.length) {
+            const [location] = weatherDate.location
+            return location
+        }
+
+        return null
     }
 )

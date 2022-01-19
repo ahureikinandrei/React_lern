@@ -50,6 +50,7 @@ export function transformDataFromWeatherApi(
     transformedData.windspeed = dataFromApi.currentConditions.windspeed
     transformedData.humidity = dataFromApi.currentConditions.humidity
     transformedData.forecast = transformForecastData(dataFromApi.days)
+    transformedData.location = dataFromApi.location
 
     return transformedData
 }

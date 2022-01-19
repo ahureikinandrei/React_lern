@@ -1,15 +1,19 @@
+import { ILocationData } from '../weather/types'
+
 export interface ICard {
     id: string
 }
 
 export interface SettingsState {
     cards: ICard[]
+    favoritesLocation: ILocationData[]
 }
 
 export enum SettingsActionEnum {
     SET_NEW_CARD = 'SET_NEW_CARD',
     DELETE_CARD = 'DELETE_CARD',
     UPDATE_CARDS_ORDER = 'UPDATE_CARDS_ORDER',
+    ADD_TO_FAVORITE = 'ADD_TO_FAVORITE',
 }
 
 export interface SetNewCardAction {
@@ -27,4 +31,13 @@ export interface UpdateCardsOrder {
     payload: ICard[]
 }
 
-export type SettingsActions = SetNewCardAction | DeleteCard | UpdateCardsOrder
+export interface UpdateFavoriteLocation {
+    type: SettingsActionEnum.ADD_TO_FAVORITE
+    payload: ILocationData
+}
+
+export type SettingsActions =
+    | SetNewCardAction
+    | DeleteCard
+    | UpdateCardsOrder
+    | UpdateFavoriteLocation

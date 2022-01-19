@@ -2,6 +2,7 @@ import { SettingsActionEnum, SettingsActions, SettingsState } from './types'
 
 const initialState: SettingsState = {
     cards: [],
+    favoritesLocation: [],
 }
 
 export default function settingsReducer(
@@ -25,6 +26,11 @@ export default function settingsReducer(
                     ...state.cards.slice(0, deleteItemIndex),
                     ...state.cards.slice(deleteItemIndex + 1),
                 ],
+            }
+        case SettingsActionEnum.ADD_TO_FAVORITE:
+            return {
+                ...state,
+                favoritesLocation: [...state.favoritesLocation, action.payload],
             }
         default:
             return state
