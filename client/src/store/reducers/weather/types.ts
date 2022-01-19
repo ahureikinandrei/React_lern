@@ -4,6 +4,13 @@ export interface IWeatherForecastData {
     humidity: number
 }
 
+export interface ILocationData {
+    country: string
+    lat: number
+    lon: number
+    name: string
+}
+
 export interface IWeatherData {
     address: string
     timezone: string
@@ -14,6 +21,7 @@ export interface IWeatherData {
     humidity: number
     windspeed: number
     forecast: IWeatherForecastData[]
+    location: ILocationData[]
 }
 
 export interface WeatherState {

@@ -1,4 +1,5 @@
 import {
+    ILocationData,
     IWeatherData,
     IWeatherForecastData,
 } from '../store/reducers/weather/types'
@@ -24,13 +25,24 @@ function transformForecastData(
     return transformedForecast
 }
 
+function transformLocationData(location: ILocationData[]): string | null {
+    if (!location.length) {
+        return null
+    }
+
+    const [nearestLocation] = location
+
+    return nearestLocation.name
+}
+
 export function transformDataFromWeatherApi(
     dataFromApi: IDataFromApi
 ): IWeatherData {
     const transformedData = {} as IWeatherData
 
     transformedData.timezone = dataFromApi.timezone
-    transformedData.address = dataFromApi.address
+    transformedData.address =
+        transformLocationData(dataFromApi.location) || dataFromApi.address
     transformedData.latitude = dataFromApi.latitude
     transformedData.longitude = dataFromApi.longitude
     transformedData.temp = dataFromApi.currentConditions.temp
