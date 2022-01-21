@@ -9,6 +9,7 @@ export interface ILocationData {
     lat: number
     lon: number
     name: string
+    _id: string
 }
 
 export interface IWeatherData {

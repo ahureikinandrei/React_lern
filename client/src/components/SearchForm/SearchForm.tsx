@@ -6,7 +6,7 @@ import { useActions } from '../../hooks/useActions'
 import { generateIdCard } from '../../utils/generateIdCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthStatus } from '../../store/reducers/auth/selectors'
-import { selectCurrentSelectedLocation } from '../../store/reducers/weather/selectors'
+import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -20,9 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         buttonsContainer: {
-            height: 80,
             display: 'flex',
-            flexDirection: 'column',
             justifyContent: 'space-between',
         },
     })
@@ -30,9 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchForm: FC = () => {
     const classes = useStyles()
-    const { setNewCard, addToUserFavouritesLocations } = useActions()
+    const { setNewCard } = useActions()
     const isAuth = useTypedSelector(selectAuthStatus)
-    const location = useTypedSelector(selectCurrentSelectedLocation)
 
     const addNewCard = useCallback((): void => {
         setNewCard({
@@ -40,26 +37,10 @@ const SearchForm: FC = () => {
         })
     }, [setNewCard])
 
-    const addLocationToFavorite = useCallback((): void => {
-        if (location) {
-            addToUserFavouritesLocations(location)
-        }
-    }, [location])
-
     return (
         <div className={classes.searchForm}>
             <SearchInput />
             <div className={classes.buttonsContainer}>
-                {isAuth ? (
-                    <Button
-                        size="small"
-                        color="default"
-                        variant="outlined"
-                        onClick={addLocationToFavorite}
-                    >
-                        Favorite
-                    </Button>
-                ) : null}
                 <Button
                     size="small"
                     color="default"
@@ -68,6 +49,7 @@ const SearchForm: FC = () => {
                 >
                     Card
                 </Button>
+                {isAuth ? <FavoriteBtn /> : null}
             </div>
         </div>
     )

@@ -102,10 +102,37 @@ class UserController {
             const cityInDb = await City.findOne({ name, lat, lon, country })
 
             const city = cityInDb || new City({ name, lat, lon, country })
-
             await city.save()
 
-            user.cities.push(city._id)
+            user.cities.addToSet(city._id)
+            await user.save()
+            const data = await user.populate('cities')
+
+            return res.formatResponse(data, 'User has been updated')
+        } catch (e) {
+            console.log(e)
+            return res.formatResponse(e, 'Update user error', 400)
+        }
+    }
+
+    async removeLocationFromFavourites(req, res) {
+        try {
+            const user = await User.findOne({ _id: req.user.id })
+            if (!user) {
+                return res.formatResponse(
+                    null,
+                    'Such user has not been found',
+                    404
+                )
+            }
+
+            const { id } = req.body
+
+            if (!id) {
+                return res.formatResponse(null, 'Id has not been found', 404)
+            }
+
+            user.cities.pull(id)
             await user.save()
             const data = await user.populate('cities')
 

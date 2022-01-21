@@ -21,7 +21,7 @@ const useStylesHeader = makeStyles((theme) =>
             [theme.breakpoints.down('xs')]: {
                 flexWrap: 'wrap-reverse',
                 padding: '0 20px',
-                height: 240,
+                height: 160,
                 justifyContent: 'flex-end',
             },
         },

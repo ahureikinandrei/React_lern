@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import axios from '../core/axios'
-import { ILocationData } from '../store/reducers/weather/types'
+import { ILocationPropsForAPI, IUserFavouritesServiceResponse } from './types'
 
 export default class UserService {
     static getUsers(): Promise<AxiosResponse> {
@@ -16,12 +16,14 @@ export default class UserService {
         return axios.post('/api/user', body)
     }
 
-    static addCityToFavouritesForUser({
+    static addLocationToFavouritesForUser({
         name,
         lat,
         lon,
         country,
-    }: ILocationData): Promise<AxiosResponse> {
+    }: ILocationPropsForAPI): Promise<
+        AxiosResponse<IUserFavouritesServiceResponse>
+    > {
         const body = {
             name,
             lat,
@@ -30,5 +32,15 @@ export default class UserService {
         }
 
         return axios.patch('/api/user', body)
+    }
+
+    static removeLocationFromFavouritesForUser(
+        id: string
+    ): Promise<AxiosResponse<IUserFavouritesServiceResponse>> {
+        const body = {
+            id,
+        }
+
+        return axios.patch('/api/user/remove', body)
     }
 }

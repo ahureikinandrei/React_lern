@@ -6,14 +6,14 @@ export interface ICard {
 
 export interface SettingsState {
     cards: ICard[]
-    favoritesLocation: ILocationData[]
+    favouritesLocations: ILocationData[]
 }
 
 export enum SettingsActionEnum {
+    UPDATE_FAVOURITES = 'UPDATE_FAVOURITES',
+    UPDATE_CARDS_ORDER = 'UPDATE_CARDS_ORDER',
     SET_NEW_CARD = 'SET_NEW_CARD',
     DELETE_CARD = 'DELETE_CARD',
-    UPDATE_CARDS_ORDER = 'UPDATE_CARDS_ORDER',
-    ADD_TO_FAVORITE = 'ADD_TO_FAVORITE',
 }
 
 export interface SetNewCardAction {
@@ -31,13 +31,13 @@ export interface UpdateCardsOrder {
     payload: ICard[]
 }
 
-export interface UpdateFavoriteLocation {
-    type: SettingsActionEnum.ADD_TO_FAVORITE
-    payload: ILocationData
+export interface UpdateFavouritesLocations {
+    type: SettingsActionEnum.UPDATE_FAVOURITES
+    payload: ILocationData[]
 }
 
 export type SettingsActions =
+    | UpdateFavouritesLocations
     | SetNewCardAction
     | DeleteCard
     | UpdateCardsOrder
-    | UpdateFavoriteLocation

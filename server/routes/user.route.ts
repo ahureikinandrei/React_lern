@@ -20,6 +20,11 @@ userRouter.post(
 userRouter.get('/user/:id', userController.get)
 userRouter.get('/user', userController.getAll)
 userRouter.patch('/user', authMiddleware, userController.patch)
+userRouter.patch(
+    '/user/remove',
+    authMiddleware,
+    userController.removeLocationFromFavourites
+)
 userRouter.delete('/user', userController.delete)
 
 export default userRouter

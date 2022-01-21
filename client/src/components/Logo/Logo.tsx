@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { createStyles, makeStyles, Typography } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
 
 export const useStyle = makeStyles((theme) =>
     createStyles({
