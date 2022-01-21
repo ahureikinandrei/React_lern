@@ -25,8 +25,9 @@ const FavoriteBtn: FC = () => {
             })
         ) {
             setState(false)
+        } else {
+            setState(true)
         }
-        setState(true)
     }, [location, favouritesLocations])
 
     return (

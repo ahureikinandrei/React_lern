@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import {
     DeleteCard,
     ICard,
@@ -9,6 +10,7 @@ import {
 import { AppDispatch } from '../../store'
 import UserService from '../../../api/UserService'
 import { ILocationData } from '../weather/types'
+import { WeatherActionCreators } from '../weather/actionCreators'
 
 export const SettingsActionCreators = {
     setNewCard: (card: ICard): SetNewCardAction => ({
@@ -47,7 +49,12 @@ export const SettingsActionCreators = {
                     )
                 }
             } catch (e) {
-                console.log(e)
+                const error = e as AxiosError
+                const { response } = error
+                if (response && response.data) {
+                    const { data } = response.data
+                    dispatch(WeatherActionCreators.setErrorWeatherData(data))
+                }
             }
         },
     removeFromUserFavouritesLocations:
@@ -56,14 +63,18 @@ export const SettingsActionCreators = {
                 const response =
                     await UserService.removeLocationFromFavouritesForUser(id)
                 const { data } = response.data
-                console.log(data)
                 if (data && data.cities) {
                     dispatch(
                         SettingsActionCreators.updateFavorites(data.cities)
                     )
                 }
             } catch (e) {
-                console.log(e)
+                const error = e as AxiosError
+                const { response } = error
+                if (response && response.data) {
+                    const { data } = response.data
+                    dispatch(WeatherActionCreators.setErrorWeatherData(data))
+                }
             }
         },
 }

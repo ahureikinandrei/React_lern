@@ -110,8 +110,7 @@ class UserController {
 
             return res.formatResponse(data, 'User has been updated')
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Update user error', 400)
+            return res.formatResponse(e.message, 'Update user error', 400)
         }
     }
 
@@ -138,8 +137,7 @@ class UserController {
 
             return res.formatResponse(data, 'User has been updated')
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Update user error', 400)
+            return res.formatResponse(e.message, 'Update user error', 400)
         }
     }
 

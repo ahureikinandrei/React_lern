@@ -44,11 +44,9 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
             paddingRight: 5,
         },
         status: {
-            [theme.breakpoints.down('xs')]: {
-                width: '100%',
-                textAlign: 'center',
-                fontSize: '1.5em',
-            },
+            width: '100%',
+            textAlign: 'center',
+            fontSize: '1.5em',
         },
     })
 )
