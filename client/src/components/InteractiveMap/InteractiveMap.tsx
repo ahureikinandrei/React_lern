@@ -43,7 +43,7 @@ const LocationMarker: FC<ILocationMarkerProps> = ({ temp }) => {
     useEffect(() => {
         map.flyTo([latitude, longitude])
         setPosition({ lat: latitude, lng: longitude } as LatLng)
-    }, [latitude, longitude])
+    }, [latitude, longitude, map])
 
     return position === null ? null : (
         <Popup position={position} autoClose={false}>

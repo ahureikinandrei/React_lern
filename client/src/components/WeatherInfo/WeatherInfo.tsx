@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { createStyles, makeStyles, Typography } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
 import NearMeOutlinedIcon from '@material-ui/icons/NearMeOutlined'
-import { unixToDay, unixToHour } from '../../utils/dateUtils'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectErrorWeatherData,
@@ -10,6 +10,7 @@ import {
     selectWeatherData,
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
+import Clock from '../Clock/Clock'
 
 export const useStylesWeatherInfo = makeStyles((theme) =>
     createStyles({
@@ -44,7 +45,7 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
             paddingRight: 5,
         },
         status: {
-            width: '100%',
+            minWidth: 180,
             textAlign: 'center',
             fontSize: '1.5em',
         },
@@ -81,8 +82,7 @@ const WeatherInfo: FC = () => {
                 {data.address}
             </Typography>
             <Typography variant="subtitle1" className={classes.date}>
-                {unixToDay(data.datetimeEpoch)} |{' '}
-                {unixToHour(data.datetimeEpoch)}
+                <Clock timezone={data.timezone} />
             </Typography>
             <Typography variant="subtitle1" className={classes.temperature}>
                 {temp} {unitsDegrees}

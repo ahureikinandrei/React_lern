@@ -7,6 +7,7 @@ import { generateIdCard } from '../../utils/generateIdCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthStatus } from '../../store/reducers/auth/selectors'
 import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
+import { selectIsLoadingWeather } from '../../store/reducers/weather/selectors'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,6 +31,7 @@ const SearchForm: FC = () => {
     const classes = useStyles()
     const { setNewCard } = useActions()
     const isAuth = useTypedSelector(selectAuthStatus)
+    const loading = useTypedSelector(selectIsLoadingWeather)
 
     const addNewCard = useCallback((): void => {
         setNewCard({
@@ -46,6 +48,7 @@ const SearchForm: FC = () => {
                     color="default"
                     variant="outlined"
                     onClick={addNewCard}
+                    disabled={loading}
                 >
                     Card
                 </Button>

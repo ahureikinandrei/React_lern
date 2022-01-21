@@ -11,6 +11,7 @@ import { useActions } from '../../hooks/useActions'
 import GraphWeather from '../GraphWeather/GraphWeather'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
+    selectTimezone,
     selectWeatherDataLatitude,
     selectWeatherDataLongitude,
     selectWeatherForecastInUnits,
@@ -57,6 +58,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const [viewState, changeViewState] = useState(TABLE_BTN_TEXT)
     const classes = useStylesCard()
     const forecast = useTypedSelector(selectWeatherForecastInUnits)
+    const timezone = useTypedSelector(selectTimezone)
     const latitude = useTypedSelector(selectWeatherDataLatitude)
     const longitude = useTypedSelector(selectWeatherDataLongitude)
     const unitsDegrees = useTypedSelector(selectWeatherUnits)
@@ -73,7 +75,11 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const renderContent = (viewState: string): ReactElement => {
         if (viewState === TABLE_BTN_TEXT) {
             return (
-                <TableWeather forecast={forecast} unitsDegrees={unitsDegrees} />
+                <TableWeather
+                    forecast={forecast}
+                    timezone={timezone}
+                    unitsDegrees={unitsDegrees}
+                />
             )
         }
 
@@ -81,7 +87,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
             return <InteractiveMap latitude={latitude} longitude={longitude} />
         }
 
-        return <GraphWeather forecast={forecast} />
+        return <GraphWeather forecast={forecast} timezone={timezone} />
     }
 
     return (

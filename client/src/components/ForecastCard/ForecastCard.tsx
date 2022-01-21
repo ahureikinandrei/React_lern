@@ -2,12 +2,14 @@ import React, { FC } from 'react'
 import { Card, createStyles, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { unixToDay } from '../../utils/dateUtils'
+import { DD_MM_DATE_FORMAT } from '../../config/constants'
 
 interface IForecastCardProps {
     temp: number
     humidity: number
     datetimeEpoch: number
     unitsDegrees: string
+    timezone: string
 }
 
 const useStylesForecastCard = makeStyles((theme) =>
@@ -34,6 +36,7 @@ const ForecastCard: FC<IForecastCardProps> = ({
     humidity,
     datetimeEpoch,
     unitsDegrees,
+    timezone,
 }) => {
     const classes = useStylesForecastCard()
 
@@ -42,8 +45,8 @@ const ForecastCard: FC<IForecastCardProps> = ({
             <Typography variant="h5">
                 {temp} {unitsDegrees}
             </Typography>
-            <Typography variant="h4">
-                {unixToDay(datetimeEpoch, true)}
+            <Typography variant="h5">
+                {unixToDay(datetimeEpoch, timezone, DD_MM_DATE_FORMAT)}
             </Typography>
             <Typography variant="h5">{humidity} %</Typography>
         </Card>

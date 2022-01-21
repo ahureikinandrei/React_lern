@@ -1,12 +1,11 @@
-export function unixToDay(unixTimestamp: number, isShortHand = false): string {
-    const format = isShortHand ? 'short' : 'long'
-    return new Date(unixTimestamp * 1000).toLocaleString('en-US', {
-        weekday: format,
-    })
-}
+import moment from 'moment-timezone'
 
-export function unixToHour(unixTimestamp: number): string {
-    return new Date(unixTimestamp * 1000).toLocaleString('en-US', {
-        hour: 'numeric',
-    })
+export function unixToDay(
+    unixTimestamp: number,
+    timezone = 'Europe/London',
+    format = 'dddd'
+): string {
+    return moment(unixTimestamp * 1000)
+        .tz(timezone)
+        .format(format)
 }

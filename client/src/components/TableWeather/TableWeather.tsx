@@ -25,9 +25,14 @@ const responsive = {
 interface ITableWeatherProps {
     forecast: IWeatherForecastData[]
     unitsDegrees: string
+    timezone: string
 }
 
-const TableWeather: FC<ITableWeatherProps> = ({ forecast, unitsDegrees }) => {
+const TableWeather: FC<ITableWeatherProps> = ({
+    forecast,
+    unitsDegrees,
+    timezone,
+}) => {
     return (
         <Carousel
             responsive={responsive}
@@ -44,6 +49,7 @@ const TableWeather: FC<ITableWeatherProps> = ({ forecast, unitsDegrees }) => {
                               temp={temp}
                               datetimeEpoch={datetimeEpoch}
                               unitsDegrees={unitsDegrees}
+                              timezone={timezone}
                           />
                       )
                   })

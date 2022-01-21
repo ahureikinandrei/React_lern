@@ -12,13 +12,14 @@ import { transformForecastForGraph } from '../../utils/dataTransfrom'
 
 interface ITableWeatherProps {
     forecast: IWeatherForecastData[]
+    timezone: string
 }
 
-const GraphWeather: FC<ITableWeatherProps> = ({ forecast }) => {
+const GraphWeather: FC<ITableWeatherProps> = ({ forecast, timezone }) => {
     return (
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
-                data={transformForecastForGraph(forecast)}
+                data={transformForecastForGraph(forecast, timezone)}
                 margin={{
                     top: 5,
                     right: 5,

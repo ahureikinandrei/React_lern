@@ -4,6 +4,7 @@ import {
     IWeatherForecastData,
 } from '../store/reducers/weather/types'
 import { unixToDay } from './dateUtils'
+import { SHORT_DAY_DATE_FORMAT } from '../config/constants'
 
 export interface IDataFromApi {
     [key: string]: any
@@ -61,11 +62,16 @@ interface IDataForForecastGraph {
 }
 
 export function transformForecastForGraph(
-    data: IWeatherForecastData[]
+    data: IWeatherForecastData[],
+    timezone: string
 ): IDataForForecastGraph[] {
     return data.map((dayData) => {
         return {
-            name: unixToDay(dayData.datetimeEpoch, true),
+            name: unixToDay(
+                dayData.datetimeEpoch,
+                timezone,
+                SHORT_DAY_DATE_FORMAT
+            ),
             temp: dayData.temp,
         }
     })

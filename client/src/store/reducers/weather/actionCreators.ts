@@ -51,6 +51,7 @@ export const WeatherActionCreators = {
             dispatch(WeatherActionCreators.setIsLoading(true))
             const response = await WeatherService.getCurrentWeather(query)
             const { data } = response.data
+            console.log(data)
             dispatch(
                 WeatherActionCreators.setWeatherData(
                     transformDataFromWeatherApi(data)
@@ -78,6 +79,7 @@ export const WeatherActionCreators = {
             dispatch(WeatherActionCreators.setSearchValue(query))
             const response = await WeatherService.getCurrentWeather(query)
             const { data } = response.data
+            console.log(data)
             dispatch(
                 WeatherActionCreators.setWeatherData(
                     transformDataFromWeatherApi(data)
