@@ -8,6 +8,9 @@ import {
     SetErrorWeatherData,
     SetSnackbarMessage,
     SwitchUnits,
+    ILocationData,
+    SetFavouritesForecastData,
+    IWeatherForecastData,
 } from './types'
 import { AppDispatch } from '../../store'
 import WeatherService from '../../../api/WeatherService'
@@ -16,6 +19,7 @@ import { coordinatesToString } from '../../../utils/unifyUtils'
 import { IGeolocationErrorResponse } from '../../../api/types'
 import { transformDataFromWeatherApi } from '../../../utils/dataTransfrom'
 import { KEY_UNITS_IN_LOCAL_STORAGE } from '../../../config/constants'
+import { SettingsActionCreators } from '../settings/actionsCreators'
 
 export const WeatherActionCreators = {
     setIsLoading: (payload: boolean): SetIsLoadingWeatherAction => ({
@@ -45,28 +49,34 @@ export const WeatherActionCreators = {
             payload,
         }
     },
-    getWeatherInfo: (query: string) => async (dispatch: AppDispatch) => {
-        try {
-            dispatch(WeatherActionCreators.setSearchValue(query))
-            dispatch(WeatherActionCreators.setIsLoading(true))
-            const response = await WeatherService.getCurrentWeather(query)
-            const { data } = response.data
-            console.log(data)
-            dispatch(
-                WeatherActionCreators.setWeatherData(
-                    transformDataFromWeatherApi(data)
+    setFavouritesForecastData: (
+        payload: IWeatherForecastData[]
+    ): SetFavouritesForecastData => ({
+        type: WeatherActionEnum.SET_FAVOURITES_FORECAST_DATA,
+        payload,
+    }),
+    getWeatherInfoFromQuery:
+        (query: string) => async (dispatch: AppDispatch) => {
+            try {
+                dispatch(WeatherActionCreators.setSearchValue(query))
+                dispatch(WeatherActionCreators.setIsLoading(true))
+                const response = await WeatherService.getCurrentWeather(query)
+                const { data } = response.data
+                dispatch(
+                    WeatherActionCreators.setWeatherData(
+                        transformDataFromWeatherApi(data)
+                    )
                 )
-            )
-            dispatch(WeatherActionCreators.setErrorWeatherData(''))
-        } catch (e) {
-            const error = e as AxiosError
-            if (error.response) {
-                const { data } = error.response.data
-                dispatch(WeatherActionCreators.setSnackbarMessage(data))
+                dispatch(WeatherActionCreators.setErrorWeatherData(''))
+            } catch (e) {
+                const error = e as AxiosError
+                if (error.response) {
+                    const { data } = error.response.data
+                    dispatch(WeatherActionCreators.setSnackbarMessage(data))
+                }
             }
-        }
-        dispatch(WeatherActionCreators.setIsLoading(false))
-    },
+            dispatch(WeatherActionCreators.setIsLoading(false))
+        },
     getWeatherInCurrentLocation: () => async (dispatch: AppDispatch) => {
         try {
             dispatch(WeatherActionCreators.setIsLoading(true))
@@ -79,7 +89,6 @@ export const WeatherActionCreators = {
             dispatch(WeatherActionCreators.setSearchValue(query))
             const response = await WeatherService.getCurrentWeather(query)
             const { data } = response.data
-            console.log(data)
             dispatch(
                 WeatherActionCreators.setWeatherData(
                     transformDataFromWeatherApi(data)
@@ -91,4 +100,34 @@ export const WeatherActionCreators = {
         }
         dispatch(WeatherActionCreators.setIsLoading(false))
     },
+    getWeatherInfoForGraphs:
+        (
+            { lat, lon, name }: ILocationData,
+            updateLocationShownOnTheChart = false
+        ) =>
+        async (dispatch: AppDispatch) => {
+            try {
+                const query = `${lat},${lon}`
+                const response = await WeatherService.getCurrentWeather(query)
+                const { data } = response.data
+                const { forecast } = transformDataFromWeatherApi(data)
+
+                dispatch(
+                    WeatherActionCreators.setFavouritesForecastData(forecast)
+                )
+                if (updateLocationShownOnTheChart) {
+                    dispatch(
+                        SettingsActionCreators.addLocationToShownOnTheChart(
+                            name
+                        )
+                    )
+                }
+            } catch (e) {
+                const error = e as AxiosError
+                if (error.response) {
+                    const { data } = error.response.data
+                    dispatch(WeatherActionCreators.setSnackbarMessage(data))
+                }
+            }
+        },
 }

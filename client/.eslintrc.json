@@ -26,6 +26,7 @@
   "rules": {
     "no-shadow": "off",
     "no-underscore-dangle": "off",
+    "no-case-declarations": "off",
     "@typescript-eslint/no-shadow": [
       "off"
     ],

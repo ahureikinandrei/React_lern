@@ -11,6 +11,7 @@ import { useActions } from '../../hooks/useActions'
 import GraphWeather from '../GraphWeather/GraphWeather'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
+    selectFavouritesForecastData,
     selectTimezone,
     selectWeatherDataLatitude,
     selectWeatherDataLongitude,
@@ -19,6 +20,7 @@ import {
 } from '../../store/reducers/weather/selectors'
 import InteractiveMap from '../InteractiveMap/InteractiveMap'
 import { MAP_BTN_TEXT, TABLE_BTN_TEXT } from '../../config/constants'
+import { selectShownOnGraphLocations } from '../../store/reducers/settings/selectors'
 
 export const useStylesCard = makeStyles((theme) =>
     createStyles({
@@ -62,6 +64,10 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const latitude = useTypedSelector(selectWeatherDataLatitude)
     const longitude = useTypedSelector(selectWeatherDataLongitude)
     const unitsDegrees = useTypedSelector(selectWeatherUnits)
+    const favouritesForecastData = useTypedSelector(
+        selectFavouritesForecastData
+    )
+    const shownOnGraphLocations = useTypedSelector(selectShownOnGraphLocations)
 
     const { deleteCard } = useActions()
     const deleteCardClick = (): void => {
@@ -87,7 +93,14 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
             return <InteractiveMap latitude={latitude} longitude={longitude} />
         }
 
-        return <GraphWeather forecast={forecast} timezone={timezone} />
+        return (
+            <GraphWeather
+                forecast={forecast}
+                timezone={timezone}
+                favouritesForecastData={favouritesForecastData}
+                shownOnGraphLocations={shownOnGraphLocations}
+            />
+        )
     }
 
     return (

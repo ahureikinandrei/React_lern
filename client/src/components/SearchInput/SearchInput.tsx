@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchInput: FC = () => {
     const classes = useStyles()
-    const { getWeatherInfo } = useActions()
+    const { getWeatherInfoFromQuery } = useActions()
     const formik = useFormik({
         initialValues: {
             query: '',
         },
         validationSchema: searchValidationSchema,
         onSubmit: (values) => {
-            getWeatherInfo(values.query)
+            getWeatherInfoFromQuery(values.query)
         },
     })
     return (
@@ -46,7 +46,7 @@ const SearchInput: FC = () => {
             <TextField
                 className={classes.input}
                 id="outlined-basic"
-                label="Query"
+                label="Search for location"
                 variant="outlined"
                 name="query"
                 value={formik.values.query}

@@ -2,6 +2,7 @@ export interface IWeatherForecastData {
     datetimeEpoch: number
     temp: number
     humidity: number
+    location?: string
 }
 
 export interface ILocationData {
@@ -32,6 +33,7 @@ export interface WeatherState {
     weatherData: IWeatherData
     snackbarMessage: string
     unitsDegrees: string
+    favouritesLocationsForecastData: Array<IWeatherForecastData[]>
 }
 
 export enum WeatherActionEnum {
@@ -41,6 +43,7 @@ export enum WeatherActionEnum {
     SET_SEARCH_VALUE = 'SET_SEARCH_VALUE',
     SET_WEATHER_DATA = 'SET_WEATHER_DATA',
     SWITCH_UNITS = 'SWITCH_UNITS',
+    SET_FAVOURITES_FORECAST_DATA = 'SET_FAVOURITES_FORECAST_DATA',
 }
 
 export interface SetIsLoadingWeatherAction {
@@ -73,6 +76,11 @@ export interface SetWeatherData {
     payload: IWeatherData
 }
 
+export interface SetFavouritesForecastData {
+    type: WeatherActionEnum.SET_FAVOURITES_FORECAST_DATA
+    payload: IWeatherForecastData[]
+}
+
 export type WeatherAction =
     | SetIsLoadingWeatherAction
     | SetSearchValueAction
@@ -80,3 +88,4 @@ export type WeatherAction =
     | SetErrorWeatherData
     | SetSnackbarMessage
     | SwitchUnits
+    | SetFavouritesForecastData

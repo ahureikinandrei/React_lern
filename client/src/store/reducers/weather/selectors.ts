@@ -48,6 +48,11 @@ export const selectWeatherTemp = (state: RootState): number =>
 export const selectWeatherUnits = (state: RootState): string =>
     state.weather.unitsDegrees
 
+export const selectFavouritesForecastData = (
+    state: RootState
+): Array<IWeatherForecastData[]> =>
+    state.weather.favouritesLocationsForecastData
+
 export const selectTempInUnits = createSelector(
     selectWeatherUnits,
     selectWeatherTemp,

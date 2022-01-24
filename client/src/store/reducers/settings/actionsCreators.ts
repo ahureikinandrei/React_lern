@@ -1,7 +1,10 @@
 import { AxiosError } from 'axios'
 import {
+    AddLocationToShownOnTheChart,
+    ClearLocationShownOnTheChart,
     DeleteCard,
     ICard,
+    RemoveLocationFromShownOnTheChart,
     SetNewCardAction,
     SettingsActionEnum,
     UpdateCardsOrder,
@@ -30,6 +33,21 @@ export const SettingsActionCreators = {
     deleteCard: (id: string): DeleteCard => ({
         type: SettingsActionEnum.DELETE_CARD,
         payload: id,
+    }),
+    addLocationToShownOnTheChart: (
+        name: string
+    ): AddLocationToShownOnTheChart => ({
+        type: SettingsActionEnum.ADD_TO_SHOWN_CHART,
+        payload: name,
+    }),
+    removeLocationFromShownOnTheChart: (
+        name: string
+    ): RemoveLocationFromShownOnTheChart => ({
+        type: SettingsActionEnum.REMOVE_FROM_SHOWN_CHART,
+        payload: name,
+    }),
+    clearLocationFromShownOnTheChart: (): ClearLocationShownOnTheChart => ({
+        type: SettingsActionEnum.CLEAR_SHOWN_ON_CHART_LOCATION,
     }),
     addToUserFavouritesLocations:
         ({ name, lat, lon, country }: ILocationData) =>

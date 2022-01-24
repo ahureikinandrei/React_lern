@@ -7,3 +7,8 @@ export const selectAuthIsLoading = (state: RootState): SettingsState['cards'] =>
 export const selectFavouritesLocations = (
     state: RootState
 ): SettingsState['favouritesLocations'] => state.settings.favouritesLocations
+
+export const selectShownOnGraphLocations = (
+    state: RootState
+): SettingsState['favouritesLocationsShownOnTheChart'] =>
+    state.settings.favouritesLocationsShownOnTheChart

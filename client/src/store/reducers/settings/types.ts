@@ -7,6 +7,7 @@ export interface ICard {
 export interface SettingsState {
     cards: ICard[]
     favouritesLocations: ILocationData[]
+    favouritesLocationsShownOnTheChart: string[]
 }
 
 export enum SettingsActionEnum {
@@ -14,6 +15,9 @@ export enum SettingsActionEnum {
     UPDATE_CARDS_ORDER = 'UPDATE_CARDS_ORDER',
     SET_NEW_CARD = 'SET_NEW_CARD',
     DELETE_CARD = 'DELETE_CARD',
+    ADD_TO_SHOWN_CHART = 'ADD_TO_SHOWN_CHART',
+    REMOVE_FROM_SHOWN_CHART = 'REMOVE_FROM_SHOWN_CHART',
+    CLEAR_SHOWN_ON_CHART_LOCATION = 'CLEAR_SHOWN_ON_CHART_LOCATION',
 }
 
 export interface SetNewCardAction {
@@ -36,8 +40,25 @@ export interface UpdateFavouritesLocations {
     payload: ILocationData[]
 }
 
+export interface AddLocationToShownOnTheChart {
+    type: SettingsActionEnum.ADD_TO_SHOWN_CHART
+    payload: string
+}
+
+export interface RemoveLocationFromShownOnTheChart {
+    type: SettingsActionEnum.REMOVE_FROM_SHOWN_CHART
+    payload: string
+}
+
+export interface ClearLocationShownOnTheChart {
+    type: SettingsActionEnum.CLEAR_SHOWN_ON_CHART_LOCATION
+}
+
 export type SettingsActions =
     | UpdateFavouritesLocations
     | SetNewCardAction
     | DeleteCard
     | UpdateCardsOrder
+    | AddLocationToShownOnTheChart
+    | RemoveLocationFromShownOnTheChart
+    | ClearLocationShownOnTheChart

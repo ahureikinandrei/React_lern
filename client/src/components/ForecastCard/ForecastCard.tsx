@@ -28,6 +28,9 @@ const useStylesForecastCard = makeStyles((theme) =>
                 width: 70,
             },
         },
+        textAlign: {
+            textAlign: 'center',
+        },
     })
 )
 
@@ -45,7 +48,7 @@ const ForecastCard: FC<IForecastCardProps> = ({
             <Typography variant="h5">
                 {temp} {unitsDegrees}
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" className={classes.textAlign}>
                 {unixToDay(datetimeEpoch, timezone, DD_MM_DATE_FORMAT)}
             </Typography>
             <Typography variant="h5">{humidity} %</Typography>

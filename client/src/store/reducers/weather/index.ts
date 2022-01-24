@@ -13,6 +13,7 @@ const initialState: WeatherState = {
     weatherData: {} as IWeatherData,
     snackbarMessage: '',
     unitsDegrees: DEGREES_CELSIUS,
+    favouritesLocationsForecastData: [],
 }
 
 export default function weatherReducer(
@@ -33,6 +34,14 @@ export default function weatherReducer(
             return { ...state, weatherData: action.payload }
         case WeatherActionEnum.SWITCH_UNITS:
             return { ...state, unitsDegrees: action.payload }
+        case WeatherActionEnum.SET_FAVOURITES_FORECAST_DATA:
+            return {
+                ...state,
+                favouritesLocationsForecastData: [
+                    ...state.favouritesLocationsForecastData,
+                    action.payload,
+                ],
+            }
         default:
             return state
     }
