@@ -49,26 +49,13 @@ export const LocationMarker: FC = () => {
     const map = useMapEvents({})
 
     useEffect(() => {
-        map.setView([latitude, longitude])
-        setPopupsData([
-            ...popupData,
-            {
-                lat: latitude,
-                lng: longitude,
-                temp,
-                units,
-            },
-        ])
-    }, [])
-
-    useEffect(() => {
         map.flyTo([latitude, longitude])
         setPosition({ lat: latitude, lng: longitude } as LatLng)
         if (
             popupData.some(({ lat, lng }) => {
                 return lat === latitude && lng === longitude
-            }) &&
-            popupData.length < 5
+            }) ||
+            popupData.length > 5
         ) {
             return
         }

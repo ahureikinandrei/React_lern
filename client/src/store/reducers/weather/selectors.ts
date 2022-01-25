@@ -38,16 +38,16 @@ export const selectWeatherDataForecast = (
 ): IWeatherForecastData[] => state.weather.weatherData.forecast
 
 export const selectTimezone = (state: RootState): string =>
-    state.weather.weatherData.timezone
+    state.weather.weatherData.timezone || ''
 
 export const selectWeatherDataLatitude = (state: RootState): number =>
-    state.weather.weatherData.latitude
+    state.weather.weatherData.latitude || 0
 
 export const selectWeatherDataLongitude = (state: RootState): number =>
-    state.weather.weatherData.longitude
+    state.weather.weatherData.longitude || 0
 
 export const selectWeatherTemp = (state: RootState): number =>
-    state.weather.weatherData.temp
+    state.weather.weatherData.temp || 0
 
 export const selectWeatherUnits = (state: RootState): string =>
     state.weather.unitsDegrees
@@ -71,7 +71,7 @@ export const selectTempInUnits = createSelector(
 export const selectWeatherForecastInUnits = createSelector(
     selectWeatherUnits,
     selectWeatherDataForecast,
-    (unitsDegrees, forecast) => {
+    (unitsDegrees, forecast = []) => {
         if (unitsDegrees === DEGREES_FAHRENHEIT) {
             return forecast.map((dailyForecast) => {
                 return {

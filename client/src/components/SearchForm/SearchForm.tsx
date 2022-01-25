@@ -7,7 +7,10 @@ import { generateIdCard } from '../../utils/generateIdCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthStatus } from '../../store/reducers/auth/selectors'
 import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
-import { selectIsLoadingWeather } from '../../store/reducers/weather/selectors'
+import {
+    selectIsLoadingWeather,
+    selectWeatherData,
+} from '../../store/reducers/weather/selectors'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,13 +34,18 @@ const SearchForm: FC = () => {
     const classes = useStyles()
     const { setNewCard } = useActions()
     const isAuth = useTypedSelector(selectAuthStatus)
-    const loading = useTypedSelector(selectIsLoadingWeather)
+    const isLoading = useTypedSelector(selectIsLoadingWeather)
+    const data = useTypedSelector(selectWeatherData)
 
     const addNewCard = useCallback((): void => {
         setNewCard({
             id: generateIdCard(),
         })
     }, [setNewCard])
+
+    const btnCardStatus = (): boolean => {
+        return isLoading || !data.address
+    }
 
     return (
         <div className={classes.searchForm}>
@@ -48,7 +56,7 @@ const SearchForm: FC = () => {
                     color="default"
                     variant="outlined"
                     onClick={addNewCard}
-                    disabled={loading}
+                    disabled={btnCardStatus()}
                 >
                     Card
                 </Button>
