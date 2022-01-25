@@ -11,7 +11,7 @@ import { useActions } from '../../hooks/useActions'
 import GraphWeather from '../GraphWeather/GraphWeather'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
-    selectFavouritesForecastData,
+    selectFavouritesForecastDataInUnits,
     selectTimezone,
     /*     selectWeatherDataLatitude,
     selectWeatherDataLongitude, */
@@ -65,7 +65,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const longitude = useTypedSelector(selectWeatherDataLongitude) */
     const unitsDegrees = useTypedSelector(selectWeatherUnits)
     const favouritesForecastData = useTypedSelector(
-        selectFavouritesForecastData
+        selectFavouritesForecastDataInUnits
     )
     const shownOnGraphLocations = useTypedSelector(selectShownOnGraphLocations)
 

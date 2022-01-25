@@ -68,17 +68,34 @@ export const selectTempInUnits = createSelector(
     }
 )
 
+const transformDailyTempInFahrenheit = (
+    dayData: IWeatherForecastData
+): IWeatherForecastData => {
+    return {
+        ...dayData,
+        temp: celsiusToFahrenheit(dayData.temp),
+    }
+}
+
+export const selectFavouritesForecastDataInUnits = createSelector(
+    selectWeatherUnits,
+    selectFavouritesForecastData,
+    (unitsDegrees, favouritesForecastData) => {
+        if (unitsDegrees === DEGREES_FAHRENHEIT) {
+            return favouritesForecastData.map((locationData) => {
+                return locationData.map(transformDailyTempInFahrenheit)
+            })
+        }
+        return favouritesForecastData
+    }
+)
+
 export const selectWeatherForecastInUnits = createSelector(
     selectWeatherUnits,
     selectWeatherDataForecast,
     (unitsDegrees, forecast = []) => {
         if (unitsDegrees === DEGREES_FAHRENHEIT) {
-            return forecast.map((dailyForecast) => {
-                return {
-                    ...dailyForecast,
-                    temp: celsiusToFahrenheit(dailyForecast.temp),
-                }
-            })
+            return forecast.map(transformDailyTempInFahrenheit)
         }
         return forecast
     }
