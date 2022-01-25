@@ -34,6 +34,7 @@ export interface WeatherState {
     snackbarMessage: string
     unitsDegrees: string
     favouritesLocationsForecastData: Array<IWeatherForecastData[]>
+    isLoadingDataForGraph: boolean
 }
 
 export enum WeatherActionEnum {
@@ -44,10 +45,16 @@ export enum WeatherActionEnum {
     SET_WEATHER_DATA = 'SET_WEATHER_DATA',
     SWITCH_UNITS = 'SWITCH_UNITS',
     SET_FAVOURITES_FORECAST_DATA = 'SET_FAVOURITES_FORECAST_DATA',
+    SET_IS_LOADING_DATA_FOR_GRAPH = 'SET_IS_LOADING_DATA_FOR_GRAPH',
 }
 
 export interface SetIsLoadingWeatherAction {
     type: WeatherActionEnum.SET_IS_LOADING_WEATHER
+    payload: boolean
+}
+
+export interface SetIsLoadingDataForGraph {
+    type: WeatherActionEnum.SET_IS_LOADING_DATA_FOR_GRAPH
     payload: boolean
 }
 
@@ -89,3 +96,4 @@ export type WeatherAction =
     | SetSnackbarMessage
     | SwitchUnits
     | SetFavouritesForecastData
+    | SetIsLoadingDataForGraph

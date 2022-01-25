@@ -63,7 +63,7 @@ export function transformDataFromWeatherApi(
 
 interface IDataForForecastGraph {
     name: string
-    temp: number
+    Selected: number
 
     [propName: string]: number | string
 }
@@ -81,7 +81,7 @@ export function transformForecastForGraph(
                 SHORT_DAY_DATE_FORMAT
             ),
             hun: dayData.humidity,
-            temp: dayData.temp,
+            Selected: dayData.temp,
         } as IDataForForecastGraph
 
         favouritesForecastData.forEach((favouriteLocationData, ind) => {
@@ -97,4 +97,11 @@ export function transformForecastForGraph(
 
 export function celsiusToFahrenheit(temp: number): number {
     return +((temp * 9) / 5 + 32).toFixed(3)
+}
+
+export function coordinatesToString(
+    latitude: number,
+    longitude: number
+): string {
+    return `${latitude},${longitude}`
 }

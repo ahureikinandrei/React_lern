@@ -67,7 +67,7 @@ export const AuthActionCreators = {
         dispatch(AuthActionCreators.setUser({} as IUser))
         dispatch(AuthActionCreators.setIsAuth(false))
         dispatch(SettingsActionCreators.updateFavorites([]))
-        dispatch(SettingsActionCreators.clearLocationFromShownOnTheChart())
+        dispatch(SettingsActionCreators.clearShownOnTheChartLocation())
     },
     auth: () => async (dispatch: AppDispatch) => {
         try {

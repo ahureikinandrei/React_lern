@@ -17,6 +17,10 @@ export const selectIsLoadingWeather = (
     state: RootState
 ): WeatherState['isLoadingWeather'] => state.weather.isLoadingWeather
 
+export const selectIsLoadingDataForGraph = (
+    state: RootState
+): WeatherState['isLoadingDataForGraph'] => state.weather.isLoadingDataForGraph
+
 export const selectErrorWeatherData = (
     state: RootState
 ): WeatherState['errorWeatherData'] => state.weather.errorWeatherData

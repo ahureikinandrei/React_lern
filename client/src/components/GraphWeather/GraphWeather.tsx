@@ -6,15 +6,17 @@ import {
     Line,
     ResponsiveContainer,
     YAxis,
+    Legend,
 } from 'recharts'
 import { IWeatherForecastData } from '../../store/reducers/weather/types'
 import { transformForecastForGraph } from '../../utils/dataTransfrom'
+import { IGraphLineData } from '../../store/reducers/settings/types'
 
 interface ITableWeatherProps {
     forecast: IWeatherForecastData[]
     timezone: string
     favouritesForecastData: Array<IWeatherForecastData[]>
-    shownOnGraphLocations: string[]
+    shownOnGraphLocations: IGraphLineData[]
 }
 
 const GraphWeather: FC<ITableWeatherProps> = ({
@@ -41,16 +43,18 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Line type="monotone" dataKey="temp" stroke="#8884d8" />
-                {shownOnGraphLocations.map((location) => {
+                <Line type="monotone" dataKey="Selected" stroke="#8884d8" />
+                {shownOnGraphLocations.map(({ location, color }) => {
                     return (
                         <Line
                             key={location}
                             type="monotone"
                             dataKey={location}
+                            stroke={color}
                         />
                     )
                 })}
+                <Legend />
             </LineChart>
         </ResponsiveContainer>
     )

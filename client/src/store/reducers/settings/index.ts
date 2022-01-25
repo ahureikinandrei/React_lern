@@ -43,7 +43,7 @@ export default function settingsReducer(
         case SettingsActionEnum.REMOVE_FROM_SHOWN_CHART:
             const deleteLocationIndex =
                 state.favouritesLocationsShownOnTheChart.findIndex(
-                    (location) => location === action.payload
+                    ({ location }) => location === action.payload
                 )
             return {
                 ...state,

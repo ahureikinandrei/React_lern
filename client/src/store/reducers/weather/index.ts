@@ -14,6 +14,7 @@ const initialState: WeatherState = {
     snackbarMessage: '',
     unitsDegrees: DEGREES_CELSIUS,
     favouritesLocationsForecastData: [],
+    isLoadingDataForGraph: false,
 }
 
 export default function weatherReducer(
@@ -24,6 +25,8 @@ export default function weatherReducer(
     switch (action.type) {
         case WeatherActionEnum.SET_IS_LOADING_WEATHER:
             return { ...state, isLoadingWeather: action.payload }
+        case WeatherActionEnum.SET_IS_LOADING_DATA_FOR_GRAPH:
+            return { ...state, isLoadingDataForGraph: action.payload }
         case WeatherActionEnum.SET_ERROR_WEATHER_DATA:
             return { ...state, errorWeatherData: action.payload }
         case WeatherActionEnum.SET_SNACKBAR_MESSAGE:

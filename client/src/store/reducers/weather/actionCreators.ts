@@ -11,19 +11,27 @@ import {
     ILocationData,
     SetFavouritesForecastData,
     IWeatherForecastData,
+    SetIsLoadingDataForGraph,
 } from './types'
 import { AppDispatch } from '../../store'
 import WeatherService from '../../../api/WeatherService'
 import GeoLocationService from '../../../api/GeoLocationService'
-import { coordinatesToString } from '../../../utils/unifyUtils'
+import {
+    coordinatesToString,
+    transformDataFromWeatherApi,
+} from '../../../utils/dataTransfrom'
 import { IGeolocationErrorResponse } from '../../../api/types'
-import { transformDataFromWeatherApi } from '../../../utils/dataTransfrom'
+
 import { KEY_UNITS_IN_LOCAL_STORAGE } from '../../../config/constants'
 import { SettingsActionCreators } from '../settings/actionsCreators'
 
 export const WeatherActionCreators = {
     setIsLoading: (payload: boolean): SetIsLoadingWeatherAction => ({
         type: WeatherActionEnum.SET_IS_LOADING_WEATHER,
+        payload,
+    }),
+    setIsLoadingDataForGraph: (payload: boolean): SetIsLoadingDataForGraph => ({
+        type: WeatherActionEnum.SET_IS_LOADING_DATA_FOR_GRAPH,
         payload,
     }),
     setErrorWeatherData: (payload: string): SetErrorWeatherData => ({
@@ -107,6 +115,7 @@ export const WeatherActionCreators = {
         ) =>
         async (dispatch: AppDispatch) => {
             try {
+                dispatch(WeatherActionCreators.setIsLoadingDataForGraph(true))
                 const query = `${lat},${lon}`
                 const response = await WeatherService.getCurrentWeather(query)
                 const { data } = response.data
@@ -129,5 +138,6 @@ export const WeatherActionCreators = {
                     dispatch(WeatherActionCreators.setSnackbarMessage(data))
                 }
             }
+            dispatch(WeatherActionCreators.setIsLoadingDataForGraph(false))
         },
 }

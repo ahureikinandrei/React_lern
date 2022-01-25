@@ -14,6 +14,7 @@ import { AppDispatch } from '../../store'
 import UserService from '../../../api/UserService'
 import { ILocationData } from '../weather/types'
 import { WeatherActionCreators } from '../weather/actionCreators'
+import { randomColor } from '../../../utils/generalUtils'
 
 export const SettingsActionCreators = {
     setNewCard: (card: ICard): SetNewCardAction => ({
@@ -35,10 +36,10 @@ export const SettingsActionCreators = {
         payload: id,
     }),
     addLocationToShownOnTheChart: (
-        name: string
+        locationName: string
     ): AddLocationToShownOnTheChart => ({
         type: SettingsActionEnum.ADD_TO_SHOWN_CHART,
-        payload: name,
+        payload: { location: locationName, color: randomColor() },
     }),
     removeLocationFromShownOnTheChart: (
         name: string
@@ -46,7 +47,7 @@ export const SettingsActionCreators = {
         type: SettingsActionEnum.REMOVE_FROM_SHOWN_CHART,
         payload: name,
     }),
-    clearLocationFromShownOnTheChart: (): ClearLocationShownOnTheChart => ({
+    clearShownOnTheChartLocation: (): ClearLocationShownOnTheChart => ({
         type: SettingsActionEnum.CLEAR_SHOWN_ON_CHART_LOCATION,
     }),
     addToUserFavouritesLocations:

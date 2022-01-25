@@ -4,10 +4,15 @@ export interface ICard {
     id: string
 }
 
+export interface IGraphLineData {
+    location: string
+    color: string
+}
+
 export interface SettingsState {
     cards: ICard[]
     favouritesLocations: ILocationData[]
-    favouritesLocationsShownOnTheChart: string[]
+    favouritesLocationsShownOnTheChart: IGraphLineData[]
 }
 
 export enum SettingsActionEnum {
@@ -42,7 +47,7 @@ export interface UpdateFavouritesLocations {
 
 export interface AddLocationToShownOnTheChart {
     type: SettingsActionEnum.ADD_TO_SHOWN_CHART
-    payload: string
+    payload: IGraphLineData
 }
 
 export interface RemoveLocationFromShownOnTheChart {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
@@ -9,21 +9,28 @@ import ListItem from '@material-ui/core/ListItem'
 import Close from '@material-ui/icons/Close'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectFavouritesLocations,
     selectShownOnGraphLocations,
 } from '../../store/reducers/settings/selectors'
 import { useActions } from '../../hooks/useActions'
-import { selectFavouritesForecastData } from '../../store/reducers/weather/selectors'
+import {
+    selectFavouritesForecastData,
+    selectIsLoadingDataForGraph,
+} from '../../store/reducers/weather/selectors'
 import { ILocationData } from '../../store/reducers/weather/types'
 
 const useStyles = makeStyles({
     drawerContent: {
         width: 250,
     },
-    LocationName: {
+    locationName: {
         flexGrow: 1,
+    },
+    loader: {
+        justifyContent: 'center',
     },
 })
 
@@ -39,6 +46,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
     closeDrawer,
 }) => {
     const classes = useStyles()
+    const isLoading = useTypedSelector(selectIsLoadingDataForGraph)
     const favouritesLocations = useTypedSelector(selectFavouritesLocations)
     const locationsOnChart = useTypedSelector(selectShownOnGraphLocations)
     const locationsOnChartWithData = useTypedSelector(
@@ -72,6 +80,45 @@ const RightDrawer: FC<IRightDrawerProps> = ({
         getWeatherInfoForGraphs(item, true)
     }
 
+    const showContent = (): ReactElement | ReactElement[] => {
+        if (isLoading) {
+            return (
+                <ListItem className={classes.loader} key="loader">
+                    <CircularProgress />
+                </ListItem>
+            )
+        }
+        return favouritesLocations.map((item) => {
+            const isLocationOnChart = !!locationsOnChart.find(
+                ({ location }) => {
+                    return location === item.name
+                }
+            )
+            return (
+                <ListItem key={item._id}>
+                    <IconButton
+                        color={isLocationOnChart ? 'secondary' : 'default'}
+                        onClick={() => {
+                            toggleViewLocationChart(item, isLocationOnChart)
+                        }}
+                    >
+                        <TimelineIcon />
+                    </IconButton>
+                    <Typography className={classes.locationName} variant="h5">
+                        {item.name}
+                    </Typography>
+                    <IconButton
+                        onClick={() =>
+                            removeFromUserFavouritesLocations(item._id)
+                        }
+                    >
+                        <Close />
+                    </IconButton>
+                </ListItem>
+            )
+        })
+    }
+
     return (
         <SwipeableDrawer
             anchor="right"
@@ -96,45 +143,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
                 {!favouritesLocations.length ? (
                     <ListItem>You have no favourites locations</ListItem>
                 ) : (
-                    favouritesLocations.map((item) => {
-                        const isLocationOnChart = locationsOnChart.includes(
-                            item.name
-                        )
-                        return (
-                            <ListItem key={item._id}>
-                                <IconButton
-                                    color={
-                                        isLocationOnChart
-                                            ? 'secondary'
-                                            : 'default'
-                                    }
-                                    onClick={() => {
-                                        toggleViewLocationChart(
-                                            item,
-                                            isLocationOnChart
-                                        )
-                                    }}
-                                >
-                                    <TimelineIcon />
-                                </IconButton>
-                                <Typography
-                                    className={classes.LocationName}
-                                    variant="h5"
-                                >
-                                    {item.name}
-                                </Typography>
-                                <IconButton
-                                    onClick={() =>
-                                        removeFromUserFavouritesLocations(
-                                            item._id
-                                        )
-                                    }
-                                >
-                                    <Close />
-                                </IconButton>
-                            </ListItem>
-                        )
-                    })
+                    showContent()
                 )}
             </List>
         </SwipeableDrawer>
