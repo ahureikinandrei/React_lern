@@ -13,8 +13,8 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectFavouritesForecastData,
     selectTimezone,
-    selectWeatherDataLatitude,
-    selectWeatherDataLongitude,
+    /*     selectWeatherDataLatitude,
+    selectWeatherDataLongitude, */
     selectWeatherForecastInUnits,
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
@@ -61,8 +61,8 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const classes = useStylesCard()
     const forecast = useTypedSelector(selectWeatherForecastInUnits)
     const timezone = useTypedSelector(selectTimezone)
-    const latitude = useTypedSelector(selectWeatherDataLatitude)
-    const longitude = useTypedSelector(selectWeatherDataLongitude)
+    /*     const latitude = useTypedSelector(selectWeatherDataLatitude)
+    const longitude = useTypedSelector(selectWeatherDataLongitude) */
     const unitsDegrees = useTypedSelector(selectWeatherUnits)
     const favouritesForecastData = useTypedSelector(
         selectFavouritesForecastData
@@ -90,7 +90,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
         }
 
         if (viewState === MAP_BTN_TEXT) {
-            return <InteractiveMap latitude={latitude} longitude={longitude} />
+            return <InteractiveMap />
         }
 
         return (

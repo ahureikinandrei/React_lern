@@ -73,7 +73,7 @@ export function transformForecastForGraph(
     timezone: string,
     favouritesForecastData: Array<IWeatherForecastData[]>
 ): IDataForForecastGraph[] {
-    const result = data.map((dayData, index) => {
+    return data.map((dayData, index) => {
         const dayForecast = {
             name: unixToDay(
                 dayData.datetimeEpoch,
@@ -91,8 +91,6 @@ export function transformForecastForGraph(
 
         return dayForecast
     })
-
-    return result
 }
 
 export function celsiusToFahrenheit(temp: number): number {
