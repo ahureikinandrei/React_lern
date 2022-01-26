@@ -34,12 +34,7 @@ const TableWeather: FC<ITableWeatherProps> = ({
     timezone,
 }) => {
     return (
-        <Carousel
-            responsive={responsive}
-            swipeable={false}
-            draggable={false}
-            infinite
-        >
+        <Carousel responsive={responsive} swipeable={false} infinite>
             {forecast
                 ? forecast.map(({ datetimeEpoch, temp, humidity }) => {
                       return (

@@ -14,7 +14,7 @@ import {
     selectFavouritesForecastDataInUnits,
     selectTimezone,
     /*     selectWeatherDataLatitude,
-    selectWeatherDataLongitude, */
+selectWeatherDataLongitude, */
     selectWeatherForecastInUnits,
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
@@ -61,8 +61,6 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
     const classes = useStylesCard()
     const forecast = useTypedSelector(selectWeatherForecastInUnits)
     const timezone = useTypedSelector(selectTimezone)
-    /*     const latitude = useTypedSelector(selectWeatherDataLatitude)
-    const longitude = useTypedSelector(selectWeatherDataLongitude) */
     const unitsDegrees = useTypedSelector(selectWeatherUnits)
     const favouritesForecastData = useTypedSelector(
         selectFavouritesForecastDataInUnits

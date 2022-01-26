@@ -88,15 +88,17 @@ export const LocationMarker: FC = () => {
 const InteractiveMap = React.memo(function InteractiveMap() {
     const classes = useStylesMap()
     return (
-        <MapContainer
-            className={classes.mapContainer}
-            center={[0, 0]}
-            zoom={5}
-            dragging={false}
-        >
-            <TileLayer url={MapUrl} />
-            <LocationMarker />
-        </MapContainer>
+        <div contentEditable suppressContentEditableWarning>
+            <MapContainer
+                className={classes.mapContainer}
+                center={[0, 0]}
+                zoom={5}
+                // dragging={false}
+            >
+                <TileLayer url={MapUrl} />
+                <LocationMarker />
+            </MapContainer>
+        </div>
     )
 })
 
