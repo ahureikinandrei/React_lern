@@ -49,6 +49,10 @@ export const LocationMarker: FC = () => {
     const map = useMapEvents({})
 
     useEffect(() => {
+        map.setView([latitude, longitude])
+    }, [])
+
+    useEffect(() => {
         map.flyTo([latitude, longitude])
         setPosition({ lat: latitude, lng: longitude } as LatLng)
         if (
@@ -93,7 +97,6 @@ const InteractiveMap = React.memo(function InteractiveMap() {
                 className={classes.mapContainer}
                 center={[0, 0]}
                 zoom={5}
-                // dragging={false}
             >
                 <TileLayer url={MapUrl} />
                 <LocationMarker />
