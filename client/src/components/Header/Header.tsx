@@ -16,7 +16,7 @@ const useStylesHeader = makeStyles((theme) =>
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 40px',
-            backgroundColor: '#E4DFD6',
+            backgroundColor: theme.palette.header.main,
             overflow: 'hidden',
             [theme.breakpoints.down('xs')]: {
                 flexWrap: 'wrap-reverse',

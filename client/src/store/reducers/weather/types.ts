@@ -3,6 +3,7 @@ export interface IWeatherForecastData {
     temp: number
     humidity: number
     location?: string
+    icon: string
 }
 
 export interface ILocationData {

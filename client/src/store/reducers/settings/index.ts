@@ -1,6 +1,8 @@
 import { SettingsActionEnum, SettingsActions, SettingsState } from './types'
+import { ThemesEnum } from '../../../config/constants'
 
 const initialState: SettingsState = {
+    theme: ThemesEnum.LIGHT_THEME,
     cards: [],
     favouritesLocations: [],
     favouritesLocationsShownOnTheChart: [],
@@ -12,6 +14,8 @@ export default function settingsReducer(
     action: SettingsActions
 ): SettingsState {
     switch (action.type) {
+        case SettingsActionEnum.SWITCH_THEME:
+            return { ...state, theme: action.payload }
         case SettingsActionEnum.SET_NEW_CARD:
             return { ...state, cards: [...state.cards, action.payload] }
         case SettingsActionEnum.UPDATE_CARDS_ORDER:

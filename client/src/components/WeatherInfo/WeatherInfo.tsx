@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { createStyles, makeStyles } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
-import NearMeOutlinedIcon from '@material-ui/icons/NearMeOutlined'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectErrorWeatherData,
@@ -11,6 +10,8 @@ import {
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
 import Clock from '../Clock/Clock'
+import { ReactComponent as Drop } from '../../assets/icons/drop.svg'
+import { ReactComponent as Wind } from '../../assets/icons/wind.svg'
 
 export const useStylesWeatherInfo = makeStyles((theme) =>
     createStyles({
@@ -43,6 +44,7 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
         },
         subInformationIcon: {
             paddingRight: 5,
+            stroke: theme.palette.text.primary,
         },
         status: {
             minWidth: 180,
@@ -88,11 +90,11 @@ const WeatherInfo: FC = () => {
                 {temp} {unitsDegrees}
             </Typography>
             <Typography variant="subtitle1" className={classes.subInformation}>
-                <NearMeOutlinedIcon className={classes.subInformationIcon} />
+                <Wind className={classes.subInformationIcon} />
                 Wind {data.windspeed} km/h
             </Typography>
             <Typography variant="subtitle1" className={classes.subInformation}>
-                <NearMeOutlinedIcon className={classes.subInformationIcon} />
+                <Drop className={classes.subInformationIcon} />
                 Hum {data.humidity} %
             </Typography>
         </div>

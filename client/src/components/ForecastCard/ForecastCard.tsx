@@ -1,8 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { Card, createStyles, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { unixToDay } from '../../utils/dateUtils'
 import { DD_MM_DATE_FORMAT } from '../../config/constants'
+import {
+    WeatherIconList,
+    WeatherIconsTitle,
+} from '../WeatherIcons/WeatherIcons'
+import { ReactComponent as Drop } from '../../assets/icons/drop.svg'
 
 interface IForecastCardProps {
     temp: number
@@ -10,6 +15,7 @@ interface IForecastCardProps {
     datetimeEpoch: number
     unitsDegrees: string
     timezone: string
+    icon: string
 }
 
 const useStylesForecastCard = makeStyles((theme) =>
@@ -30,6 +36,17 @@ const useStylesForecastCard = makeStyles((theme) =>
         },
         textAlign: {
             textAlign: 'center',
+            [theme.breakpoints.down('xs')]: {
+                width: 45,
+            },
+        },
+        weatherIcon: {
+            height: 50,
+            width: 50,
+        },
+        humidityIcon: {
+            paddingTop: 3,
+            marginRight: 5,
         },
     })
 )
@@ -40,8 +57,16 @@ const ForecastCard: FC<IForecastCardProps> = ({
     datetimeEpoch,
     unitsDegrees,
     timezone,
+    icon,
 }) => {
     const classes = useStylesForecastCard()
+
+    const findIcon = (icon: string): ReactElement => {
+        return (
+            WeatherIconList[icon] ||
+            WeatherIconList[WeatherIconsTitle.CLOUDY_DAY]
+        )
+    }
 
     return (
         <Card className={classes.card}>
@@ -51,7 +76,11 @@ const ForecastCard: FC<IForecastCardProps> = ({
             <Typography variant="h5" className={classes.textAlign}>
                 {unixToDay(datetimeEpoch, timezone, DD_MM_DATE_FORMAT)}
             </Typography>
-            <Typography variant="h5">{humidity} %</Typography>
+            <div className={classes.weatherIcon}>{findIcon(icon)}</div>
+            <Typography variant="h5">
+                <Drop className={classes.humidityIcon} />
+                {humidity} %
+            </Typography>
         </Card>
     )
 }

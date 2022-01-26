@@ -3,14 +3,16 @@ import { createTheme } from '@material-ui/core/styles'
 declare module '@material-ui/core/styles/createPalette' {
     interface Palette {
         footer: Palette['primary']
+        header: Palette['primary']
     }
 
     interface PaletteOptions {
         footer: PaletteOptions['primary']
+        header: PaletteOptions['primary']
     }
 }
 
-export const theme = createTheme({
+export const light = createTheme({
     palette: {
         primary: {
             main: '#FCD2C2',
@@ -26,6 +28,9 @@ export const theme = createTheme({
         },
         footer: {
             main: '#0B3846',
+        },
+        header: {
+            main: '#E4DFD6',
         },
     },
     typography: {

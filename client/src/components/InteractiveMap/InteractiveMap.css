@@ -1,1 +1,7 @@
 @import '~leaflet/dist/leaflet.css';
+
+.Map {
+    width: 100%;
+    height: 245px;
+    border-radius: 20px;
+}

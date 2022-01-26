@@ -1,4 +1,5 @@
 import { ILocationData } from '../weather/types'
+import { ThemesEnum } from '../../../config/constants'
 
 export interface ICard {
     id: string
@@ -10,6 +11,7 @@ export interface IGraphLineData {
 }
 
 export interface SettingsState {
+    theme: ThemesEnum.LIGHT_THEME | ThemesEnum.DARK_THEME
     cards: ICard[]
     favouritesLocations: ILocationData[]
     favouritesLocationsShownOnTheChart: IGraphLineData[]
@@ -23,6 +25,12 @@ export enum SettingsActionEnum {
     ADD_TO_SHOWN_CHART = 'ADD_TO_SHOWN_CHART',
     REMOVE_FROM_SHOWN_CHART = 'REMOVE_FROM_SHOWN_CHART',
     CLEAR_SHOWN_ON_CHART_LOCATION = 'CLEAR_SHOWN_ON_CHART_LOCATION',
+    SWITCH_THEME = 'SWITCH_THEME',
+}
+
+export interface SwitchThemeAction {
+    type: SettingsActionEnum.SWITCH_THEME
+    payload: ThemesEnum.LIGHT_THEME | ThemesEnum.DARK_THEME
 }
 
 export interface SetNewCardAction {
@@ -67,3 +75,4 @@ export type SettingsActions =
     | AddLocationToShownOnTheChart
     | RemoveLocationFromShownOnTheChart
     | ClearLocationShownOnTheChart
+    | SwitchThemeAction

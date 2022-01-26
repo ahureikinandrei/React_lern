@@ -21,10 +21,11 @@ import {
     selectIsLoadingDataForGraph,
 } from '../../store/reducers/weather/selectors'
 import { ILocationData } from '../../store/reducers/weather/types'
+import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
 
 const useStyles = makeStyles({
     drawerContent: {
-        width: 250,
+        width: 300,
     },
     locationName: {
         flexGrow: 1,
@@ -137,6 +138,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
                         <ChevronRightIcon />
                     </IconButton>
                 </div>
+                <SwitcherThemes />
                 <Divider />
             </div>
             <List>

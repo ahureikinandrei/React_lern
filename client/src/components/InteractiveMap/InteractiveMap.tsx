@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Popup, useMapEvents } from 'react-leaflet'
 import './InteractiveMap.css'
-import { makeStyles } from '@material-ui/core/styles'
-import { createStyles } from '@material-ui/core'
 import L, { LatLng } from 'leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
@@ -21,16 +19,6 @@ const DefaultIcon = L.icon({
 })
 
 L.Marker.prototype.options.icon = DefaultIcon
-
-const useStylesMap = makeStyles(() =>
-    createStyles({
-        mapContainer: {
-            width: '100%',
-            height: 245,
-            borderRadius: 20,
-        },
-    })
-)
 
 interface IPopupData {
     temp: number
@@ -90,14 +78,9 @@ export const LocationMarker: FC = () => {
 }
 
 const InteractiveMap = React.memo(function InteractiveMap() {
-    const classes = useStylesMap()
     return (
         <div contentEditable suppressContentEditableWarning>
-            <MapContainer
-                className={classes.mapContainer}
-                center={[0, 0]}
-                zoom={5}
-            >
+            <MapContainer className="Map" center={[0, 0]} zoom={5}>
                 <TileLayer url={MapUrl} />
                 <LocationMarker />
             </MapContainer>

@@ -7,6 +7,7 @@ import {
     RemoveLocationFromShownOnTheChart,
     SetNewCardAction,
     SettingsActionEnum,
+    SwitchThemeAction,
     UpdateCardsOrder,
     UpdateFavouritesLocations,
 } from './types'
@@ -15,8 +16,15 @@ import UserService from '../../../api/UserService'
 import { ILocationData } from '../weather/types'
 import { WeatherActionCreators } from '../weather/actionCreators'
 import { randomColor } from '../../../utils/generalUtils'
+import { ThemesEnum } from '../../../config/constants'
 
 export const SettingsActionCreators = {
+    switchTheme: (
+        theme: ThemesEnum.LIGHT_THEME | ThemesEnum.DARK_THEME
+    ): SwitchThemeAction => ({
+        type: SettingsActionEnum.SWITCH_THEME,
+        payload: theme,
+    }),
     setNewCard: (card: ICard): SetNewCardAction => ({
         type: SettingsActionEnum.SET_NEW_CARD,
         payload: card,

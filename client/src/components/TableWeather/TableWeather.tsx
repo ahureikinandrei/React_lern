@@ -36,7 +36,7 @@ const TableWeather: FC<ITableWeatherProps> = ({
     return (
         <Carousel responsive={responsive} swipeable={false} infinite>
             {forecast
-                ? forecast.map(({ datetimeEpoch, temp, humidity }) => {
+                ? forecast.map(({ datetimeEpoch, temp, humidity, icon }) => {
                       return (
                           <ForecastCard
                               key={datetimeEpoch}
@@ -45,6 +45,7 @@ const TableWeather: FC<ITableWeatherProps> = ({
                               datetimeEpoch={datetimeEpoch}
                               unitsDegrees={unitsDegrees}
                               timezone={timezone}
+                              icon={icon}
                           />
                       )
                   })

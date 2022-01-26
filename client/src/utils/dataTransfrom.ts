@@ -19,12 +19,13 @@ function transformForecastData(
 ): IWeatherForecastData[] {
     const transformedForecast = []
     for (let i = 0; i < NUMBER_OF_DAY_IN_THE_FORECAST; i += 1) {
-        const { datetimeEpoch, temp, humidity } = forecast[i]
+        const { datetimeEpoch, temp, humidity, icon } = forecast[i]
         transformedForecast.push({
             datetimeEpoch,
             temp,
             humidity,
             location,
+            icon,
         })
     }
 

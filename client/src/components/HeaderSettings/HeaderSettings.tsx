@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import { createStyles, makeStyles } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import AuthModal from '../AuthModal/AuthModal'
-import SwitchSystem from '../Switch/SwitchSystem'
+import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
 import {
@@ -48,7 +48,7 @@ const HeaderSettings: FC = () => {
 
     return (
         <div className={classes.headerSettings}>
-            <SwitchSystem />
+            <SwitcherUnits />
             {isAuth ? (
                 <Button variant="outlined" onClick={onClickHandler}>
                     Logout

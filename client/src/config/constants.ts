@@ -8,3 +8,8 @@ export const KEY_TOKEN_IN_LOCAL_STORAGE = 'token'
 export const DD_MM_DATE_FORMAT = 'DD.MM ddd'
 export const SHORT_DAY_DATE_FORMAT = 'ddd'
 export const NUMBER_OF_DAY_IN_THE_FORECAST = 7
+
+export enum ThemesEnum {
+    LIGHT_THEME = 'light',
+    DARK_THEME = 'dark',
+}
