@@ -6,6 +6,9 @@ import SearchForm from '../SearchForm/SearchForm'
 import HeaderSettings from '../HeaderSettings/HeaderSettings'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import RightDrawer from '../RightDrawer/RightDrawer'
+import BackgroundImage from '../../assets/image/header/Bg.jpg'
+import BackgroundImageDark from '../../assets/image/header/Bg_dark.jpg'
+import { ThemesEnum } from '../../config/constants'
 
 const useStylesHeader = makeStyles((theme) =>
     createStyles({
@@ -16,12 +19,16 @@ const useStylesHeader = makeStyles((theme) =>
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 40px',
-            backgroundColor: theme.palette.header.main,
+            backgroundImage:
+                theme.palette.type === ThemesEnum.LIGHT_THEME
+                    ? `url(${BackgroundImage})`
+                    : `url(${BackgroundImageDark})`,
+            backgroundSize: 'cover',
             overflow: 'hidden',
             [theme.breakpoints.down('xs')]: {
                 flexWrap: 'wrap-reverse',
                 padding: '0 20px',
-                height: 160,
+                height: 240,
                 justifyContent: 'flex-end',
             },
         },

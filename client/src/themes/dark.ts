@@ -1,25 +1,29 @@
 import { createTheme } from '@material-ui/core/styles'
+import { ThemesEnum } from '../config/constants'
 
 export const dark = createTheme({
     palette: {
-        type: 'dark',
+        type: ThemesEnum.DARK_THEME,
         primary: {
-            main: '#001494',
+            main: '#2d2d2d',
         },
         secondary: {
-            main: '#001371',
+            main: '#424242',
         },
         background: {
-            default: '#000750',
+            default: '#010101',
         },
         text: {
             primary: '#FFFFFF',
         },
         footer: {
-            main: '#0f0128',
+            main: '#110f14',
         },
-        header: {
-            main: '#0d0634',
+        contrast: {
+            main: '#8a8989',
+        },
+        whiteBackground: {
+            main: 'rgba(255,255,255,0.2)',
         },
     },
     typography: {

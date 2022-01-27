@@ -10,6 +10,7 @@ import Close from '@material-ui/icons/Close'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { createStyles } from '@material-ui/core'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectFavouritesLocations,
@@ -23,17 +24,31 @@ import {
 import { ILocationData } from '../../store/reducers/weather/types'
 import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
 
-const useStyles = makeStyles({
-    drawerContent: {
-        width: 300,
-    },
-    locationName: {
-        flexGrow: 1,
-    },
-    loader: {
-        justifyContent: 'center',
-    },
-})
+const useStyles = makeStyles((theme) =>
+    createStyles({
+        drawerContent: {
+            width: 300,
+        },
+        locationName: {
+            flexGrow: 1,
+        },
+        loader: {
+            justifyContent: 'center',
+        },
+        active: {
+            borderRadius: 8,
+            padding: 4,
+            marginRight: 8,
+            backgroundColor: theme.palette.primary.main,
+        },
+        disable: {
+            backgroundColor: theme.palette.contrast.main,
+            borderRadius: 8,
+            padding: 4,
+            marginRight: 8,
+        },
+    })
+)
 
 interface IRightDrawerProps {
     drawerState: boolean
@@ -46,7 +61,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
     openDrawer,
     closeDrawer,
 }) => {
-    const classes = useStyles()
+    const { loader, locationName, active, disable, drawerContent } = useStyles()
     const isLoading = useTypedSelector(selectIsLoadingDataForGraph)
     const favouritesLocations = useTypedSelector(selectFavouritesLocations)
     const locationsOnChart = useTypedSelector(selectShownOnGraphLocations)
@@ -84,7 +99,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
     const showContent = (): ReactElement | ReactElement[] => {
         if (isLoading) {
             return (
-                <ListItem className={classes.loader} key="loader">
+                <ListItem className={loader} key="loader">
                     <CircularProgress />
                 </ListItem>
             )
@@ -98,14 +113,14 @@ const RightDrawer: FC<IRightDrawerProps> = ({
             return (
                 <ListItem key={item._id}>
                     <IconButton
-                        color={isLocationOnChart ? 'secondary' : 'default'}
+                        className={isLocationOnChart ? active : disable}
                         onClick={() => {
                             toggleViewLocationChart(item, isLocationOnChart)
                         }}
                     >
                         <TimelineIcon />
                     </IconButton>
-                    <Typography className={classes.locationName} variant="h5">
+                    <Typography className={locationName} variant="h5">
                         {item.name}
                     </Typography>
                     <IconButton
@@ -127,7 +142,7 @@ const RightDrawer: FC<IRightDrawerProps> = ({
             onClose={closeDrawer}
             onOpen={openDrawer}
         >
-            <div className={classes.drawerContent}>
+            <div className={drawerContent}>
                 <div
                     onClick={closeDrawer}
                     onKeyPress={closeDrawer}

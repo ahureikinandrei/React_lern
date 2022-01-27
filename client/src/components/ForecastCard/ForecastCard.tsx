@@ -29,7 +29,7 @@ const useStylesForecastCard = makeStyles((theme) =>
             alignItems: 'center',
             justifyContent: 'space-around',
             borderRadius: 20,
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.whiteBackground.main,
             [theme.breakpoints.down('xs')]: {
                 width: 70,
             },
@@ -77,7 +77,7 @@ const ForecastCard: FC<IForecastCardProps> = ({
                 {unixToDay(datetimeEpoch, timezone, DD_MM_DATE_FORMAT)}
             </Typography>
             <div className={classes.weatherIcon}>{findIcon(icon)}</div>
-            <Typography variant="h5">
+            <Typography variant="h6">
                 <Drop className={classes.humidityIcon} />
                 {humidity} %
             </Typography>

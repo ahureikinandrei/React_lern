@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { createStyles, makeStyles } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
@@ -19,6 +20,9 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
             minWidth: 180,
             overflow: 'hidden',
             fontSize: 16,
+            padding: 10,
+            borderRadius: 20,
+            backgroundColor: theme.palette.whiteBackground.main,
             [theme.breakpoints.down('xs')]: {
                 width: '100%',
                 display: 'flex',
@@ -33,7 +37,6 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
             },
         },
         city: { fontSize: '1.5em', lineHeight: 1.2 },
-        date: { fontSize: '1.25em', lineHeight: 1.2 },
         temperature: { fontSize: '1.5em', lineHeight: 1.2, fontWeight: 600 },
         subInformation: {
             paddingTop: 5,
@@ -45,6 +48,7 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
         subInformationIcon: {
             paddingRight: 5,
             stroke: theme.palette.text.primary,
+            strokeWidth: 2,
         },
         status: {
             minWidth: 180,
@@ -79,25 +83,23 @@ const WeatherInfo: FC = () => {
     }
 
     return (
-        <div className={classes.wrapper}>
+        <Box boxShadow={3} className={classes.wrapper}>
             <Typography variant="subtitle1" className={classes.city}>
                 {data.address}
             </Typography>
-            <Typography variant="subtitle1" className={classes.date}>
-                <Clock timezone={data.timezone} />
-            </Typography>
-            <Typography variant="subtitle1" className={classes.temperature}>
+            <Clock timezone={data.timezone} />
+            <Typography variant="h4">
                 {temp} {unitsDegrees}
             </Typography>
-            <Typography variant="subtitle1" className={classes.subInformation}>
+            <Typography variant="h6" className={classes.subInformation}>
                 <Wind className={classes.subInformationIcon} />
                 Wind {data.windspeed} km/h
             </Typography>
-            <Typography variant="subtitle1" className={classes.subInformation}>
+            <Typography variant="h6" className={classes.subInformation}>
                 <Drop className={classes.subInformationIcon} />
                 Hum {data.humidity} %
             </Typography>
-        </div>
+        </Box>
     )
 }
 

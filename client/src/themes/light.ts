@@ -3,12 +3,14 @@ import { createTheme } from '@material-ui/core/styles'
 declare module '@material-ui/core/styles/createPalette' {
     interface Palette {
         footer: Palette['primary']
-        header: Palette['primary']
+        contrast: Palette['primary']
+        whiteBackground: Palette['primary']
     }
 
     interface PaletteOptions {
         footer: PaletteOptions['primary']
-        header: PaletteOptions['primary']
+        contrast: PaletteOptions['primary']
+        whiteBackground: PaletteOptions['primary']
     }
 }
 
@@ -27,10 +29,13 @@ export const light = createTheme({
             primary: '#202020',
         },
         footer: {
-            main: '#0B3846',
+            main: '#5f6262',
         },
-        header: {
+        contrast: {
             main: '#E4DFD6',
+        },
+        whiteBackground: {
+            main: 'rgba(255,255,255,0.2)',
         },
     },
     typography: {

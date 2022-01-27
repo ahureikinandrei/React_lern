@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import { createStyles } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
+import Close from '@material-ui/icons/Close'
 import TableWeather from '../TableWeather/TableWeather'
 import WeatherCardSettings from '../WeatherCardSettings/WeatherCardSettings'
 import { useActions } from '../../hooks/useActions'
@@ -13,8 +13,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import {
     selectFavouritesForecastDataInUnits,
     selectTimezone,
-    /*     selectWeatherDataLatitude,
-selectWeatherDataLongitude, */
     selectWeatherForecastInUnits,
     selectWeatherUnits,
 } from '../../store/reducers/weather/selectors'
@@ -118,7 +116,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
                     onClick={deleteCardClick}
                     aria-label="delete"
                 >
-                    <DeleteIcon />
+                    <Close />
                 </IconButton>
             </Grid>
         </Card>

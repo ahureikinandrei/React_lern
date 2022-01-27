@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         form: {
             display: 'flex',
+            alignItems: 'center',
         },
         input: {
             margin: theme.spacing(1),
@@ -18,6 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.down('sm')]: {
                 order: -1,
             },
+        },
+        searchBtn: {
+            height: 50,
+            border: '1px solid rgba(0, 0, 0, 0.23)',
+            borderRadius: 4,
+            backgroundColor: theme.palette.whiteBackground.main,
+            marginRight: 12,
         },
         icon: {
             fontSize: theme.spacing(3),
@@ -54,7 +62,7 @@ const SearchInput: FC = () => {
                 error={formik.touched.query && Boolean(formik.errors.query)}
                 helperText={formik.touched.query && formik.errors.query}
             />
-            <IconButton type="submit">
+            <IconButton type="submit" className={classes.searchBtn}>
                 <SearchIcon className={classes.icon} />
             </IconButton>
         </form>

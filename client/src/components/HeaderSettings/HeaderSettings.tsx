@@ -16,6 +16,7 @@ const useStylesHeader = makeStyles((theme: Theme) =>
         headerSettings: {
             display: 'flex',
             alignItems: 'center',
+            paddingRight: 40,
             [theme.breakpoints.down('xs')]: {
                 display: 'none',
             },

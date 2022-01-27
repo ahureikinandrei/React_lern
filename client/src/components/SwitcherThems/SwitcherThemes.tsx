@@ -23,7 +23,7 @@ const SwitcherThemes: FC = () => {
         <FormControl component="fieldset">
             <FormControlLabel
                 value="theme"
-                control={<Switch color="secondary" />}
+                control={<Switch color="default" />}
                 label="Dark theme"
                 labelPlacement="top"
                 checked={themeTitle === ThemesEnum.DARK_THEME}

@@ -9,9 +9,12 @@ import {
     DEGREES_FAHRENHEIT,
     KEY_TOKEN_IN_LOCAL_STORAGE,
     KEY_UNITS_IN_LOCAL_STORAGE,
+    ThemesEnum,
 } from '../../config/constants'
+import BackgroundImage from '../../assets/image/main/world_map.jpg'
+import BackgroundImageDark from '../../assets/image/main/world_map_dark.jpg'
 
-export const useStylesHome = makeStyles(() =>
+export const useStylesHome = makeStyles((theme) =>
     createStyles({
         wrapper: {
             display: 'flex',
@@ -28,6 +31,12 @@ export const useStylesHome = makeStyles(() =>
             paddingLeft: 16,
             paddingRight: 16,
             paddingBottom: 16,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage:
+                theme.palette.type === ThemesEnum.LIGHT_THEME
+                    ? `url(${BackgroundImage})`
+                    : `url(${BackgroundImageDark})`,
         },
     })
 )

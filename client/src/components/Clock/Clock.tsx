@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
+import Typography from '@material-ui/core/Typography'
 import moment from 'moment'
 import 'moment-timezone'
 
@@ -23,7 +24,7 @@ const Clock: FC<IClockProps> = ({ timezone }) => {
         }
     }, [timezone])
 
-    return <span>{hourState}</span>
+    return <Typography variant="h5">{hourState}</Typography>
 }
 
 export default Clock
