@@ -23,7 +23,7 @@ const SwitcherUnits: FC = () => {
         <FormControl component="fieldset">
             <FormControlLabel
                 value="degrees"
-                control={<Switch color="secondary" />}
+                control={<Switch color="primary" />}
                 label="°C | °F"
                 labelPlacement="top"
                 checked={unitsDegrees === DEGREES_FAHRENHEIT}

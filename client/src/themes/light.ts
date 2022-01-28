@@ -41,13 +41,31 @@ export const light = createTheme({
     typography: {
         fontSize: 10,
     },
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 600,
-            md: 960,
-            lg: 1280,
-            xl: 1920,
+    shape: {
+        borderRadius: 20,
+    },
+    overrides: {
+        MuiTooltip: {
+            tooltip: {
+                fontSize: '0.5 rem',
+            },
+        },
+        MuiSwitch: {
+            switchBase: {
+                color: '#FCD2C2',
+            },
+            colorSecondary: {
+                '&$checked': {
+                    color: '#FCD2C2',
+                },
+            },
+            track: {
+                backgroundColor: '#5f6262',
+                '$checked$checked + &': {
+                    opacity: 0.7,
+                    backgroundColor: '#5f6262',
+                },
+            },
         },
     },
 })

@@ -47,8 +47,9 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
         },
         subInformationIcon: {
             paddingRight: 5,
+            paddingBottom: 2,
             stroke: theme.palette.text.primary,
-            strokeWidth: 2,
+            strokeWidth: 1,
         },
         status: {
             minWidth: 180,

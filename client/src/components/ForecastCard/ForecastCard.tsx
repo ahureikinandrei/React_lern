@@ -30,12 +30,19 @@ const useStylesForecastCard = makeStyles((theme) =>
             justifyContent: 'space-around',
             borderRadius: 20,
             backgroundColor: theme.palette.whiteBackground.main,
+            '& .cls-1, .cls-2, .cls-3, svg': {
+                stroke: theme.palette.text.primary,
+            },
+            '& svg': {
+                fill: theme.palette.text.primary,
+            },
             [theme.breakpoints.down('xs')]: {
                 width: 70,
             },
         },
         textAlign: {
             textAlign: 'center',
+
             [theme.breakpoints.down('xs')]: {
                 width: 45,
             },
@@ -47,6 +54,7 @@ const useStylesForecastCard = makeStyles((theme) =>
         humidityIcon: {
             paddingTop: 3,
             marginRight: 5,
+            stroke: theme.palette.text.primary,
         },
     })
 )

@@ -23,6 +23,8 @@ import {
 } from '../../store/reducers/weather/selectors'
 import { ILocationData } from '../../store/reducers/weather/types'
 import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
+import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
+import AuthBtn from '../AuthBtn/AuthBtn'
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -47,6 +49,10 @@ const useStyles = makeStyles((theme) =>
             padding: 4,
             marginRight: 8,
         },
+        settings: {
+            display: 'flex',
+            alignItems: 'center',
+        },
     })
 )
 
@@ -61,7 +67,8 @@ const RightDrawer: FC<IRightDrawerProps> = ({
     openDrawer,
     closeDrawer,
 }) => {
-    const { loader, locationName, active, disable, drawerContent } = useStyles()
+    const { loader, locationName, active, disable, drawerContent, settings } =
+        useStyles()
     const isLoading = useTypedSelector(selectIsLoadingDataForGraph)
     const favouritesLocations = useTypedSelector(selectFavouritesLocations)
     const locationsOnChart = useTypedSelector(selectShownOnGraphLocations)
@@ -153,7 +160,11 @@ const RightDrawer: FC<IRightDrawerProps> = ({
                         <ChevronRightIcon />
                     </IconButton>
                 </div>
-                <SwitcherThemes />
+                <div className={settings}>
+                    <SwitcherThemes />
+                    <SwitcherUnits />
+                    <AuthBtn />
+                </div>
                 <Divider />
             </div>
             <List>

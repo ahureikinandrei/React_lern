@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
         searchBtn: {
             height: 50,
             border: '1px solid rgba(0, 0, 0, 0.23)',
-            borderRadius: 4,
+            borderRadius: theme.shape.borderRadius,
             backgroundColor: theme.palette.whiteBackground.main,
             marginRight: 12,
         },

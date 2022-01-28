@@ -3,12 +3,13 @@ import { createStyles, makeStyles } from '@material-ui/core'
 import Logo from '../Logo/Logo'
 import WeatherInfo from '../WeatherInfo/WeatherInfo'
 import SearchForm from '../SearchForm/SearchForm'
-import HeaderSettings from '../HeaderSettings/HeaderSettings'
 import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import RightDrawer from '../RightDrawer/RightDrawer'
 import BackgroundImage from '../../assets/image/header/Bg.jpg'
 import BackgroundImageDark from '../../assets/image/header/Bg_dark.jpg'
 import { ThemesEnum } from '../../config/constants'
+import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
+import AuthBtn from '../AuthBtn/AuthBtn'
 
 const useStylesHeader = makeStyles((theme) =>
     createStyles({
@@ -32,11 +33,23 @@ const useStylesHeader = makeStyles((theme) =>
                 justifyContent: 'flex-end',
             },
         },
+        headerSettings: {
+            display: 'flex',
+            alignItems: 'center',
+            paddingRight: 40,
+            [theme.breakpoints.down('xs')]: {
+                display: 'none',
+            },
+            [theme.breakpoints.down('md')]: {
+                flexDirection: 'column',
+                minWidth: 90,
+            },
+        },
     })
 )
 
 const Header: FC = () => {
-    const classes = useStylesHeader()
+    const { header, headerSettings } = useStylesHeader()
     const [drawerState, setDrawerState] = useState(false)
 
     const openDrawer = (): void => {
@@ -48,11 +61,14 @@ const Header: FC = () => {
     }
 
     return (
-        <header className={classes.header}>
+        <header className={header}>
             <Logo />
             <WeatherInfo />
             <SearchForm />
-            <HeaderSettings />
+            <div className={headerSettings}>
+                <SwitcherUnits />
+                <AuthBtn />
+            </div>
             <BurgerMenu openDrawer={openDrawer} />
             <RightDrawer
                 drawerState={drawerState}
