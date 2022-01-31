@@ -33,12 +33,14 @@ class AuthController {
             }
 
             const token = AuthController._generateAccessToken(user._id)
+            const data = await user.populate('cities')
 
             return res.formatResponse(
                 {
                     token,
                     user: {
                         email: user.email,
+                        cities: data.cities,
                     },
                 },
                 'Login'
@@ -62,11 +64,14 @@ class AuthController {
 
             const token = AuthController._generateAccessToken(user._id)
 
+            const data = await user.populate('cities')
+
             return res.formatResponse(
                 {
                     token,
                     user: {
                         email: user.email,
+                        cities: data.cities,
                     },
                 },
                 'Successful authentication'

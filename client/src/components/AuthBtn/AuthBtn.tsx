@@ -1,9 +1,6 @@
 import React, { FC, useState } from 'react'
 import Button from '@material-ui/core/Button'
-import { createStyles, makeStyles } from '@material-ui/core'
-import { Theme } from '@material-ui/core/styles'
 import AuthModal from '../AuthModal/AuthModal'
-import SwitchSystem from '../Switch/SwitchSystem'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { useActions } from '../../hooks/useActions'
 import {
@@ -11,21 +8,7 @@ import {
     selectAuthStatus,
 } from '../../store/reducers/auth/selectors'
 
-const useStylesHeader = makeStyles((theme: Theme) =>
-    createStyles({
-        headerSettings: {
-            display: 'flex',
-            alignItems: 'center',
-            [theme.breakpoints.down('md')]: {
-                flexDirection: 'column',
-                minWidth: 90,
-            },
-        },
-    })
-)
-
-const HeaderSettings: FC = () => {
-    const classes = useStylesHeader()
+const AuthBtn: FC = () => {
     const isAuth = useTypedSelector(selectAuthStatus)
     const isLoading = useTypedSelector(selectAuthIsLoading)
     const { logout } = useActions()
@@ -44,9 +27,7 @@ const HeaderSettings: FC = () => {
     }
 
     return (
-        <div className={classes.headerSettings}>
-            <div />
-            <SwitchSystem />
+        <>
             {isAuth ? (
                 <Button variant="outlined" onClick={onClickHandler}>
                     Logout
@@ -61,8 +42,8 @@ const HeaderSettings: FC = () => {
                 </Button>
             )}
             <AuthModal visible={visibleModal} onClose={handleClickCloseModal} />
-        </div>
+        </>
     )
 }
 
-export default HeaderSettings
+export default AuthBtn

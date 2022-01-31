@@ -24,6 +24,7 @@
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-var-requires": "off",
     "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
     "semi-style": [
       "error",
       "last"

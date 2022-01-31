@@ -1,9 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
-import SearchSelect from '../SerchSelect/SearchSelect'
+import Button from '@material-ui/core/Button'
 import SearchInput from '../SearchInput/SearchInput'
+import { useActions } from '../../hooks/useActions'
+import { generateIdCard } from '../../utils/generateIdCard'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { selectAuthStatus } from '../../store/reducers/auth/selectors'
+import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
+import {
+    selectIsLoadingWeather,
+    selectWeatherData,
+} from '../../store/reducers/weather/selectors'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -12,31 +19,49 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             [theme.breakpoints.down('sm')]: {
                 flexWrap: 'wrap',
-                justifyContent: 'space-evenly',
+                justifyContent: 'center',
+                width: '100%',
             },
         },
-        searchFormFab: {
-            [theme.breakpoints.down('sm')]: {
-                order: 4,
-            },
+        buttonsContainer: {
+            display: 'flex',
+            justifyContent: 'space-between',
         },
     })
 )
 
 const SearchForm: FC = () => {
     const classes = useStyles()
+    const { setNewCard } = useActions()
+    const isAuth = useTypedSelector(selectAuthStatus)
+    const isLoading = useTypedSelector(selectIsLoadingWeather)
+    const data = useTypedSelector(selectWeatherData)
+
+    const addNewCard = useCallback((): void => {
+        setNewCard({
+            id: generateIdCard(),
+        })
+    }, [setNewCard])
+
+    const btnCardStatus = (): boolean => {
+        return isLoading || !data.address
+    }
+
     return (
         <div className={classes.searchForm}>
-            <SearchSelect />
             <SearchInput />
-            <Fab
-                size="small"
-                color="primary"
-                aria-label="add"
-                className={classes.searchFormFab}
-            >
-                <AddIcon />
-            </Fab>
+            <div className={classes.buttonsContainer}>
+                <Button
+                    size="small"
+                    color="default"
+                    variant="outlined"
+                    onClick={addNewCard}
+                    disabled={btnCardStatus()}
+                >
+                    Card
+                </Button>
+                {isAuth ? <FavoriteBtn /> : null}
+            </div>
         </div>
     )
 }
