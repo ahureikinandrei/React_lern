@@ -15,6 +15,7 @@ export interface SettingsState {
     cards: ICard[]
     favouritesLocations: ILocationData[]
     favouritesLocationsShownOnTheChart: IGraphLineData[]
+    isZipCodeApiNeed: boolean
 }
 
 export enum SettingsActionEnum {
@@ -26,11 +27,17 @@ export enum SettingsActionEnum {
     REMOVE_FROM_SHOWN_CHART = 'REMOVE_FROM_SHOWN_CHART',
     CLEAR_SHOWN_ON_CHART_LOCATION = 'CLEAR_SHOWN_ON_CHART_LOCATION',
     SWITCH_THEME = 'SWITCH_THEME',
+    TOGGLE_ZIP_CODE_API = 'TOGGLE_ZIP_CODE_API',
 }
 
 export interface SwitchThemeAction {
     type: SettingsActionEnum.SWITCH_THEME
     payload: ThemesEnum.LIGHT_THEME | ThemesEnum.DARK_THEME
+}
+
+export interface ToggleZipCodeApi {
+    type: SettingsActionEnum.TOGGLE_ZIP_CODE_API
+    payload: boolean
 }
 
 export interface SetNewCardAction {
@@ -76,3 +83,4 @@ export type SettingsActions =
     | RemoveLocationFromShownOnTheChart
     | ClearLocationShownOnTheChart
     | SwitchThemeAction
+    | ToggleZipCodeApi

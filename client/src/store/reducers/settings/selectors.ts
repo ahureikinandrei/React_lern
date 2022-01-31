@@ -4,6 +4,10 @@ import { SettingsState } from './types'
 export const selectTheme = (state: RootState): SettingsState['theme'] =>
     state.settings.theme
 
+export const selectStatusZipCodeApi = (
+    state: RootState
+): SettingsState['isZipCodeApiNeed'] => state.settings.isZipCodeApiNeed
+
 export const selectAuthIsLoading = (state: RootState): SettingsState['cards'] =>
     state.settings.cards
 

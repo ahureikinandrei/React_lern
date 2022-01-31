@@ -8,6 +8,7 @@ import {
     SetNewCardAction,
     SettingsActionEnum,
     SwitchThemeAction,
+    ToggleZipCodeApi,
     UpdateCardsOrder,
     UpdateFavouritesLocations,
 } from './types'
@@ -28,6 +29,10 @@ export const SettingsActionCreators = {
     setNewCard: (card: ICard): SetNewCardAction => ({
         type: SettingsActionEnum.SET_NEW_CARD,
         payload: card,
+    }),
+    toggleZipCodeApi: (status: boolean): ToggleZipCodeApi => ({
+        type: SettingsActionEnum.TOGGLE_ZIP_CODE_API,
+        payload: status,
     }),
     updateFavorites: (
         locations: ILocationData[]

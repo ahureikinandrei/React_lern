@@ -6,6 +6,8 @@ import { IconButton } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { searchValidationSchema } from './validationSheme'
 import { useActions } from '../../hooks/useActions'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { selectStatusZipCodeApi } from '../../store/reducers/settings/selectors'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,7 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const SearchInput: FC = () => {
-    const classes = useStyles()
+    const { form, input, searchBtn, icon } = useStyles()
+    const isZipCodeApiStatus = useTypedSelector(selectStatusZipCodeApi)
+
     const { getWeatherInfoFromQuery } = useActions()
     const formik = useFormik({
         initialValues: {
@@ -42,17 +46,17 @@ const SearchInput: FC = () => {
         },
         validationSchema: searchValidationSchema,
         onSubmit: (values) => {
-            getWeatherInfoFromQuery(values.query)
+            getWeatherInfoFromQuery(values.query, isZipCodeApiStatus)
         },
     })
     return (
         <form
-            className={classes.form}
+            className={form}
             onSubmit={formik.handleSubmit}
             autoComplete="off"
         >
             <TextField
-                className={classes.input}
+                className={input}
                 id="outlined-basic"
                 label="Search for location"
                 variant="outlined"
@@ -62,8 +66,8 @@ const SearchInput: FC = () => {
                 error={formik.touched.query && Boolean(formik.errors.query)}
                 helperText={formik.touched.query && formik.errors.query}
             />
-            <IconButton type="submit" className={classes.searchBtn}>
-                <SearchIcon className={classes.icon} />
+            <IconButton type="submit" className={searchBtn}>
+                <SearchIcon className={icon} />
             </IconButton>
         </form>
     )

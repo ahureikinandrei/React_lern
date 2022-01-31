@@ -64,12 +64,18 @@ export const WeatherActionCreators = {
         payload,
     }),
     getWeatherInfoFromQuery:
-        (query: string) => async (dispatch: AppDispatch) => {
+        (query: string, isZipCodeApiNeed: boolean) =>
+        async (dispatch: AppDispatch) => {
             try {
                 dispatch(WeatherActionCreators.setSearchValue(query))
                 dispatch(WeatherActionCreators.setIsLoading(true))
-                const response = await WeatherService.getCurrentWeather(query)
+                const response = await WeatherService.getCurrentWeather(
+                    query,
+                    isZipCodeApiNeed
+                )
+
                 const { data } = response.data
+
                 dispatch(
                     WeatherActionCreators.setWeatherData(
                         transformDataFromWeatherApi(data)

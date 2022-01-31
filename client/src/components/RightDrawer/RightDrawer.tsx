@@ -1,6 +1,5 @@
 import React, { FC, ReactElement } from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import IconButton from '@material-ui/core/IconButton'
@@ -10,8 +9,14 @@ import Close from '@material-ui/icons/Close'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { makeStyles } from '@material-ui/core/styles'
 import { createStyles } from '@material-ui/core'
+import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
+import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
+import AuthBtn from '../AuthBtn/AuthBtn'
+import ZipCodeCheckbox from '../ZipCodeCheckbox/ZIpCodeCheckbox'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { ILocationData } from '../../store/reducers/weather/types'
 import {
     selectFavouritesLocations,
     selectShownOnGraphLocations,
@@ -21,10 +26,6 @@ import {
     selectFavouritesForecastData,
     selectIsLoadingDataForGraph,
 } from '../../store/reducers/weather/selectors'
-import { ILocationData } from '../../store/reducers/weather/types'
-import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
-import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
-import AuthBtn from '../AuthBtn/AuthBtn'
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -37,21 +38,28 @@ const useStyles = makeStyles((theme) =>
         loader: {
             justifyContent: 'center',
         },
-        active: {
+        chartIconActive: {
             borderRadius: 8,
             padding: 4,
             marginRight: 8,
             backgroundColor: theme.palette.primary.main,
         },
-        disable: {
+        chartIconDisable: {
             backgroundColor: theme.palette.contrast.main,
             borderRadius: 8,
             padding: 4,
             marginRight: 8,
         },
-        settings: {
+        settingsContainer: {
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-around',
+            paddingTop: 10,
+        },
+        authBtnContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            padding: 10,
         },
     })
 )
@@ -67,8 +75,15 @@ const RightDrawer: FC<IRightDrawerProps> = ({
     openDrawer,
     closeDrawer,
 }) => {
-    const { loader, locationName, active, disable, drawerContent, settings } =
-        useStyles()
+    const {
+        loader,
+        locationName,
+        chartIconActive,
+        chartIconDisable,
+        drawerContent,
+        settingsContainer,
+        authBtnContainer,
+    } = useStyles()
     const isLoading = useTypedSelector(selectIsLoadingDataForGraph)
     const favouritesLocations = useTypedSelector(selectFavouritesLocations)
     const locationsOnChart = useTypedSelector(selectShownOnGraphLocations)
@@ -120,7 +135,11 @@ const RightDrawer: FC<IRightDrawerProps> = ({
             return (
                 <ListItem key={item._id}>
                     <IconButton
-                        className={isLocationOnChart ? active : disable}
+                        className={
+                            isLocationOnChart
+                                ? chartIconActive
+                                : chartIconDisable
+                        }
                         onClick={() => {
                             toggleViewLocationChart(item, isLocationOnChart)
                         }}
@@ -160,10 +179,15 @@ const RightDrawer: FC<IRightDrawerProps> = ({
                         <ChevronRightIcon />
                     </IconButton>
                 </div>
-                <div className={settings}>
+                <Divider />
+                <div className={authBtnContainer}>
+                    <AuthBtn />
+                </div>
+                <Divider />
+                <div className={settingsContainer}>
                     <SwitcherThemes />
                     <SwitcherUnits />
-                    <AuthBtn />
+                    <ZipCodeCheckbox />
                 </div>
                 <Divider />
             </div>

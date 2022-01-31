@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react'
 import { createStyles, makeStyles } from '@material-ui/core'
-import Logo from '../Logo/Logo'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
 import WeatherInfo from '../WeatherInfo/WeatherInfo'
 import SearchForm from '../SearchForm/SearchForm'
-import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import RightDrawer from '../RightDrawer/RightDrawer'
 import BackgroundImage from '../../assets/image/header/Bg.jpg'
 import BackgroundImageDark from '../../assets/image/header/Bg_dark.jpg'
@@ -45,11 +46,21 @@ const useStylesHeader = makeStyles((theme) =>
                 minWidth: 90,
             },
         },
+        logo: {
+            [theme.breakpoints.down('md')]: {
+                display: 'none',
+            },
+        },
+        menuIcon: {
+            position: 'absolute',
+            top: 10,
+            right: 10,
+        },
     })
 )
 
 const Header: FC = () => {
-    const { header, headerSettings } = useStylesHeader()
+    const { header, headerSettings, logo, menuIcon } = useStylesHeader()
     const [drawerState, setDrawerState] = useState(false)
 
     const openDrawer = (): void => {
@@ -62,14 +73,18 @@ const Header: FC = () => {
 
     return (
         <header className={header}>
-            <Logo />
+            <Typography variant="h4" className={logo}>
+                WeatherApp
+            </Typography>
             <WeatherInfo />
             <SearchForm />
             <div className={headerSettings}>
                 <SwitcherUnits />
                 <AuthBtn />
             </div>
-            <BurgerMenu openDrawer={openDrawer} />
+            <IconButton className={menuIcon} onClick={openDrawer}>
+                <MenuIcon />
+            </IconButton>
             <RightDrawer
                 drawerState={drawerState}
                 openDrawer={openDrawer}

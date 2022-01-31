@@ -6,6 +6,7 @@ const initialState: SettingsState = {
     cards: [],
     favouritesLocations: [],
     favouritesLocationsShownOnTheChart: [],
+    isZipCodeApiNeed: false,
 }
 
 export default function settingsReducer(
@@ -16,6 +17,8 @@ export default function settingsReducer(
     switch (action.type) {
         case SettingsActionEnum.SWITCH_THEME:
             return { ...state, theme: action.payload }
+        case SettingsActionEnum.TOGGLE_ZIP_CODE_API:
+            return { ...state, isZipCodeApiNeed: action.payload }
         case SettingsActionEnum.SET_NEW_CARD:
             return { ...state, cards: [...state.cards, action.payload] }
         case SettingsActionEnum.UPDATE_CARDS_ORDER:

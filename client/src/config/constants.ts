@@ -13,6 +13,8 @@ export const NO_CITY_TOOLTIP_MESSAGE =
 export const ALREADY_IN_FAVORITES_TOOLTIP_MESSAGE =
     'Already in the favorites list'
 
+export const reqExpFindCountryByCode = /[a-zA-Z]{2}/
+
 export enum ThemesEnum {
     LIGHT_THEME = 'light',
     DARK_THEME = 'dark',
