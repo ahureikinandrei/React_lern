@@ -1,20 +1,24 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import { Request, Response } from 'express'
 import User from '../models/User'
 import { SECRET_KEY, JWT_TOKEN_LIFE_TIME } from '../config/constants'
+import { undefinedToEmptyString } from '../utils/utils'
 
 class AuthController {
-    static _generateAccessToken(id) {
-        const payload = {
+    static _generateAccessToken(id: string) {
+        const payload: {
+            id: string
+        } = {
             id,
         }
 
-        return jwt.sign(payload, SECRET_KEY, {
+        return jwt.sign(payload, undefinedToEmptyString(SECRET_KEY), {
             expiresIn: JWT_TOKEN_LIFE_TIME,
         })
     }
 
-    async post(req, res) {
+    async post(req: Request, res: Response) {
         try {
             const { email, password } = req.body
             const user = await User.findOne({ email })
@@ -40,7 +44,7 @@ class AuthController {
                     token,
                     user: {
                         email: user.email,
-                        cities: data.cities,
+                        cities: data.cities || [],
                     },
                 },
                 'Login'
@@ -50,9 +54,9 @@ class AuthController {
         }
     }
 
-    async get(req, res) {
+    async get(req: Request, res: Response) {
         try {
-            const user = await User.findOne({ _id: req.user.id })
+            const user = await User.findById(req.user.id)
 
             if (!user) {
                 return res.formatResponse(
@@ -62,22 +66,18 @@ class AuthController {
                 )
             }
 
-            const token = AuthController._generateAccessToken(user._id)
-
             const data = await user.populate('cities')
 
             return res.formatResponse(
                 {
-                    token,
                     user: {
                         email: user.email,
-                        cities: data.cities,
+                        cities: data.cities || [],
                     },
                 },
                 'Successful authentication'
             )
         } catch (e) {
-            console.log(e)
             return res.formatResponse(e, 'Server error', 400)
         }
     }

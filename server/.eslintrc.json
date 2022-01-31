@@ -1,5 +1,6 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "commonjs": true,
     "es2021": true
@@ -41,7 +42,10 @@
     ],
     "consistent-return": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"]
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
+    "@typescript-eslint/no-explicit-any": 2
   },
   "settings": {
     "import/resolver": {

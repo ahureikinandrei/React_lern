@@ -8,50 +8,23 @@ import userRouter from './routes/user.route'
 import authRouter from './routes/auth.route'
 import corsMiddleware from './middleware/cors.middleware'
 import weatherRoute from './routes/weather.route'
+import { formatResponse } from './middleware/formatResponse.middleware'
+import { undefinedToEmptyString } from './utils/utils'
 
 const app = express()
 const SERVER_PORT = PORT || 5000
 
-const formatResponse = (req, res, next) => {
-    res.formatResponse = (data, message, status?, errors?) => {
-        const newData = {}
-
-        Object.defineProperty(newData, 'data', {
-            value: data,
-            enumerable: true,
-        })
-
-        Object.defineProperty(newData, 'message', {
-            value: message,
-            enumerable: true,
-        })
-
-        if (errors) {
-            Object.defineProperty(newData, 'errors', {
-                value: errors,
-                enumerable: true,
-            })
-        }
-
-        if (status) {
-            res.status(status)
-        }
-
-        return res.json(newData)
-    }
-    next()
-}
-
 app.use(corsMiddleware)
-app.use(express.json())
 app.use(formatResponse)
+app.use(express.json())
+
 app.use('/api', userRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/weather', weatherRoute)
 
 const start = async () => {
     try {
-        await mongoose.connect(DB_URL)
+        await mongoose.connect(undefinedToEmptyString(DB_URL))
 
         app.listen(SERVER_PORT, () => {
             console.log('server start on port', PORT)

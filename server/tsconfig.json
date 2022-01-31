@@ -1,10 +1,24 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "target": "es5",
+    "module": "commonjs",
     "outDir": "dist",
-    "baseUrl": ".",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/middleware/*" : ["middleware/*"],
+    }
   },
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+    "dist"
+  ],
+  "include": ["src/**/*.ts"]
 }

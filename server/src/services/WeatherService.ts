@@ -1,10 +1,5 @@
 import axios from 'axios'
-import {
-    API_KEY_ZIPCODEBASE,
-    BASE_URL_ZIPCODEBASE,
-    WVC_KEY,
-    WVC_URL,
-} from '../config/constants'
+import { WVC_KEY, WVC_URL } from '../config/constants'
 
 class WeatherService {
     static generateQueryString(data) {

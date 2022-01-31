@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
+import { Request, Response } from 'express'
 import { SALT_LENGTH } from '../config/constants'
 import User from '../models/User'
 import City from '../models/City'
@@ -9,7 +10,7 @@ class UserController {
         return bcrypt.hash(password, SALT_LENGTH)
     }
 
-    async post(req, res) {
+    async post(req: Request, res: Response) {
         try {
             const { email, password } = req.body
 
@@ -42,7 +43,7 @@ class UserController {
         }
     }
 
-    async get(req, res) {
+    async get(req: Request, res: Response) {
         try {
             const { id } = req.params
 
@@ -67,7 +68,7 @@ class UserController {
         }
     }
 
-    async getAll(req, res) {
+    async getAll(req: Request, res: Response) {
         try {
             const users = await User.find()
 
@@ -86,7 +87,7 @@ class UserController {
         }
     }
 
-    async patch(req, res) {
+    async patch(req: Request, res: Response) {
         try {
             const user = await User.findOne({ _id: req.user.id })
             if (!user) {
@@ -114,7 +115,7 @@ class UserController {
         }
     }
 
-    async removeLocationFromFavourites(req, res) {
+    async removeLocationFromFavourites(req: Request, res: Response) {
         try {
             const user = await User.findOne({ _id: req.user.id })
             if (!user) {
@@ -141,7 +142,7 @@ class UserController {
         }
     }
 
-    async delete(req, res) {
+    async delete(req: Request, res: Response) {
         try {
             const { email, password } = req.body
             const user = await User.findOne({ email })
