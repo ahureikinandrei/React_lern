@@ -1,11 +1,12 @@
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from 'express'
 import { SECRET_KEY } from '../config/constants'
 import { undefinedToEmptyString } from '../utils/utils'
+import { UserToken } from '../controllers/auth.controller'
 
 declare module 'express-serve-static-core' {
     interface Request {
-        user: string | JwtPayload
+        user: UserToken
     }
 }
 
@@ -18,15 +19,17 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
         const token = req.headers.authorization?.split(' ')[1]
 
         if (!token) {
-            return res.status(401).json({ message: 'Auth error' })
+            return res.formatResponse(null, 'Authentication token missing', 401)
         }
 
-        const decoded = jwt.verify(token, undefinedToEmptyString(SECRET_KEY))
+        req.user = jwt.verify(
+            token,
+            undefinedToEmptyString(SECRET_KEY)
+        ) as UserToken
 
-        req.user = decoded
         next()
     } catch (e) {
-        return res.status(401).json({ message: 'Auth error' })
+        return res.formatResponse(null, 'Authentication token missing', 401)
     }
 }
 

@@ -1,12 +1,17 @@
 import { validationResult } from 'express-validator'
-import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
+import bcrypt from 'bcryptjs'
 import { SALT_LENGTH } from '../config/constants'
 import User from '../models/User'
 import City from '../models/City'
+import { errorHandler } from '../utils/errorHandler'
+import {
+    transformUserFromDataBase,
+    transformUsersFromDataBase,
+} from '../utils/transformData'
 
 class UserController {
-    static async _hashPassword(password) {
+    static async _hashPassword(password: string) {
         return bcrypt.hash(password, SALT_LENGTH)
     }
 
@@ -16,19 +21,15 @@ class UserController {
 
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.formatResponse(
-                    req.body,
-                    'Incorrect request',
-                    400,
-                    errors
-                )
+                const [error] = errors.array()
+                return res.formatResponse(null, error.msg, 400)
             }
 
             const candidate = await User.findOne({ email })
 
             if (candidate) {
                 return res.formatResponse(
-                    candidate,
+                    null,
                     `User with ${email} already exists`,
                     400
                 )
@@ -37,9 +38,13 @@ class UserController {
             const hashPassword = await UserController._hashPassword(password)
             const user = new User({ email, password: hashPassword })
             await user.save()
-            return res.formatResponse(user, 'User has been created')
+
+            return res.formatResponse(
+                { user: { email: user.email } },
+                'User has been created'
+            )
         } catch (e) {
-            return res.formatResponse(e, 'Registration error', 400)
+            return errorHandler(res, e)
         }
     }
 
@@ -63,8 +68,7 @@ class UserController {
 
             return res.json(user)
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Get user error', 400)
+            return errorHandler(res, e)
         }
     }
 
@@ -80,10 +84,12 @@ class UserController {
                 )
             }
 
-            return res.formatResponse(users, 'Search results')
+            return res.formatResponse(
+                transformUsersFromDataBase(users),
+                'Search results'
+            )
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Get users error', 400)
+            return errorHandler(res, e)
         }
     }
 
@@ -109,9 +115,12 @@ class UserController {
             await user.save()
             const data = await user.populate('cities')
 
-            return res.formatResponse(data, 'User has been updated')
+            return res.formatResponse(
+                transformUserFromDataBase(data),
+                'User has been updated'
+            )
         } catch (e) {
-            return res.formatResponse(e.message, 'Update user error', 400)
+            return errorHandler(res, e, 'Update user error')
         }
     }
 
@@ -136,9 +145,12 @@ class UserController {
             await user.save()
             const data = await user.populate('cities')
 
-            return res.formatResponse(data, 'User has been updated')
+            return res.formatResponse(
+                transformUserFromDataBase(data),
+                'User has been updated'
+            )
         } catch (e) {
-            return res.formatResponse(e.message, 'Update user error', 400)
+            return errorHandler(res, e, 'Update user error')
         }
     }
 
@@ -152,14 +164,20 @@ class UserController {
 
             const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword) {
-                return res.formatResponse({ email }, 'Invalid password', 400)
+                return res.formatResponse(
+                    { user: { email } },
+                    'Invalid password',
+                    400
+                )
             }
 
             await User.deleteOne({ email })
-            return res.formatResponse(user, 'User has been deleted')
+            return res.formatResponse(
+                { user: { email } },
+                'User has been deleted'
+            )
         } catch (e) {
-            console.log(e)
-            return res.formatResponse(e, 'Delete user error', 400)
+            return errorHandler(res, e, 'Delete user error')
         }
     }
 }

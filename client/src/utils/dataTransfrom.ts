@@ -8,6 +8,7 @@ import {
     SHORT_DAY_DATE_FORMAT,
     NUMBER_OF_DAY_IN_THE_FORECAST,
 } from '../config/constants'
+import { SettingsActionCreators } from '../store/reducers/settings/actionsCreators'
 
 export interface IDataFromApi {
     [key: string]: any

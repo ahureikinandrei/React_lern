@@ -4,12 +4,14 @@ import { Request, Response } from 'express'
 import User from '../models/User'
 import { SECRET_KEY, JWT_TOKEN_LIFE_TIME } from '../config/constants'
 import { undefinedToEmptyString } from '../utils/utils'
+import { errorHandler } from '../utils/errorHandler'
 
+export type UserToken = {
+    id: string
+}
 class AuthController {
     static _generateAccessToken(id: string) {
-        const payload: {
-            id: string
-        } = {
+        const payload: UserToken = {
             id,
         }
 
@@ -21,6 +23,7 @@ class AuthController {
     async post(req: Request, res: Response) {
         try {
             const { email, password } = req.body
+
             const user = await User.findOne({ email })
 
             if (!user) {
@@ -50,7 +53,7 @@ class AuthController {
                 'Login'
             )
         } catch (e) {
-            return res.formatResponse(e, 'Server error', 400)
+            return errorHandler(res, e)
         }
     }
 
@@ -78,7 +81,7 @@ class AuthController {
                 'Successful authentication'
             )
         } catch (e) {
-            return res.formatResponse(e, 'Server error', 400)
+            return errorHandler(res, e)
         }
     }
 }

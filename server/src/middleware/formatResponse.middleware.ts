@@ -6,8 +6,7 @@ declare module 'express-serve-static-core' {
         formatResponse: (
             data: CustomData,
             message: string,
-            status?: number,
-            errors?: string
+            status?: number
         ) => Response
     }
 }
@@ -17,8 +16,11 @@ export const formatResponse = (
     res: Response,
     next: NextFunction
 ) => {
-    res.formatResponse = (data, message, status?, errors?) => {
-        const newData = {}
+    res.formatResponse = (data, message, status?) => {
+        const newData: {
+            data?: CustomData
+            message?: string
+        } = {}
 
         Object.defineProperty(newData, 'data', {
             value: data,
@@ -29,13 +31,6 @@ export const formatResponse = (
             value: message,
             enumerable: true,
         })
-
-        if (errors) {
-            Object.defineProperty(newData, 'errors', {
-                value: errors,
-                enumerable: true,
-            })
-        }
 
         if (status) {
             res.status(status)

@@ -52,6 +52,7 @@ export const useStylesWeatherInfo = makeStyles((theme) =>
             strokeWidth: 1,
         },
         status: {
+            width: '100%',
             minWidth: 180,
             textAlign: 'center',
             fontSize: '1.5em',

@@ -19,8 +19,8 @@ class GeoLocationService {
 
             return response.data
         } catch (e) {
-            if (e.response) {
-                return e.response.data
+            if (axios.isAxiosError(e)) {
+                return e.response?.data
             }
             return { message: 'Geo-service error' }
         }

@@ -1,11 +1,35 @@
-import axios from 'axios'
+import { Request, Response } from 'express'
 import { transformLocation } from '../utils/utils'
 import ZipCodeService from '../services/ZipCodeService'
 import WeatherService from '../services/WeatherService'
 import GeoLocationService from '../services/GeoLocationService'
+import { errorHandler } from '../utils/errorHandler'
+import { IWeatherData } from '../types'
+
+interface IWeatherControllerBody {
+    data: {
+        query: string
+        isZipCodeApiNeed: boolean
+        country?: string
+    }
+}
+
+interface ILocationFromZipCodeApi {
+    postal_code?: string
+    country_code?: string
+    latitude?: string
+    longitude?: string
+    city?: string
+    state?: string
+    state_code?: string
+    province?: string | null
+    province_code?: string | null
+}
 
 class WeatherController {
-    static generateQueryStringFromZipCodeApi(locationFromZipCodeApi) {
+    static generateQueryStringFromZipCodeApi(
+        locationFromZipCodeApi: ILocationFromZipCodeApi
+    ) {
         const { latitude, longitude } = locationFromZipCodeApi
         if (!latitude || !longitude) {
             return null
@@ -13,13 +37,13 @@ class WeatherController {
         return `${transformLocation(latitude)},${transformLocation(longitude)}`
     }
 
-    async post(req, res) {
+    async post(req: Request, res: Response) {
         try {
-            const responseData = {}
-            const locationFromZipCodeApi = {}
+            const responseData = {} as IWeatherData
+            const locationFromZipCodeApi = {} as ILocationFromZipCodeApi
 
             const { body } = req
-            const { data } = body
+            const { data } = body as IWeatherControllerBody
             const { query, isZipCodeApiNeed, country } = data
 
             if (!data || !query) {
@@ -29,6 +53,7 @@ class WeatherController {
             if (isZipCodeApiNeed) {
                 const locationByZipCode =
                     await ZipCodeService.getLocationFromZipCode(query, country)
+
                 Object.assign(locationFromZipCodeApi, locationByZipCode)
             }
 
@@ -57,10 +82,7 @@ class WeatherController {
 
             return res.formatResponse(responseData, 'Weather')
         } catch (e) {
-            if (axios.isAxiosError(e)) {
-                return res.formatResponse(e.response.data, 'Server error', 400)
-            }
-            return res.formatResponse(e.message, 'Server error', 400)
+            errorHandler(res, e)
         }
     }
 }

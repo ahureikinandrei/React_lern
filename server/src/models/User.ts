@@ -1,10 +1,10 @@
-import { model, Schema, Document } from 'mongoose'
+import { model, Schema, Document, Types } from 'mongoose'
 
 export interface IUserSchema {
     _id?: string
     email: string
     password: string
-    cities?: string[]
+    cities: Types.Array<string>
 }
 
 export type UserSchemaDocument = IUserSchema & Document
