@@ -1,5 +1,6 @@
 {
   "env": {
+    "node": true,
     "browser": true,
     "commonjs": true,
     "es2021": true
@@ -24,6 +25,7 @@
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-var-requires": "off",
     "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
     "semi-style": [
       "error",
       "last"
@@ -40,7 +42,11 @@
     ],
     "consistent-return": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"]
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
   },
   "settings": {
     "import/resolver": {

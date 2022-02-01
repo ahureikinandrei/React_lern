@@ -1,3 +1,19 @@
+export interface IWeatherForecastData {
+    datetimeEpoch: number
+    temp: number
+    humidity: number
+    location?: string
+    icon: string
+}
+
+export interface ILocationData {
+    country: string
+    lat: number
+    lon: number
+    name: string
+    _id: string
+}
+
 export interface IWeatherData {
     address: string
     timezone: string
@@ -7,6 +23,8 @@ export interface IWeatherData {
     datetimeEpoch: number
     humidity: number
     windspeed: number
+    forecast: IWeatherForecastData[]
+    location: ILocationData[]
 }
 
 export interface WeatherState {
@@ -15,6 +33,9 @@ export interface WeatherState {
     errorWeatherData: string
     weatherData: IWeatherData
     snackbarMessage: string
+    unitsDegrees: string
+    favouritesLocationsForecastData: Array<IWeatherForecastData[]>
+    isLoadingDataForGraph: boolean
 }
 
 export enum WeatherActionEnum {
@@ -23,11 +44,24 @@ export enum WeatherActionEnum {
     SET_SNACKBAR_MESSAGE = 'SET_SNACKBAR_MESSAGE',
     SET_SEARCH_VALUE = 'SET_SEARCH_VALUE',
     SET_WEATHER_DATA = 'SET_WEATHER_DATA',
+    SWITCH_UNITS = 'SWITCH_UNITS',
+    SET_FAVOURITES_FORECAST_DATA = 'SET_FAVOURITES_FORECAST_DATA',
+    SET_IS_LOADING_DATA_FOR_GRAPH = 'SET_IS_LOADING_DATA_FOR_GRAPH',
 }
 
 export interface SetIsLoadingWeatherAction {
     type: WeatherActionEnum.SET_IS_LOADING_WEATHER
     payload: boolean
+}
+
+export interface SetIsLoadingDataForGraph {
+    type: WeatherActionEnum.SET_IS_LOADING_DATA_FOR_GRAPH
+    payload: boolean
+}
+
+export interface SwitchUnits {
+    type: WeatherActionEnum.SWITCH_UNITS
+    payload: string
 }
 
 export interface SetErrorWeatherData {
@@ -50,9 +84,17 @@ export interface SetWeatherData {
     payload: IWeatherData
 }
 
+export interface SetFavouritesForecastData {
+    type: WeatherActionEnum.SET_FAVOURITES_FORECAST_DATA
+    payload: IWeatherForecastData[]
+}
+
 export type WeatherAction =
     | SetIsLoadingWeatherAction
     | SetSearchValueAction
     | SetWeatherData
     | SetErrorWeatherData
     | SetSnackbarMessage
+    | SwitchUnits
+    | SetFavouritesForecastData
+    | SetIsLoadingDataForGraph

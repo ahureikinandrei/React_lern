@@ -11,6 +11,7 @@ import { IUser } from '../../../models/IUser'
 import { AppDispatch } from '../../store'
 import UserService from '../../../api/UserService'
 import AuthService from '../../../api/AuthService'
+import { SettingsActionCreators } from '../settings/actionsCreators'
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({
@@ -43,6 +44,9 @@ export const AuthActionCreators = {
                 if (data && data.token) {
                     localStorage.setItem('token', data.token)
                     dispatch(AuthActionCreators.setIsAuth(true))
+                    dispatch(
+                        SettingsActionCreators.updateFavorites(data.user.cities)
+                    )
                 } else {
                     dispatch(AuthActionCreators.setError('Input is not valid'))
                 }
@@ -62,6 +66,8 @@ export const AuthActionCreators = {
         localStorage.removeItem('token')
         dispatch(AuthActionCreators.setUser({} as IUser))
         dispatch(AuthActionCreators.setIsAuth(false))
+        dispatch(SettingsActionCreators.updateFavorites([]))
+        dispatch(SettingsActionCreators.clearShownOnTheChartLocation())
     },
     auth: () => async (dispatch: AppDispatch) => {
         try {
@@ -70,6 +76,9 @@ export const AuthActionCreators = {
             const { data } = response.data
             if (data && data.user) {
                 dispatch(AuthActionCreators.setUser(data.user))
+                dispatch(
+                    SettingsActionCreators.updateFavorites(data.user.cities)
+                )
                 dispatch(AuthActionCreators.setIsAuth(true))
             } else {
                 localStorage.removeItem('token')
