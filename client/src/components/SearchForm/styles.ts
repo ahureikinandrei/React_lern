@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) =>
         buttonsContainer: {
             display: 'flex',
             justifyContent: 'space-between',
-            [theme.breakpoints.down('md')]: {
+            [theme.breakpoints.down('sm')]: {
                 marginTop: 10,
                 width: '100%',
                 justifyContent: 'center',

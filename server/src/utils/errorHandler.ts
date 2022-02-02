@@ -8,13 +8,14 @@ export const errorHandler = (
     statusCode = 500
 ) => {
     if (axios.isAxiosError(e)) {
-        console.log(e.response?.data)
-        console.log(e.message)
-        return res.formatResponse(e.response?.data, message, statusCode)
+        return res.formatResponse(
+            e.response?.data,
+            e.message || message,
+            e.response?.status || statusCode
+        )
     }
 
     if (e instanceof Error) {
-        console.log(e.message)
         return res.formatResponse(e.message, message, statusCode)
     }
     return res.formatResponse(null, message, statusCode)

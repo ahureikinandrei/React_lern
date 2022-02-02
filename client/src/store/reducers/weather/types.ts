@@ -1,3 +1,5 @@
+import { IGeolocationResponse } from '../../../utils/types'
+
 export interface IWeatherForecastData {
     datetimeEpoch: number
     temp: number
@@ -24,7 +26,7 @@ export interface IWeatherData {
     humidity: number
     windspeed: number
     forecast: IWeatherForecastData[]
-    location: ILocationData[]
+    location: IGeolocationResponse[]
 }
 
 export interface WeatherState {

@@ -29,6 +29,9 @@ export const dark = createTheme({
     typography: {
         fontSize: 10,
     },
+    shape: {
+        borderRadius: 20,
+    },
     overrides: {
         MuiTooltip: {
             tooltip: {

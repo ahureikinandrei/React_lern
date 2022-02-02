@@ -18,6 +18,7 @@ import { ILocationData } from '../weather/types'
 import { WeatherActionCreators } from '../weather/actionCreators'
 import { randomColor } from '../../../utils/generalUtils'
 import { ThemesEnum } from '../../../config/constants'
+import { IGeolocationResponse } from '../../../utils/types'
 
 export const SettingsActionCreators = {
     switchTheme: (
@@ -64,7 +65,7 @@ export const SettingsActionCreators = {
         type: SettingsActionEnum.CLEAR_SHOWN_ON_CHART_LOCATION,
     }),
     addToUserFavouritesLocations:
-        ({ name, lat, lon, country }: ILocationData) =>
+        ({ name, lat, lon, country }: IGeolocationResponse) =>
         async (dispatch: AppDispatch) => {
             try {
                 const response =
@@ -75,9 +76,9 @@ export const SettingsActionCreators = {
                         country,
                     })
                 const { data } = response.data
-                if (data && data.cities) {
+                if (data && data.user.cities) {
                     dispatch(
-                        SettingsActionCreators.updateFavorites(data.cities)
+                        SettingsActionCreators.updateFavorites(data.user.cities)
                     )
                 }
             } catch (e) {
@@ -95,9 +96,9 @@ export const SettingsActionCreators = {
                 const response =
                     await UserService.removeLocationFromFavouritesForUser(id)
                 const { data } = response.data
-                if (data && data.cities) {
+                if (data && data.user.cities) {
                     dispatch(
-                        SettingsActionCreators.updateFavorites(data.cities)
+                        SettingsActionCreators.updateFavorites(data.user.cities)
                     )
                 }
             } catch (e) {

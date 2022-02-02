@@ -21,7 +21,7 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "no-console": "off",
+    "no-console": "error",
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-var-requires": "off",
     "class-methods-use-this": "off",

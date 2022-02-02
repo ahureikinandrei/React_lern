@@ -64,7 +64,7 @@ export const WeatherActionCreators = {
         payload,
     }),
     getWeatherInfoFromQuery:
-        (query: string, isZipCodeApiNeed: boolean) =>
+        (query: string, isZipCodeApiNeed = false) =>
         async (dispatch: AppDispatch) => {
             try {
                 dispatch(WeatherActionCreators.setSearchValue(query))

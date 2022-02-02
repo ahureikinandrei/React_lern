@@ -1,17 +1,9 @@
 import { createSelector } from 'reselect'
-import {
-    ILocationData,
-    IWeatherData,
-    IWeatherForecastData,
-    WeatherState,
-} from './types'
+import { IWeatherData, IWeatherForecastData, WeatherState } from './types'
 import { RootState } from '../../store'
 import { celsiusToFahrenheit } from '../../../utils/dataTransfrom'
 import { DEGREES_FAHRENHEIT } from '../../../config/constants'
-
-export const selectSearchValue = (
-    state: RootState
-): WeatherState['searchValue'] => state.weather.searchValue
+import { IGeolocationResponse } from '../../../utils/types'
 
 export const selectIsLoadingWeather = (
     state: RootState
@@ -103,7 +95,7 @@ export const selectWeatherForecastInUnits = createSelector(
 
 export const selectCurrentSelectedLocation = createSelector(
     selectWeatherData,
-    (weatherDate: IWeatherData): ILocationData | null => {
+    (weatherDate: IWeatherData): IGeolocationResponse | null => {
         if (weatherDate.location && weatherDate.location.length) {
             const [location] = weatherDate.location
             return location

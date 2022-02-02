@@ -11,8 +11,10 @@ export interface IGeolocationErrorResponse {
 }
 
 interface IUserWhitFavourite {
-    cities: ILocationData[]
-    email: string
+    user: {
+        cities: ILocationData[]
+        email: string
+    }
 }
 
 export interface IUserFavouritesServiceResponse {

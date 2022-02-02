@@ -1,5 +1,4 @@
 import {
-    ILocationData,
     IWeatherData,
     IWeatherForecastData,
 } from '../store/reducers/weather/types'
@@ -8,10 +7,7 @@ import {
     SHORT_DAY_DATE_FORMAT,
     NUMBER_OF_DAY_IN_THE_FORECAST,
 } from '../config/constants'
-
-export interface IDataFromApi {
-    [key: string]: any
-}
+import { IGeolocationResponse, IWeatherDataFromServer } from './types'
 
 function transformForecastData(
     forecast: IWeatherForecastData[],
@@ -32,7 +28,9 @@ function transformForecastData(
     return transformedForecast
 }
 
-function transformLocationData(location: ILocationData[]): string | null {
+function transformLocationData(
+    location: IGeolocationResponse[]
+): string | null {
     if (!location.length) {
         return null
     }
@@ -42,7 +40,7 @@ function transformLocationData(location: ILocationData[]): string | null {
 }
 
 export function transformDataFromWeatherApi(
-    dataFromApi: IDataFromApi
+    dataFromApi: IWeatherDataFromServer
 ): IWeatherData {
     const transformedData = {} as IWeatherData
     const location =
@@ -72,7 +70,8 @@ interface IDataForForecastGraph {
 export function transformForecastForGraph(
     data: IWeatherForecastData[],
     timezone: string,
-    favouritesForecastData: Array<IWeatherForecastData[]>
+    favouritesForecastData: Array<IWeatherForecastData[]>,
+    dataKey: 'temp' | 'humidity'
 ): IDataForForecastGraph[] {
     return data.map((dayData, index) => {
         const dayForecast = {
@@ -82,12 +81,12 @@ export function transformForecastForGraph(
                 SHORT_DAY_DATE_FORMAT
             ),
             hun: dayData.humidity,
-            Selected: dayData.temp,
+            Selected: dayData[dataKey],
         } as IDataForForecastGraph
 
         favouritesForecastData.forEach((favouriteLocationData, ind) => {
-            const { temp, location } = favouriteLocationData[index]
-            dayForecast[location || ind] = temp
+            const dayData = favouriteLocationData[index]
+            dayForecast[dayData.location || ind] = dayData[dataKey]
         })
 
         return dayForecast
@@ -95,6 +94,7 @@ export function transformForecastForGraph(
 }
 
 export function celsiusToFahrenheit(temp: number): number {
+    console.log(123)
     return +((temp * 9) / 5 + 32).toFixed(3)
 }
 

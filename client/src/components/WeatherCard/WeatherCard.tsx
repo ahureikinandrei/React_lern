@@ -23,7 +23,7 @@ interface IWeatherCardProps {
     id: string
 }
 
-export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
+export const WeatherCard: FC<IWeatherCardProps> = React.memo(({ id }) => {
     const [viewState, changeViewState] = useState(TABLE_BTN_TEXT)
     const { card, table, settings, icon } = useStyles()
     const forecast = useTypedSelector(selectWeatherForecastInUnits)
@@ -90,4 +90,4 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ id }) => {
             </Grid>
         </Card>
     )
-}
+})

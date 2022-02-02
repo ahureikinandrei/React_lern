@@ -1,4 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 import {
     LineChart,
     XAxis,
@@ -11,6 +13,7 @@ import {
 import { IWeatherForecastData } from '../../store/reducers/weather/types'
 import { transformForecastForGraph } from '../../utils/dataTransfrom'
 import { IGraphLineData } from '../../store/reducers/settings/types'
+import { useStyles } from './styles'
 
 interface ITableWeatherProps {
     forecast: IWeatherForecastData[]
@@ -25,38 +28,84 @@ const GraphWeather: FC<ITableWeatherProps> = ({
     favouritesForecastData,
     shownOnGraphLocations,
 }) => {
+    const { cartWrapper, setting, settingBtn } = useStyles()
+    const [dataKey, setDataKey] = useState<'temp' | 'humidity'>('humidity')
+
+    const onButtonDataKeyClick = (dataKey: 'temp' | 'humidity'): void => {
+        setDataKey(dataKey)
+    }
+
     return (
-        <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-                data={transformForecastForGraph(
-                    forecast,
-                    timezone,
-                    favouritesForecastData
-                )}
-                margin={{
-                    top: 5,
-                    right: 5,
-                    left: -30,
-                    bottom: 0,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Line type="monotone" dataKey="Selected" stroke="#8884d8" />
-                {shownOnGraphLocations.map(({ location, color }) => {
-                    return (
+        <div>
+            <div className={cartWrapper}>
+                <ResponsiveContainer>
+                    <LineChart
+                        data={transformForecastForGraph(
+                            forecast,
+                            timezone,
+                            favouritesForecastData,
+                            dataKey
+                        )}
+                        margin={{
+                            top: 5,
+                            right: 5,
+                            left: -30,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
                         <Line
-                            key={location}
                             type="monotone"
-                            dataKey={location}
-                            stroke={color}
+                            dataKey="Selected"
+                            stroke="#8884d8"
                         />
-                    )
-                })}
-                <Legend />
-            </LineChart>
-        </ResponsiveContainer>
+                        {shownOnGraphLocations.map(({ location, color }) => {
+                            return (
+                                <Line
+                                    key={location}
+                                    type="monotone"
+                                    dataKey={location}
+                                    stroke={color}
+                                />
+                            )
+                        })}
+                        <Legend />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
+            <ButtonGroup
+                className={setting}
+                size="small"
+                aria-label="small outlined button group"
+            >
+                <Button
+                    onClick={() => {
+                        onButtonDataKeyClick('temp')
+                    }}
+                    className={settingBtn}
+                >
+                    Temp
+                </Button>
+                <Button
+                    onClick={() => {
+                        onButtonDataKeyClick('humidity')
+                    }}
+                    className={settingBtn}
+                >
+                    Wind
+                </Button>
+                <Button
+                    onClick={() => {
+                        onButtonDataKeyClick('humidity')
+                    }}
+                    className={settingBtn}
+                >
+                    Hum
+                </Button>
+            </ButtonGroup>
+        </div>
     )
 }
 
