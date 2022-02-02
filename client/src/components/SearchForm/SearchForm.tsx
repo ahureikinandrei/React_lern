@@ -13,7 +13,7 @@ import {
 import { useStyles } from './styles'
 
 const SearchForm: FC = () => {
-    const classes = useStyles()
+    const { searchForm, buttonsContainer } = useStyles()
     const { setNewCard } = useActions()
     const isAuth = useTypedSelector(selectAuthStatus)
     const isLoading = useTypedSelector(selectIsLoadingWeather)
@@ -30,9 +30,9 @@ const SearchForm: FC = () => {
     }
 
     return (
-        <div className={classes.searchForm}>
+        <div className={searchForm}>
             <SearchInput />
-            <div className={classes.buttonsContainer}>
+            <div className={buttonsContainer}>
                 <Button
                     size="small"
                     color="default"

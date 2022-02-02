@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) =>
         input: {
             margin: theme.spacing(1),
             width: '40ch',
+            height: 50,
             [theme.breakpoints.down('sm')]: {
                 order: -1,
             },
