@@ -1,24 +1,11 @@
 import React, { FC } from 'react'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
-import { createStyles } from '@material-ui/core'
 import {
     GRAPH_BTN_TEXT,
     MAP_BTN_TEXT,
     TABLE_BTN_TEXT,
 } from '../../config/constants'
-
-export const useStylesCardSettings = makeStyles(() =>
-    createStyles({
-        settings: {
-            display: 'flex',
-            height: 200,
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-        },
-    })
-)
+import { useStyles } from './styles'
 
 interface IWeatherCardSettingsProps {
     swapViewMod: (value: string) => void
@@ -31,10 +18,10 @@ const WeatherCardSettings: FC<IWeatherCardSettingsProps> = ({
     swapViewMod,
     viewState,
 }) => {
-    const classes = useStylesCardSettings()
+    const { settings } = useStyles()
 
     return (
-        <div className={classes.settings}>
+        <div className={settings}>
             {buttonEnum.map((buttonValue) => {
                 return (
                     <Button

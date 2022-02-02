@@ -1,34 +1,16 @@
 import React, { FC, useCallback } from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import SearchInput from '../SearchInput/SearchInput'
+import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
 import { useActions } from '../../hooks/useActions'
 import { generateIdCard } from '../../utils/generateIdCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthStatus } from '../../store/reducers/auth/selectors'
-import FavoriteBtn from '../FavoriteBtn/FavoriteBtn'
 import {
     selectIsLoadingWeather,
     selectWeatherData,
 } from '../../store/reducers/weather/selectors'
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        searchForm: {
-            display: 'flex',
-            alignItems: 'center',
-            [theme.breakpoints.down('sm')]: {
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                width: '100%',
-            },
-        },
-        buttonsContainer: {
-            display: 'flex',
-            justifyContent: 'space-between',
-        },
-    })
-)
+import { useStyles } from './styles'
 
 const SearchForm: FC = () => {
     const classes = useStyles()

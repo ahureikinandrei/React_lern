@@ -1,14 +1,16 @@
 import React, { FC, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import AuthModal from '../AuthModal/AuthModal'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { useActions } from '../../hooks/useActions'
+import { useStyles } from './styles'
 import {
     selectAuthIsLoading,
     selectAuthStatus,
 } from '../../store/reducers/auth/selectors'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { useActions } from '../../hooks/useActions'
 
 const AuthBtn: FC = () => {
+    const { button } = useStyles()
     const isAuth = useTypedSelector(selectAuthStatus)
     const isLoading = useTypedSelector(selectAuthIsLoading)
     const { logout } = useActions()
@@ -29,12 +31,17 @@ const AuthBtn: FC = () => {
     return (
         <>
             {isAuth ? (
-                <Button variant="outlined" onClick={onClickHandler}>
+                <Button
+                    variant="outlined"
+                    className={button}
+                    onClick={onClickHandler}
+                >
                     Logout
                 </Button>
             ) : (
                 <Button
                     variant="outlined"
+                    className={button}
                     onClick={handleClickOpenModal}
                     disabled={isLoading}
                 >

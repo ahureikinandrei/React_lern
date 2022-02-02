@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react'
-import { Card, createStyles, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 import { unixToDay } from '../../utils/dateUtils'
 import { DD_MM_DATE_FORMAT } from '../../config/constants'
 import {
@@ -8,6 +8,7 @@ import {
     WeatherIconsTitle,
 } from '../WeatherIcons/WeatherIcons'
 import { ReactComponent as Drop } from '../../assets/icons/drop.svg'
+import { useStyles } from './styles'
 
 interface IForecastCardProps {
     temp: number
@@ -18,47 +19,6 @@ interface IForecastCardProps {
     icon: string
 }
 
-const useStylesForecastCard = makeStyles((theme) =>
-    createStyles({
-        card: {
-            width: 110,
-            height: 200,
-            marginBottom: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            borderRadius: 20,
-            backgroundColor: theme.palette.whiteBackground.main,
-            '& .cls-1, .cls-2, .cls-3, svg': {
-                stroke: theme.palette.text.primary,
-            },
-            '& svg': {
-                fill: theme.palette.text.primary,
-            },
-            [theme.breakpoints.down('xs')]: {
-                width: 70,
-            },
-        },
-        textAlign: {
-            textAlign: 'center',
-
-            [theme.breakpoints.down('xs')]: {
-                width: 45,
-            },
-        },
-        weatherIcon: {
-            height: 50,
-            width: 50,
-        },
-        humidityIcon: {
-            paddingTop: 3,
-            marginRight: 5,
-            stroke: theme.palette.text.primary,
-        },
-    })
-)
-
 const ForecastCard: FC<IForecastCardProps> = ({
     temp,
     humidity,
@@ -67,7 +27,7 @@ const ForecastCard: FC<IForecastCardProps> = ({
     timezone,
     icon,
 }) => {
-    const classes = useStylesForecastCard()
+    const { card, textAlign, weatherIcon, humidityIcon } = useStyles()
 
     const findIcon = (icon: string): ReactElement => {
         return (
@@ -77,16 +37,16 @@ const ForecastCard: FC<IForecastCardProps> = ({
     }
 
     return (
-        <Card className={classes.card}>
+        <Card className={card}>
             <Typography variant="h5">
                 {temp} {unitsDegrees}
             </Typography>
-            <Typography variant="h5" className={classes.textAlign}>
+            <Typography variant="h5" className={textAlign}>
                 {unixToDay(datetimeEpoch, timezone, DD_MM_DATE_FORMAT)}
             </Typography>
-            <div className={classes.weatherIcon}>{findIcon(icon)}</div>
+            <div className={weatherIcon}>{findIcon(icon)}</div>
             <Typography variant="h6">
-                <Drop className={classes.humidityIcon} />
+                <Drop className={humidityIcon} />
                 {humidity} %
             </Typography>
         </Card>

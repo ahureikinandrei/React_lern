@@ -13,7 +13,7 @@ import {
     UpdateFavouritesLocations,
 } from './types'
 import { AppDispatch } from '../../store'
-import UserService from '../../../api/UserService'
+import UserService from '../../../service/UserService'
 import { ILocationData } from '../weather/types'
 import { WeatherActionCreators } from '../weather/actionCreators'
 import { randomColor } from '../../../utils/generalUtils'

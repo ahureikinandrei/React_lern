@@ -9,8 +9,8 @@ import {
 } from './types'
 import { IUser } from '../../../models/IUser'
 import { AppDispatch } from '../../store'
-import UserService from '../../../api/UserService'
-import AuthService from '../../../api/AuthService'
+import UserService from '../../../service/UserService'
+import AuthService from '../../../service/AuthService'
 import { SettingsActionCreators } from '../settings/actionsCreators'
 
 export const AuthActionCreators = {

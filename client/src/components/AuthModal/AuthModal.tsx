@@ -4,28 +4,13 @@ import DialogContent from '@material-ui/core/DialogContent'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { createStyles, makeStyles } from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import TabPanel from './AuthTabPanel'
-import { AuthModalItemsValue, Ia11yProps } from './types'
 import SignInTabPanel from './SignInTabPanel'
 import SignUpTabPanel from './SignUpTabPanel'
-
-const useStyles = makeStyles(() =>
-    createStyles({
-        modal: {
-            borderRadius: 20,
-        },
-        title: {
-            display: 'flex',
-            justifyContent: 'space-between',
-        },
-        closeIcon: {
-            fontSize: 26,
-        },
-    })
-)
+import { AuthModalItemsValue, Ia11yProps } from './types'
+import { useStyles } from './styles'
 
 interface IAuthModalProps {
     visible: boolean
@@ -33,7 +18,7 @@ interface IAuthModalProps {
 }
 
 const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
-    const classes = useStyles()
+    const { modal, title, closeIcon } = useStyles()
     const [value, setValue] = useState(AuthModalItemsValue.SIGN_IN)
 
     const handleChange = (
@@ -57,11 +42,11 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
             onClose={onClose}
             aria-labelledby="form-dialog-title"
             PaperProps={{
-                className: classes.modal,
+                className: modal,
             }}
         >
             <DialogTitle id="form-dialog-title">
-                <div className={classes.title}>
+                <div className={title}>
                     <div>
                         <Tabs
                             value={value}
@@ -85,10 +70,7 @@ const AuthModal: FC<IAuthModalProps> = ({ visible, onClose }) => {
                         color="secondary"
                         aria-label="close"
                     >
-                        <CloseIcon
-                            className={classes.closeIcon}
-                            color="secondary"
-                        />
+                        <CloseIcon className={closeIcon} color="secondary" />
                     </IconButton>
                 </div>
             </DialogTitle>

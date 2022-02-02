@@ -9,60 +9,22 @@ import Close from '@material-ui/icons/Close'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { makeStyles } from '@material-ui/core/styles'
-import { createStyles } from '@material-ui/core'
 import SwitcherThemes from '../SwitcherThems/SwitcherThemes'
 import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
 import AuthBtn from '../AuthBtn/AuthBtn'
 import ZipCodeCheckbox from '../ZipCodeCheckbox/ZIpCodeCheckbox'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ILocationData } from '../../store/reducers/weather/types'
+import { useActions } from '../../hooks/useActions'
+import { useStyles } from './styles'
 import {
     selectFavouritesLocations,
     selectShownOnGraphLocations,
 } from '../../store/reducers/settings/selectors'
-import { useActions } from '../../hooks/useActions'
 import {
     selectFavouritesForecastData,
     selectIsLoadingDataForGraph,
 } from '../../store/reducers/weather/selectors'
-
-const useStyles = makeStyles((theme) =>
-    createStyles({
-        drawerContent: {
-            width: 300,
-        },
-        locationName: {
-            flexGrow: 1,
-        },
-        loader: {
-            justifyContent: 'center',
-        },
-        chartIconActive: {
-            borderRadius: 8,
-            padding: 4,
-            marginRight: 8,
-            backgroundColor: theme.palette.primary.main,
-        },
-        chartIconDisable: {
-            backgroundColor: theme.palette.contrast.main,
-            borderRadius: 8,
-            padding: 4,
-            marginRight: 8,
-        },
-        settingsContainer: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            paddingTop: 10,
-        },
-        authBtnContainer: {
-            display: 'flex',
-            justifyContent: 'center',
-            padding: 10,
-        },
-    })
-)
 
 interface IRightDrawerProps {
     drawerState: boolean

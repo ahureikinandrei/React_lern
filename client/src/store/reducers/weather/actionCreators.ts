@@ -14,13 +14,13 @@ import {
     SetIsLoadingDataForGraph,
 } from './types'
 import { AppDispatch } from '../../store'
-import WeatherService from '../../../api/WeatherService'
-import GeoLocationService from '../../../api/GeoLocationService'
+import WeatherService from '../../../service/WeatherService'
+import GeoLocationService from '../../../service/GeoLocationService'
 import {
     coordinatesToString,
     transformDataFromWeatherApi,
 } from '../../../utils/dataTransfrom'
-import { IGeolocationErrorResponse } from '../../../api/types'
+import { IGeolocationErrorResponse } from '../../../service/types'
 
 import { KEY_UNITS_IN_LOCAL_STORAGE } from '../../../config/constants'
 import { SettingsActionCreators } from '../settings/actionsCreators'

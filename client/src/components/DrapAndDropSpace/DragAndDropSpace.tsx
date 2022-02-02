@@ -12,7 +12,7 @@ import { WeatherCard } from '../WeatherCard/WeatherCard'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { selectAuthIsLoading } from '../../store/reducers/settings/selectors'
 import { useActions } from '../../hooks/useActions'
-import './style.css'
+import './styles.css'
 
 const getItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined
