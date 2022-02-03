@@ -80,7 +80,12 @@ export const LocationMarker: FC = () => {
 const InteractiveMap = React.memo(function InteractiveMap() {
     return (
         <div contentEditable suppressContentEditableWarning>
-            <MapContainer className="Map" center={[0, 0]} zoom={5}>
+            <MapContainer
+                zoomControl={false}
+                className="Map"
+                center={[0, 0]}
+                zoom={5}
+            >
                 <TileLayer url={MapUrl} />
                 <LocationMarker />
             </MapContainer>

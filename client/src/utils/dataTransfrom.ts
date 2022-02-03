@@ -8,6 +8,7 @@ import {
     NUMBER_OF_DAY_IN_THE_FORECAST,
 } from '../config/constants'
 import { IGeolocationResponse, IWeatherDataFromServer } from './types'
+import { graphDataKeysType } from '../components/GraphWeather/GraphWeather'
 
 function transformForecastData(
     forecast: IWeatherForecastData[],
@@ -15,13 +16,14 @@ function transformForecastData(
 ): IWeatherForecastData[] {
     const transformedForecast = []
     for (let i = 0; i < NUMBER_OF_DAY_IN_THE_FORECAST; i += 1) {
-        const { datetimeEpoch, temp, humidity, icon } = forecast[i]
+        const { datetimeEpoch, temp, humidity, icon, windspeed } = forecast[i]
         transformedForecast.push({
             datetimeEpoch,
             temp,
             humidity,
             location,
             icon,
+            windspeed,
         })
     }
 
@@ -63,7 +65,6 @@ export function transformDataFromWeatherApi(
 interface IDataForForecastGraph {
     name: string
     Selected: number
-
     [propName: string]: number | string
 }
 
@@ -71,7 +72,7 @@ export function transformForecastForGraph(
     data: IWeatherForecastData[],
     timezone: string,
     favouritesForecastData: Array<IWeatherForecastData[]>,
-    dataKey: 'temp' | 'humidity'
+    dataKey: graphDataKeysType
 ): IDataForForecastGraph[] {
     return data.map((dayData, index) => {
         const dayForecast = {
@@ -94,7 +95,6 @@ export function transformForecastForGraph(
 }
 
 export function celsiusToFahrenheit(temp: number): number {
-    console.log(123)
     return +((temp * 9) / 5 + 32).toFixed(3)
 }
 

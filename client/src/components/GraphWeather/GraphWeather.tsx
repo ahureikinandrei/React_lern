@@ -22,6 +22,8 @@ interface ITableWeatherProps {
     shownOnGraphLocations: IGraphLineData[]
 }
 
+export type graphDataKeysType = 'temp' | 'humidity' | 'windspeed'
+
 const GraphWeather: FC<ITableWeatherProps> = ({
     forecast,
     timezone,
@@ -29,9 +31,9 @@ const GraphWeather: FC<ITableWeatherProps> = ({
     shownOnGraphLocations,
 }) => {
     const { cartWrapper, setting, settingBtn } = useStyles()
-    const [dataKey, setDataKey] = useState<'temp' | 'humidity'>('humidity')
+    const [dataKey, setDataKey] = useState<graphDataKeysType>('temp')
 
-    const onButtonDataKeyClick = (dataKey: 'temp' | 'humidity'): void => {
+    const onButtonDataKeyClick = (dataKey: graphDataKeysType): void => {
         setDataKey(dataKey)
     }
 
@@ -90,7 +92,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                 </Button>
                 <Button
                     onClick={() => {
-                        onButtonDataKeyClick('humidity')
+                        onButtonDataKeyClick('windspeed')
                     }}
                     className={settingBtn}
                 >

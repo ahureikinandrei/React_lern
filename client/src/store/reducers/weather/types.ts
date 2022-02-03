@@ -5,6 +5,7 @@ export interface IWeatherForecastData {
     temp: number
     humidity: number
     location?: string
+    windspeed: number
     icon: string
 }
 
