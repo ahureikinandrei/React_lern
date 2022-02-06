@@ -3,10 +3,10 @@ import express from 'express'
 import mongoose from 'mongoose'
 /* eslint-disable import/first */
 dotenv.config()
+import cors from 'cors'
 import { PORT, DB_URL } from './config/constants'
 import userRouter from './routes/user.route'
 import authRouter from './routes/auth.route'
-import corsMiddleware from './middleware/cors.middleware'
 import weatherRoute from './routes/weather.route'
 import { formatResponse } from './middleware/formatResponse.middleware'
 import { undefinedToEmptyString } from './utils/utils'
@@ -14,7 +14,7 @@ import { undefinedToEmptyString } from './utils/utils'
 const app = express()
 const SERVER_PORT = PORT || 5000
 
-app.use(corsMiddleware)
+app.use(cors())
 app.use(formatResponse)
 app.use(express.json())
 

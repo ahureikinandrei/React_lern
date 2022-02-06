@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) =>
             backgroundColor: theme.palette.primary.main,
         },
         chartIconDisable: {
-            backgroundColor: theme.palette.contrast.main,
+            backgroundColor: theme.palette.contrast?.main,
             borderRadius: 8,
             padding: 4,
             marginRight: 8,

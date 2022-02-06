@@ -30,16 +30,16 @@ export const selectWeatherDataForecast = (
 ): IWeatherForecastData[] => state.weather.weatherData.forecast
 
 export const selectTimezone = (state: RootState): string =>
-    state.weather.weatherData.timezone || ''
+    state.weather.weatherData.timezone
 
 export const selectWeatherDataLatitude = (state: RootState): number =>
-    state.weather.weatherData.latitude || 0
+    state.weather.weatherData.latitude
 
 export const selectWeatherDataLongitude = (state: RootState): number =>
-    state.weather.weatherData.longitude || 0
+    state.weather.weatherData.longitude
 
 export const selectWeatherTemp = (state: RootState): number =>
-    state.weather.weatherData.temp || 0
+    state.weather.weatherData.temp
 
 export const selectWeatherUnits = (state: RootState): string =>
     state.weather.unitsDegrees

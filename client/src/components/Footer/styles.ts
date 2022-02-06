@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) =>
         footer: {
             height: 100,
             flex: '0 0 auto',
-            backgroundColor: theme.palette.footer.main,
+            backgroundColor: theme.palette.footer?.main,
             display: 'flex',
             alignItems: 'center',
             padding: '0 40px',

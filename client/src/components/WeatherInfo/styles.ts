@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) =>
             fontSize: 16,
             padding: 10,
             borderRadius: 20,
-            backgroundColor: theme.palette.whiteBackground.main,
+            backgroundColor: theme.palette.whiteBackground?.main,
             [theme.breakpoints.down('xs')]: {
                 width: '100%',
                 display: 'flex',

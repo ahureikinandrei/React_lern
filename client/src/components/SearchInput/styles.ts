@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) =>
             height: 50,
             border: '1px solid rgba(0, 0, 0, 0.23)',
             borderRadius: theme.shape.borderRadius,
-            backgroundColor: theme.palette.whiteBackground.main,
+            backgroundColor: theme.palette.whiteBackground?.main,
             marginRight: 12,
         },
         icon: {
