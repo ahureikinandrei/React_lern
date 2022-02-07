@@ -15,9 +15,9 @@ const SignUpTabPanel: FC<ISignUpTabPanelProps> = ({ onClose }) => {
     const { registration } = useActions()
     const formik = useFormik({
         initialValues: {
-            email: 'test@mail.ru',
-            password: 'password',
-            confirm_password: 'password',
+            email: '',
+            password: '',
+            confirm_password: '',
         },
         validateOnChange: false,
         validateOnBlur: false,

@@ -1,52 +1,38 @@
 import React, { FC } from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import SearchIcon from '@material-ui/icons/Search'
-import { IconButton } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
 import { useFormik } from 'formik'
 import { searchValidationSchema } from './validationSheme'
 import { useActions } from '../../hooks/useActions'
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        form: {
-            display: 'flex',
-        },
-        input: {
-            margin: theme.spacing(1),
-            width: '40ch',
-            [theme.breakpoints.down('sm')]: {
-                order: -1,
-            },
-        },
-        icon: {
-            fontSize: theme.spacing(3),
-        },
-    })
-)
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { selectStatusZipCodeApi } from '../../store/reducers/settings/selectors'
+import { useStyles } from './styles'
 
 const SearchInput: FC = () => {
-    const classes = useStyles()
-    const { getWeatherInfo } = useActions()
+    const { form, input, searchBtn, icon } = useStyles()
+    const isZipCodeApiStatus = useTypedSelector(selectStatusZipCodeApi)
+
+    const { getWeatherInfoFromQuery } = useActions()
     const formik = useFormik({
         initialValues: {
             query: '',
         },
         validationSchema: searchValidationSchema,
         onSubmit: (values) => {
-            getWeatherInfo(values.query)
+            getWeatherInfoFromQuery(values.query, isZipCodeApiStatus)
         },
     })
     return (
         <form
-            className={classes.form}
+            className={form}
             onSubmit={formik.handleSubmit}
             autoComplete="off"
         >
             <TextField
-                className={classes.input}
+                className={input}
                 id="outlined-basic"
-                label="Query"
+                label="Search for location"
                 variant="outlined"
                 name="query"
                 value={formik.values.query}
@@ -54,8 +40,8 @@ const SearchInput: FC = () => {
                 error={formik.touched.query && Boolean(formik.errors.query)}
                 helperText={formik.touched.query && formik.errors.query}
             />
-            <IconButton type="submit">
-                <SearchIcon className={classes.icon} />
+            <IconButton type="submit" className={searchBtn}>
+                <SearchIcon className={icon} />
             </IconButton>
         </form>
     )

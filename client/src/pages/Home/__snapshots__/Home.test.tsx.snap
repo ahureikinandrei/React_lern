@@ -1,0 +1,740 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders Home component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="makeStyles-wrapper-1"
+      >
+        <header
+          class="makeStyles-header-3"
+        >
+          <h4
+            class="MuiTypography-root makeStyles-logo-5 MuiTypography-h4"
+          >
+            WeatherApp
+          </h4>
+          <h3
+            class="MuiTypography-root makeStyles-status-12 MuiTypography-h3"
+          >
+            Loading...
+          </h3>
+          <div
+            class="makeStyles-searchForm-14"
+          >
+            <form
+              autocomplete="off"
+              class="makeStyles-form-16"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root makeStyles-input-17"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+                  data-shrink="false"
+                  for="outlined-basic"
+                  id="outlined-basic-label"
+                >
+                  Search for location
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input"
+                    id="outlined-basic"
+                    name="query"
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-20 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-22"
+                    >
+                      <span>
+                        Search for location
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <button
+                class="MuiButtonBase-root MuiIconButton-root makeStyles-searchBtn-18"
+                tabindex="0"
+                type="submit"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root makeStyles-icon-19"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </form>
+            <div
+              class="makeStyles-buttonsContainer-15"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Card
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="makeStyles-headerSettings-4"
+          >
+            <fieldset
+              class="MuiFormControl-root"
+            >
+              <label
+                class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementTop"
+              >
+                <span
+                  class="MuiSwitch-root"
+                >
+                  <span
+                    aria-disabled="false"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-24 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input-27 MuiSwitch-input"
+                        type="checkbox"
+                        value="degrees"
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </span>
+                  <span
+                    class="MuiSwitch-track"
+                  />
+                </span>
+                <span
+                  class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                >
+                  °C | °F
+                </span>
+              </label>
+            </fieldset>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-28"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Sign In
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root makeStyles-menuIcon-6"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+          <div
+            class="PrivateSwipeArea-root-42 PrivateSwipeArea-anchorRight-44"
+            style="width: 20px;"
+          />
+        </header>
+        <main
+          class="makeStyles-content-2"
+        >
+          <div
+            data-rbd-droppable-context-id="0"
+            data-rbd-droppable-id="cards"
+          >
+            <div />
+          </div>
+        </main>
+        <footer
+          class="makeStyles-footer-39"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-h6"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root makeStyles-copyrightIcon-40"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M11.88 9.14c1.28.06 1.61 1.15 1.63 1.66h1.79c-.08-1.98-1.49-3.19-3.45-3.19C9.64 7.61 8 9 8 12.14c0 1.94.93 4.24 3.84 4.24 2.22 0 3.41-1.65 3.44-2.95h-1.79c-.03.59-.45 1.38-1.63 1.44-1.31-.04-1.86-1.06-1.86-2.73 0-2.89 1.28-2.98 1.88-3zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+              />
+            </svg>
+            2022
+          </h6>
+        </footer>
+      </div>
+    </div>
+    <div
+      aria-atomic="true"
+      aria-live="assertive"
+      id="rbd-announcement-0"
+      style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%);"
+    />
+    <div
+      id="rbd-hidden-text-0-hidden-text-0"
+      style="display: none;"
+    >
+      
+  Press space bar to start a drag.
+  When dragging you can use the arrow keys to move the item around and escape to cancel.
+  Some screen readers may require you to be in focus mode or to use your pass through key
+
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="makeStyles-wrapper-1"
+    >
+      <header
+        class="makeStyles-header-3"
+      >
+        <h4
+          class="MuiTypography-root makeStyles-logo-5 MuiTypography-h4"
+        >
+          WeatherApp
+        </h4>
+        <h3
+          class="MuiTypography-root makeStyles-status-12 MuiTypography-h3"
+        >
+          Loading...
+        </h3>
+        <div
+          class="makeStyles-searchForm-14"
+        >
+          <form
+            autocomplete="off"
+            class="makeStyles-form-16"
+          >
+            <div
+              class="MuiFormControl-root MuiTextField-root makeStyles-input-17"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+                data-shrink="false"
+                for="outlined-basic"
+                id="outlined-basic-label"
+              >
+                Search for location
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input"
+                  id="outlined-basic"
+                  name="query"
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-20 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-22"
+                  >
+                    <span>
+                      Search for location
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root makeStyles-searchBtn-18"
+              tabindex="0"
+              type="submit"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root makeStyles-icon-19"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </form>
+          <div
+            class="makeStyles-buttonsContainer-15"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Card
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="makeStyles-headerSettings-4"
+        >
+          <fieldset
+            class="MuiFormControl-root"
+          >
+            <label
+              class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementTop"
+            >
+              <span
+                class="MuiSwitch-root"
+              >
+                <span
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-24 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <input
+                      class="PrivateSwitchBase-input-27 MuiSwitch-input"
+                      type="checkbox"
+                      value="degrees"
+                    />
+                    <span
+                      class="MuiSwitch-thumb"
+                    />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </span>
+                <span
+                  class="MuiSwitch-track"
+                />
+              </span>
+              <span
+                class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+              >
+                °C | °F
+              </span>
+            </label>
+          </fieldset>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-28"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Sign In
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-menuIcon-6"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          class="PrivateSwipeArea-root-42 PrivateSwipeArea-anchorRight-44"
+          style="width: 20px;"
+        />
+      </header>
+      <main
+        class="makeStyles-content-2"
+      >
+        <div
+          data-rbd-droppable-context-id="0"
+          data-rbd-droppable-id="cards"
+        >
+          <div />
+        </div>
+      </main>
+      <footer
+        class="makeStyles-footer-39"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root makeStyles-copyrightIcon-40"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11.88 9.14c1.28.06 1.61 1.15 1.63 1.66h1.79c-.08-1.98-1.49-3.19-3.45-3.19C9.64 7.61 8 9 8 12.14c0 1.94.93 4.24 3.84 4.24 2.22 0 3.41-1.65 3.44-2.95h-1.79c-.03.59-.45 1.38-1.63 1.44-1.31-.04-1.86-1.06-1.86-2.73 0-2.89 1.28-2.98 1.88-3zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+            />
+          </svg>
+          2022
+        </h6>
+      </footer>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": Object {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
+
+exports[`Home renders Home component by snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="makeStyles-wrapper-1"
+  >
+    <header
+      class="makeStyles-header-3"
+    >
+      <h4
+        class="MuiTypography-root makeStyles-logo-5 MuiTypography-h4"
+      >
+        WeatherApp
+      </h4>
+      <h3
+        class="MuiTypography-root makeStyles-status-12 MuiTypography-h3"
+      >
+        Loading...
+      </h3>
+      <div
+        class="makeStyles-searchForm-14"
+      >
+        <form
+          autocomplete="off"
+          class="makeStyles-form-16"
+        >
+          <div
+            class="MuiFormControl-root MuiTextField-root makeStyles-input-17"
+          >
+            <label
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+              data-shrink="false"
+              for="outlined-basic"
+              id="outlined-basic-label"
+            >
+              Search for location
+            </label>
+            <div
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+            >
+              <input
+                aria-invalid="false"
+                class="MuiInputBase-input MuiOutlinedInput-input"
+                id="outlined-basic"
+                name="query"
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden="true"
+                class="PrivateNotchedOutline-root-20 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  class="PrivateNotchedOutline-legendLabelled-22"
+                >
+                  <span>
+                    Search for location
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <button
+            class="MuiButtonBase-root MuiIconButton-root makeStyles-searchBtn-18"
+            tabindex="0"
+            type="submit"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-icon-19"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </form>
+        <div
+          class="makeStyles-buttonsContainer-15"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Card
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="makeStyles-headerSettings-4"
+      >
+        <fieldset
+          class="MuiFormControl-root"
+        >
+          <label
+            class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementTop"
+          >
+            <span
+              class="MuiSwitch-root"
+            >
+              <span
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-24 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <input
+                    class="PrivateSwitchBase-input-27 MuiSwitch-input"
+                    type="checkbox"
+                    value="degrees"
+                  />
+                  <span
+                    class="MuiSwitch-thumb"
+                  />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </span>
+              <span
+                class="MuiSwitch-track"
+              />
+            </span>
+            <span
+              class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+            >
+              °C | °F
+            </span>
+          </label>
+        </fieldset>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-button-28"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Sign In
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root makeStyles-menuIcon-6"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <div
+        class="PrivateSwipeArea-root-42 PrivateSwipeArea-anchorRight-44"
+        style="width: 20px;"
+      />
+    </header>
+    <main
+      class="makeStyles-content-2"
+    >
+      <div
+        data-rbd-droppable-context-id="0"
+        data-rbd-droppable-id="cards"
+      >
+        <div />
+      </div>
+    </main>
+    <footer
+      class="makeStyles-footer-39"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-h6"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root makeStyles-copyrightIcon-40"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M11.88 9.14c1.28.06 1.61 1.15 1.63 1.66h1.79c-.08-1.98-1.49-3.19-3.45-3.19C9.64 7.61 8 9 8 12.14c0 1.94.93 4.24 3.84 4.24 2.22 0 3.41-1.65 3.44-2.95h-1.79c-.03.59-.45 1.38-1.63 1.44-1.31-.04-1.86-1.06-1.86-2.73 0-2.89 1.28-2.98 1.88-3zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+          />
+        </svg>
+        2022
+      </h6>
+    </footer>
+  </div>
+</DocumentFragment>
+`;

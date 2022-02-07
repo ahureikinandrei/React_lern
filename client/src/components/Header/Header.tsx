@@ -1,32 +1,45 @@
-import React, { FC } from 'react'
-import { createStyles, makeStyles } from '@material-ui/core'
-import Logo from '../Logo/Logo'
+import React, { FC, useState } from 'react'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
 import WeatherInfo from '../WeatherInfo/WeatherInfo'
 import SearchForm from '../SearchForm/SearchForm'
-import HeaderSettings from '../HeaderSettings/HeaderSettings'
-
-const useStylesHeader = makeStyles(() =>
-    createStyles({
-        header: {
-            height: 180,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 40px',
-            backgroundColor: '#E4DFD6',
-        },
-    })
-)
+import RightDrawer from '../RightDrawer/RightDrawer'
+import SwitcherUnits from '../SwitcherUnits/SwitcherUnits'
+import AuthBtn from '../AuthBtn/AuthBtn'
+import { useStyles } from './styles'
 
 const Header: FC = () => {
-    const classes = useStylesHeader()
+    const { header, headerSettings, logo, menuIcon } = useStyles()
+    const [drawerState, setDrawerState] = useState(false)
+
+    const openDrawer = (): void => {
+        setDrawerState(true)
+    }
+
+    const closeDrawer = (): void => {
+        setDrawerState(false)
+    }
 
     return (
-        <header className={classes.header}>
-            <Logo />
+        <header className={header}>
+            <Typography variant="h4" className={logo}>
+                WeatherApp
+            </Typography>
             <WeatherInfo />
             <SearchForm />
-            <HeaderSettings />
+            <div className={headerSettings}>
+                <SwitcherUnits />
+                <AuthBtn />
+            </div>
+            <IconButton className={menuIcon} onClick={openDrawer}>
+                <MenuIcon />
+            </IconButton>
+            <RightDrawer
+                drawerState={drawerState}
+                openDrawer={openDrawer}
+                closeDrawer={closeDrawer}
+            />
         </header>
     )
 }
