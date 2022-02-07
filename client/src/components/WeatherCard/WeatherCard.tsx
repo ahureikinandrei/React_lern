@@ -62,6 +62,7 @@ export const WeatherCard: FC<IWeatherCardProps> = React.memo(({ id }) => {
             <GraphWeather
                 forecast={forecast}
                 timezone={timezone}
+                unitsDegrees={unitsDegrees}
                 favouritesForecastData={favouritesForecastData}
                 shownOnGraphLocations={shownOnGraphLocations}
             />

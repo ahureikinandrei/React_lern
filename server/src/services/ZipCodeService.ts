@@ -11,8 +11,6 @@ class ZipCodeService {
                 `${BASE_URL_ZIPCODEBASE}` +
                 `${API_KEY_ZIPCODEBASE}&codes=${query}${queryCountry}`
 
-            console.log(url)
-
             const response = await axios.get<IZipCodeServiceResponse>(url)
 
             const [firstSearchResultByZipCode] = response.data.results[query]

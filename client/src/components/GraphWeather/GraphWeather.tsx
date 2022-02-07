@@ -20,6 +20,7 @@ interface ITableWeatherProps {
     timezone: string
     favouritesForecastData: Array<IWeatherForecastData[]>
     shownOnGraphLocations: IGraphLineData[]
+    unitsDegrees: string
 }
 
 export type graphDataKeysType = 'temp' | 'humidity' | 'windspeed'
@@ -29,6 +30,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
     timezone,
     favouritesForecastData,
     shownOnGraphLocations,
+    unitsDegrees,
 }) => {
     const { cartWrapper, setting, settingBtn } = useStyles()
     const [dataKey, setDataKey] = useState<graphDataKeysType>('temp')
@@ -37,8 +39,18 @@ const GraphWeather: FC<ITableWeatherProps> = ({
         setDataKey(dataKey)
     }
 
+    const labelYAxis = (): string => {
+        if (dataKey === 'temp') {
+            return unitsDegrees
+        }
+        if (dataKey === 'humidity') {
+            return '%'
+        }
+        return 'km/h'
+    }
+
     return (
-        <div>
+        <>
             <div className={cartWrapper}>
                 <ResponsiveContainer>
                     <LineChart
@@ -51,13 +63,18 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                         margin={{
                             top: 5,
                             right: 5,
-                            left: -30,
+                            left: -20,
                             bottom: 0,
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />
-                        <YAxis />
+                        <YAxis
+                            label={{
+                                value: labelYAxis(),
+                                angle: -90,
+                            }}
+                        />
                         <Line
                             type="monotone"
                             dataKey="Selected"
@@ -83,6 +100,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                 aria-label="small outlined button group"
             >
                 <Button
+                    variant={dataKey === 'temp' ? 'contained' : 'outlined'}
                     onClick={() => {
                         onButtonDataKeyClick('temp')
                     }}
@@ -91,6 +109,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                     Temp
                 </Button>
                 <Button
+                    variant={dataKey === 'windspeed' ? 'contained' : 'outlined'}
                     onClick={() => {
                         onButtonDataKeyClick('windspeed')
                     }}
@@ -99,6 +118,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                     Wind
                 </Button>
                 <Button
+                    variant={dataKey === 'humidity' ? 'contained' : 'outlined'}
                     onClick={() => {
                         onButtonDataKeyClick('humidity')
                     }}
@@ -107,7 +127,7 @@ const GraphWeather: FC<ITableWeatherProps> = ({
                     Hum
                 </Button>
             </ButtonGroup>
-        </div>
+        </>
     )
 }
 

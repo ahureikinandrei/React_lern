@@ -16,8 +16,8 @@ const SignInTabPanel: FC<ISignInTabPanelProps> = ({ onClose }) => {
 
     const formik = useFormik({
         initialValues: {
-            email: 'test@mail.ru',
-            password: 'password',
+            email: '',
+            password: '',
         },
         validateOnChange: false,
         validateOnBlur: false,
